@@ -14,6 +14,11 @@ import { FormsModule } from '@angular/forms';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { MaterializeModule } from "angular2-materialize";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSidenavModule} from '@angular/material/sidenav';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,10 +30,13 @@ import { AgmCoreModule } from '@agm/core';
   imports: [
     BrowserModule,
     FormsModule,
+    BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAQZGWfnDR3C28jqGEiJqEQT4BvTXRy_bM'
     }),
-    HttpModule
+    HttpModule,
+    MaterializeModule,
+    MatSidenavModule
   ],
   providers: [
     MapService
