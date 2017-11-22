@@ -1,5 +1,5 @@
 <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng">
   <ng-container *ngFor="let marker of places">
-      <agm-marker [latitude]="marker.geometry.location.lat" [longitude]="marker.geometry.location.lng"></agm-marker>
+      <agm-marker [latitude]="marker.geometry.location.lat" [longitude]="marker.geometry.location.lng" iconUrl="assets/images/marker1.png"></agm-marker>
   </ng-container>
 </agm-map>
