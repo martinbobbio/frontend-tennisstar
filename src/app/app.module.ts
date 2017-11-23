@@ -9,10 +9,6 @@ import { MapService } from './services/map.service';
 
 //Dependencia (Mapa)
 import { AgmCoreModule } from '@agm/core';
-//Dependencia (Angular 2 - Materialize)
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MaterializeModule } from "angular2-materialize";
-//import { MatSidenavModule } from '@angular/material/sidenav';
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -33,13 +29,10 @@ import { MapComponent } from './components/map/map.component';
   imports: [
     BrowserModule,
     FormsModule,
-    BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAQZGWfnDR3C28jqGEiJqEQT4BvTXRy_bM'
     }),
     HttpModule,
-    MaterializeModule,
-    //MatSidenavModule
   ],
   providers: [
     MapService
