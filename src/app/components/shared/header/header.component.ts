@@ -10,11 +10,24 @@ import * as $ from 'jquery';
 })
 export class HeaderComponent implements OnInit {
 
+  openMenu:boolean = false;
+
+  openAside(){
+    if(!this.openMenu){
+      $(".sidebar-left-collapse").fadeIn();
+      this.openMenu = true;
+    }
+    else if(this.openMenu){
+      $(".sidebar-left-collapse").fadeOut();
+      this.openMenu = false;
+      }
+  }
+
   constructor() { }
 
   ngOnInit() {
 
-    var links = $('#menu');
+    var links = $('.links');
     
       links.on('click', function () {
 

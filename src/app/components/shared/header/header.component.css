@@ -15,11 +15,12 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: #292c2f;
-	width: 180px;
+  width: 180px;
+  color:white;
 	height: 100%;
   padding: 20px 0;
-  z-index: 111;
+  z-index: 10;
+  display:none;
 }
 
 .sidebar-left-collapse > a {
@@ -49,7 +50,7 @@
 	padding: 10px 0 10px 5px;
 	background-color: #35393e;
 	text-align: left;
-	color:  #b3bcc5;
+	color:  white;
 	font-size: 12px;
 	font-weight: bold;
 	line-height: 2;
@@ -58,7 +59,8 @@
 }
 
 .sidebar-links div.selected > a{
-	background-color: #ffffff;
+  background-color: #ffffff;
+  font-weight:bold;
 	color: #565d63;
 	line-height: 2.3;
 	margin: 0;
@@ -92,7 +94,7 @@
 
 .sidebar-links div .sub-links a {
 	text-decoration: none;
-	color: #b3bcc5;
+	color: white;
 	display: block;
 	text-align: left;
 }
