@@ -10,17 +10,21 @@
 
 /* The left-collapsing sidebar */
 
+body{
+	opacity: 1111;
+}
+
 .sidebar-left-collapse {
 	font-family: Arial, Helvetica, sans-serif;
 	position: fixed;
 	top: 0;
 	left: 0;
-  width: 180px;
-  color:white;
+  	width: 180px;
+  	color:white;
 	height: 100%;
-  padding: 20px 0;
-  z-index: 10;
-  display:none;
+  	padding: 20px 0;
+  	z-index: 10;
+  	display:none;
 }
 
 .sidebar-left-collapse > a {
