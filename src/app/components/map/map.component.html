@@ -1,5 +1,21 @@
-<agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng" style="z-index: 1111">
-  <ng-container *ngFor="let marker of places">
-      <agm-marker [latitude]="marker.geometry.location.lat" [longitude]="marker.geometry.location.lng" iconUrl="assets/images/marker1.png"></agm-marker>
-  </ng-container>
-</agm-map>
+<ng-container *ngIf="type == 1">
+  <div class="relative">
+    <div class="blur">
+      <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng">
+        <ng-container *ngFor="let marker of places">
+            <agm-marker [latitude]="marker.geometry.location.lat" [longitude]="marker.geometry.location.lng" iconUrl="assets/images/marker1.png"></agm-marker>
+        </ng-container>
+      </agm-map>
+    </div>
+    <div class="row absolute" style="position:absolute; top:0%;left:15%;width:80%">
+        <div class="col s6" style="margin-top:50px;">
+          <h2 class="orange-text text-darken-1 fs-38">Impulsado por los mejores jugadores del mundo.</h2>
+          <h3 class="orange-text text-darken-1 fs-25">Conviertete en uno de ellos.</h3>
+          <a class="orange darken-1 waves-effect waves-light btn-large">Comienza a jugar!</a>
+        </div>
+        <div class="col s6">
+          <img src="assets/images/{{homeImages[homeImageIndex]}}.png">
+        </div>
+    </div>
+  </div>
+</ng-container>

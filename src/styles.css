@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+/*Fontsize*/
+.fs-38{
+    font-size: 38px;
+}
+.fs-25{
+    font-size: 25px;
+}
+
+
+/*Positions*/
+.relative{
+    position: relative;
+}
+.absolute{
+    position: absolute
+}
