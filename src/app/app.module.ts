@@ -16,6 +16,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { HomeComponent } from './views/home/home.component';
 import { MapComponent } from './components/map/map.component';
+import { DodecaedroComponent } from './components/dodecaedro/dodecaedro.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MapComponent } from './components/map/map.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    MapComponent
+    MapComponent,
+    DodecaedroComponent
   ],
   imports: [
     BrowserModule,
