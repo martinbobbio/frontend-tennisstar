@@ -14,3 +14,23 @@
 .absolute{
     position: absolute
 }
+
+
+/*Mediaqueries*/
+
+/*Mobile*/
+@media only screen and (max-width: 576px) {
+
+    agm-map {
+        height: 350px !important;
+    }
+    .no-margin-mobile{
+        margin-top:0px !important;
+    }
+    .fs-38{
+        font-size:30px !important;
+    }
+    .fs-25{
+        font-size:20px !important;
+    }
+}
