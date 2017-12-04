@@ -5,7 +5,7 @@ import { ExplorarComponent } from "./views/explorar/explorar.component";
 
 const APP_ROUTES: Routes = [
     { path: '', component:HomeComponent},
-    { path: '/explorar', component:ExplorarComponent},
+    { path: 'explorar', component:ExplorarComponent},
     { path: '**', pathMatch:'full', redirectTo:'home'},
 ]
 

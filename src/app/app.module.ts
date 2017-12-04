@@ -9,6 +9,7 @@ import { APP_ROUTING } from "./app.routes";
 
 //Servicios
 import { MapService } from './services/map.service';
+import { HomeService } from './services/home.service';
 
 //Dependencia (Mapa)
 import { AgmCoreModule } from '@agm/core';
@@ -44,7 +45,8 @@ import { ExplorarComponent } from './views/explorar/explorar.component';
     
   ],
   providers: [
-    MapService
+    MapService,
+    HomeService
   ],
   bootstrap: [AppComponent]
 })
