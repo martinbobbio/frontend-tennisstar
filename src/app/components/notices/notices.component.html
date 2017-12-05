@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col m12">
+      <h3 class="green-text">Noticias</h3>
+      <ng-container *ngFor="let notice of notices">
+        <notice title="{{notice.title}}" description="{{notice.description}}" imgsrc="{{notice.imgsrc}}" createdAt="{{notice.created.date | date:'shortDate'}}"></notice>
+      </ng-container>
+    </div>
+
+  </div>
+</div>

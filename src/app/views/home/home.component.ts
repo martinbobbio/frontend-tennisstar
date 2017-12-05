@@ -9,12 +9,14 @@ import { HomeService } from '../../services/home.service'
 })
 export class HomeComponent implements OnInit {
 
+  notices:any[];
+
   constructor(public homeService:HomeService) { }
 
   ngOnInit() {
 
     this.homeService.getNotices().subscribe(data =>{
-      console.log(data);
+      this.notices = data.data[0][0];
     });
 
     

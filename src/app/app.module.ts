@@ -22,6 +22,8 @@ import { HomeComponent } from './views/home/home.component';
 import { MapComponent } from './components/map/map.component';
 import { DodecaedroComponent } from './components/dodecaedro/dodecaedro.component';
 import { ExplorarComponent } from './views/explorar/explorar.component';
+import { NoticesComponent } from './components/notices/notices.component';
+import { NoticeComponent } from './components/notice/notice.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { ExplorarComponent } from './views/explorar/explorar.component';
     HomeComponent,
     MapComponent,
     DodecaedroComponent,
-    ExplorarComponent
+    ExplorarComponent,
+    NoticesComponent,
+    NoticeComponent
   ],
   imports: [
     BrowserModule,
