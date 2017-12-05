@@ -11,7 +11,7 @@ export class NoticesComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {console.log(this.notices);
+  ngOnInit() {
   }
 
 }

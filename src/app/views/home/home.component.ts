@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
     this.homeService.getNotices().subscribe(data =>{
-      this.notices = data.data[0][0];
+      this.notices = data.data[0];
     });
 
     

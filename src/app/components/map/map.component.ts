@@ -29,10 +29,8 @@ export class MapComponent implements OnInit {
     if(this.type != 1){
 
       this.mapService.getClubes(this.lat, this.lng).subscribe(
-        (response) => {
-          console.log(response.results)
-          this.places = response.results;
-
+        (data) => {
+          this.places = data.data[0].results;
         })
     }
 

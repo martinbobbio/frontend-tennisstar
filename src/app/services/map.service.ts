@@ -14,7 +14,7 @@ export class MapService {
 
   getClubes(latitud:number,longitud:number){
 
-    return this.http.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitud},${longitud}&radius=5000&name=tenis&key=AIzaSyAQZGWfnDR3C28jqGEiJqEQT4BvTXRy_bM`).map(
+    return this.http.get(`http://admin-tenis.tennis-star.com/web/app_dev.php/api/map/get-clubes/`).map(
       (response) => response.json()
     )
   }
