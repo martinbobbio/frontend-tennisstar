@@ -15,7 +15,7 @@ export class AppComponent {
     meta.addTags([
       { charset: 'utf-8'},
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'msapplication-TileColor', content: '#4CAF50'},
+      { name: 'msapplication-TileColor', content: '#4caf50'},
       { name: 'msapplication-TileImage', content: 'assets/images/logo.png' },
       { name: 'theme-color', content: '#47589C' },
       { name: 'google', content: 'notranslate' },
