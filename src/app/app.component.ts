@@ -15,7 +15,7 @@ export class AppComponent {
     meta.addTags([
       { charset: 'utf-8'},
       { name: 'msapplication-TileImage', content: 'assets/images/logo.png' },
-      { name: 'theme-color', content: '#47589C' },
+      { name: 'theme-color', content: '#4caf50' },
       { name: 'google', content: 'notranslate' },
       { name: 'description', content: 'Sitio WEB de Tennis amateur' },
       { name: 'abstract', content: 'Sitio WEB de Tennis amateur' },
