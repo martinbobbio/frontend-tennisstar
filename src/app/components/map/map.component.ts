@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { MapService } from '../../services/map.service'
+import { MapService } from '../../services/map.service';
 
 @Component({
   selector: 'map',
@@ -14,6 +14,9 @@ export class MapComponent implements OnInit {
   //Imagenes para el home
   homeImages=["federer","djokovic","murray","nadal","del potro"];
   homeImageIndex;
+
+  //Estados
+  isLogged:boolean = false;
   
   //Latitud y Longitud (Escuela Da Vinci)
   lat: number = -34.604486;
@@ -35,6 +38,11 @@ export class MapComponent implements OnInit {
     }
 
     this.homeImageIndex = Math.floor(Math.random() * 5);
+
+  }
+
+  checkLogin(){
+    if(!this.isLogged){}
 
   }
 

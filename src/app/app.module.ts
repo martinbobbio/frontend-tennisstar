@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
 //Rutas
 import { APP_ROUTING } from "./app.routes";
@@ -10,6 +10,8 @@ import { APP_ROUTING } from "./app.routes";
 //Servicios
 import { MapService } from './services/map.service';
 import { HomeService } from './services/home.service';
+import { LoginService } from './services/login.service';
+import { RegisterService } from './services/register.service';
 
 //Dependencia (Mapa)
 import { AgmCoreModule } from '@agm/core';
@@ -24,6 +26,8 @@ import { DodecaedroComponent } from './components/dodecaedro/dodecaedro.componen
 import { ExplorarComponent } from './views/explorar/explorar.component';
 import { NoticesComponent } from './components/notices/notices.component';
 import { NoticeComponent } from './components/notice/notice.component';
+import { LoginComponent } from './views/login/login.component';
+import { RegisterComponent } from './views/register/register.component';
 
 
 @NgModule({
@@ -36,7 +40,9 @@ import { NoticeComponent } from './components/notice/notice.component';
     DodecaedroComponent,
     ExplorarComponent,
     NoticesComponent,
-    NoticeComponent
+    NoticeComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,11 +52,13 @@ import { NoticeComponent } from './components/notice/notice.component';
     }),
     HttpModule,
     APP_ROUTING,
-    
+    ReactiveFormsModule
   ],
   providers: [
     MapService,
-    HomeService
+    HomeService,
+    LoginService,
+    RegisterService,
   ],
   bootstrap: [AppComponent]
 })

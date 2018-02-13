@@ -1,0 +1,60 @@
+<main>
+    <div class="section"></div>
+
+    <h5 class="white-text center-align">Registrate ahora para comenzar</h5>
+    <div class="section"></div>
+
+    <div class="container center-align">
+      <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+        <form (ngSubmit)="registerForm()" [formGroup]="form" novalidate="novalidate" method="post" class="col s12">
+          <div class='row'>
+            <div class='col s12'>
+              <a [routerLink]="['/']">
+                <img src="assets/images/logo.png" class="responsive-img">
+              </a>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input formControlName="username" class='validate' type='text' name='username' id='username' />
+              <label for='username'>Ingresa tu nombre de usuario</label>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input formControlName="email" class='validate' type='email' name='email' id='email' />
+              <label for='email'>Ingresa tu email</label>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input formControlName="password" class='validate' type='password' name='password' id='password' />
+              <label for='password'>Ingresa tu contraseña</label>
+            </div>
+          </div>
+
+          <div class='row'>
+              <div class='input-field col s12'>
+                <input formControlName="password2" class='validate' type='password' name='password2' id='password2' />
+                <label for='password'>Repité tu contraseña</label>
+              </div>
+            </div>
+
+          <br />
+            <div class='row'>
+              <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Registrarse</button>
+            </div>
+            <br>
+            <a class="green-text" [routerLink]="['/login']"><p class="center-">Volver</p></a>
+            <br>
+        </form>
+      </div>
+    </div>
+
+  <div class="section"></div>
+  <div class="section"></div>
+</main>

@@ -6,6 +6,11 @@
     font-size: 25px;
 }
 
+/*Cursor*/
+.pointer{
+    cursor: pointer;
+}
+
 
 /*Positions*/
 .relative{
