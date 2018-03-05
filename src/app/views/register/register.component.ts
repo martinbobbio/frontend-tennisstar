@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
 
 import * as $ from 'jquery';
@@ -13,7 +14,7 @@ import swal from 'sweetalert2';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(public registerService:RegisterService) {
+  constructor(public registerService:RegisterService, public router:Router) {
     this.form = new FormGroup({
       'username': new FormControl(''),
       'password': new FormControl(''),
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit {
     let data;
     if(this.form.get("password").value === this.form.get("password2").value){
       data = {
-        username: this.form.get("email").value,
+        username: this.form.get("username").value,
         email: this.form.get("email").value,
         password: this.form.get("password").value,
       }
@@ -53,11 +54,19 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    console.log(data);
-
     this.registerService.sendData(data).subscribe(
       (response)=>{
-        alert("ok");
+        if(response.error != null){
+          swal({
+            title: 'Error',
+            text: response.error[0],
+            type: 'error',
+          })
+          return;
+        }
+
+        this.router.navigate(['/'])
+        
       } ,
       (error) =>{ 
         swal({

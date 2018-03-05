@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
+import { AuthService } from '../../services/auth.service';
 
 import * as $ from 'jquery';
 import swal from 'sweetalert2';
@@ -12,10 +13,13 @@ import swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public loginService:LoginService) {
+  constructor(public loginService:LoginService, public authService:AuthService) {
+
+    this.authService.handleAuthentication();
+
     this.form = new FormGroup({
       'password': new FormControl(''),
-      'email': new FormControl('', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]),
+      'username': new FormControl(''),
     })
   }
 
@@ -25,13 +29,16 @@ export class LoginComponent implements OnInit {
 
   }
 
+  login(){
+    this.authService.login();
+  }
+
   loginForm(){
+    if(this.form.get("username").value != "" && this.form.get("password").value != ""){
       let data = {
-        email: this.form.get("email").value,
+        username: this.form.get("username").value,
         password: this.form.get("password").value,
       }
-
-      console.log(data);
 
       this.loginService.sendData(data).subscribe(
         (response)=>{
@@ -40,7 +47,7 @@ export class LoginComponent implements OnInit {
         (error) =>{ 
           swal({
             title: 'Error',
-            text: 'El email o contraseña son invalidos',
+            text: 'El nombre de usuario no existe',
             type: 'error',
           })
           this.form.reset({
@@ -48,6 +55,13 @@ export class LoginComponent implements OnInit {
           });
         }
       )
+    }else{
+      swal({
+        title: 'Error',
+        text: 'Debes completar el nombre de usuario y contraseña',
+        type: 'error',
+      })
+    }
   }
 
 }

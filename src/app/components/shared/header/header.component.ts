@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { AuthService } from '../../../services/auth.service'
 
 import * as $ from 'jquery';
 
@@ -11,6 +12,7 @@ import * as $ from 'jquery';
 export class HeaderComponent implements OnInit {
 
   openMenu:boolean = false;
+  profile:any[];
 
   openAside(){
     if(!this.openMenu){
@@ -23,7 +25,9 @@ export class HeaderComponent implements OnInit {
       }
   }
 
-  constructor() { }
+  constructor(public auth:AuthService) {
+    auth.handleAuthentication();
+  }
 
   ngOnInit() {
 
@@ -36,7 +40,13 @@ export class HeaderComponent implements OnInit {
 
       });
 
-    
+      if (this.auth.userProfile) {
+        this.profile = this.auth.userProfile;
+      } else {
+        this.auth.getProfile((err, profile) => {
+          this.profile = profile;
+        });
+      }
 
   }
 

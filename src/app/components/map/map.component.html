@@ -18,7 +18,7 @@
                 <dodecaedro></dodecaedro>
               </div>
             </div>
-          <a (click)="checkLogin()" class="orange darken-1 waves-effect waves-light btn-large">Comienza a jugar!</a>
+          <a (click)="checkLogin()" [routerLink]="['/login']" class="orange darken-1 waves-effect waves-light btn-large">Comienza a jugar!</a>
           
         </div>
         <div class="col m6 hide-on-small-only">
@@ -29,9 +29,11 @@
 </ng-container>
 
 <ng-container *ngIf="type == 2">
+  <app-header></app-header>
   <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng" [streetViewControl]=false [zoomControl]=false>
       <ng-container *ngFor="let marker of places">
           <agm-marker [latitude]="marker.geometry.location.lat" [longitude]="marker.geometry.location.lng" iconUrl="assets/images/marker1.png" [title]="marker.name"></agm-marker>
       </ng-container>
     </agm-map>
+    <app-footer></app-footer>
 </ng-container>

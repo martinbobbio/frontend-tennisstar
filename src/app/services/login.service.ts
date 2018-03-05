@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Http, Headers, RequestOptionsArgs, RequestMethod, RequestOptions, Response } from '@angular/http'
+import { Http, Headers, RequestOptionsArgs, RequestMethod, RequestOptions, Response, URLSearchParams  } from '@angular/http'
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
 
@@ -12,20 +12,17 @@ export class LoginService {
   constructor(private http:Http) {}
 
   sendData(formData){
-
-    let data = JSON.stringify(formData);
+    
     let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    let requestOptions = new RequestOptions({
-        method: RequestMethod.Post,
-        url: `http://localhost:8000/api/login/`,
-        headers: headers,
-        body: data
-    });
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('username', formData.username);
+    urlSearchParams.append('password', formData.password);
 
-    return this.http.post(`http://localhost:8000/api/login/`,data,requestOptions).map(
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`http://admin-tenis.tennis-star.com/web/app_dev.php/api/auth/login`,body, {headers: headers}).map(
       (response) => response.json()
     )
   }

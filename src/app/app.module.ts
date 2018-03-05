@@ -12,6 +12,7 @@ import { MapService } from './services/map.service';
 import { HomeService } from './services/home.service';
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
+import { AuthService } from './services/auth.service';
 
 //Dependencia (Mapa)
 import { AgmCoreModule } from '@agm/core';
@@ -59,6 +60,7 @@ import { RegisterComponent } from './views/register/register.component';
     HomeService,
     LoginService,
     RegisterService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

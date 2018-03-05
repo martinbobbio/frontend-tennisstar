@@ -12,7 +12,7 @@ export class MapComponent implements OnInit {
   @Input() type:number = 1;
 
   //Imagenes para el home
-  homeImages=["federer","djokovic","murray","nadal","del potro"];
+  homeImages=["federer","djokovic","murray","nadal","del potro","dimitrov","zverev"];
   homeImageIndex;
 
   //Estados
@@ -37,7 +37,7 @@ export class MapComponent implements OnInit {
         })
     }
 
-    this.homeImageIndex = Math.floor(Math.random() * 5);
+    this.homeImageIndex = Math.floor(Math.random() * 7);
 
   }
 
