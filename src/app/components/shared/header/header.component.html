@@ -13,7 +13,14 @@
 
 <aside class="sidebar-left-collapse green">
   
-  <a href="#" class="company-logo">Foto</a>
+  <div *ngIf="profile && auth.isAuthenticated()" class="center-align ">
+    <div class="col s4">
+      <img src="{{profile.picture}}" class="circle center-align">
+    </div>
+    <div class="col s8">
+      <p class="bold">{{profile.name}}</p>
+    </div>
+  </div>
 
   <div class="sidebar-links">
 
@@ -27,7 +34,7 @@
         <li><a href="#">Portraits</a></li>
         <li><a href="#">Landscape</a></li>
         <li><a href="#">Studio shots</a></li>
-        <li><a href="#">Macros</a></li>
+        <li><a (click)="logout()" href="#">Salir</a></li>
       </ul>
 
     </div>
@@ -78,7 +85,8 @@
     </div>
 
   </div>
-  
+  <br><br>
+
 </aside>
     
 

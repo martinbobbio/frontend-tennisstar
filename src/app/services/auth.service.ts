@@ -1,19 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
 
 @Injectable()
 export class AuthService {
 
+  apiUrl = environment.apiUrl;
+
   auth0 = new auth0.WebAuth({
     clientID: '1ZBj8dstoxp3dJBxVEee0756wyv3Gl09',
     domain: 'martinbobbio.auth0.com',
     responseType: 'token id_token',
     audience: 'https://martinbobbio.auth0.com/userinfo',
-    redirectUri: 'http://www.tennis-star.com:4200/callback',
-    scope: 'openid'
+    redirectUri: this.apiUrl+'/callback',
+    scope: 'openid profile'
   });
+
+  
 
   public userProfile:any;
 
@@ -51,7 +56,7 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // Go back to the home route
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
   public isAuthenticated(): boolean {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -13,7 +14,7 @@ import swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public loginService:LoginService, public authService:AuthService) {
+  constructor(public loginService:LoginService, public authService:AuthService, public router:Router) {
 
     this.authService.handleAuthentication();
 
@@ -42,9 +43,26 @@ export class LoginComponent implements OnInit {
 
       this.loginService.sendData(data).subscribe(
         (response)=>{
-          alert("ok");
+
+          if(response.error != null){
+            return;
+          }
+          
+          if(response.data[0] == "false"){
+            swal({
+              title: 'Error',
+              text: 'La contraseña es invalida',
+              type: 'error',
+            })
+            this.form.reset({
+              password:"",
+            });
+            return;
+          }else{
+            this.router.navigate(['/']);
+          }
         } ,
-        (error) =>{ 
+        (error) =>{
           swal({
             title: 'Error',
             text: 'El nombre de usuario no existe',

@@ -33,21 +33,28 @@ export class HeaderComponent implements OnInit {
 
     var links = $('.links');
     
-      links.on('click', function () {
+    links.on('click', function () {
 
-        links.removeClass('selected');
-        $(this).addClass('selected');
+      links.removeClass('selected');
+      $(this).addClass('selected');
 
-      });
+    });
 
-      if (this.auth.userProfile) {
-        this.profile = this.auth.userProfile;
-      } else {
+    
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+    } else {
+      if(this.auth.isAuthenticated()){
         this.auth.getProfile((err, profile) => {
           this.profile = profile;
         });
       }
+    }
 
+  }
+
+  logout(){
+    this.auth.logout();
   }
 
 }

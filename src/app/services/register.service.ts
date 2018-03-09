@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-
 import { Http, Headers, RequestOptionsArgs, RequestMethod, RequestOptions, Response, URLSearchParams } from '@angular/http'
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
-
 import { environment } from '../../environments/environment';
 
 @Injectable()
 export class RegisterService {
+
+  backUrl = environment.backUrl;
 
   constructor(private http:Http) {}
 
@@ -23,7 +23,7 @@ export class RegisterService {
 
     let body = urlSearchParams.toString();
 
-    return this.http.post(`http://admin-tenis.tennis-star.com/web/app_dev.php/api/auth/register`,body, {headers: headers}).map(
+    return this.http.post(`${this.backUrl}/api/auth/register`,body, {headers: headers}).map(
       (response) => response.json()
     )
   }

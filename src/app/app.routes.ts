@@ -10,6 +10,7 @@ const APP_ROUTES: Routes = [
     { path: 'explorar', component:ExplorarComponent},
     { path: 'login', component:LoginComponent},
     { path: 'register', component:RegisterComponent},
+    { path: 'callback', redirectTo:''},
     { path: '**', pathMatch:'full', redirectTo:''},
 ]
 
