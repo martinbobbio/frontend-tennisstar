@@ -9,16 +9,21 @@
     </div>
     <div class="row absolute" style="top:0%;left:15%;width:80%">
         <div class="col m6 no-margin-mobile" style="margin-top:50px;">
-          <h2 class="orange-text text-darken-1 fs-38">Impulsado por los mejores jugadores del mundo.</h2>
+          <h2 *ngIf="isNewUser == null" class="orange-text text-darken-1 fs-38">Impulsado por los mejores jugadores del mundo.</h2>
+          <h2 *ngIf="isNewUser" class="orange-text text-darken-1 fs-38">Solo faltan dos pasos. 0/2</h2>
             <div class="row">
               <div class="col m6">
-                <h3 class="orange-text text-darken-1 fs-25">Conviertete en uno de ellos.</h3>
+                <h3 *ngIf="isNewUser == null" class="orange-text text-darken-1 fs-25">Conviertete en uno de ellos.</h3>
+                <h3 *ngIf="isNewUser" class="orange-text text-darken-1 fs-25">Ingresa tus datos y estilo de juego.</h3>
               </div>
               <div class="col m6 hide-on-small-only" style="margin-top:100px;">
                 <dodecaedro></dodecaedro>
               </div>
             </div>
-          <a (click)="checkLogin()" [routerLink]="['/login']" class="orange darken-1 waves-effect waves-light btn-large">Comienza a jugar!</a>
+          <a *ngIf="isNewUser == null" [routerLink]="['/login']" class="orange darken-1 waves-effect waves-light btn-large">Ingresa a TennisStar</a>
+          <a *ngIf="isNewUser" [routerLink]="['/completePerfil']" class="orange darken-1 waves-effect waves-light btn-large">Completa tus datos</a>
+          <br><br>
+          <a *ngIf="isNewUser" [routerLink]="['/completeGameStats']" class="orange darken-1 waves-effect waves-light btn-large">Completa tu perfil</a>
           
         </div>
         <div class="col m6 hide-on-small-only">

@@ -27,4 +27,10 @@ export class LoginService {
     )
   }
 
+  setSession(username){
+    localStorage.setItem('id_user', "12");
+    localStorage.setItem('username', username);
+    localStorage.setItem('new_user', "true");
+  }
+
 }

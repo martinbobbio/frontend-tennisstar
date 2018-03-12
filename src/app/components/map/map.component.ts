@@ -11,6 +11,8 @@ export class MapComponent implements OnInit {
 
   @Input() type:number = 1;
 
+  isNewUser;
+
   //Imagenes para el home
   homeImages=["federer","djokovic","murray","nadal","del potro","dimitrov","zverev"];
   homeImageIndex;
@@ -29,6 +31,8 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
 
+    this.isNewUser = localStorage.getItem("new_user")
+console.log(this.isNewUser)
     if(this.type != 1){
 
       this.mapService.getClubes(this.lat, this.lng).subscribe(
@@ -38,11 +42,6 @@ export class MapComponent implements OnInit {
     }
 
     this.homeImageIndex = Math.floor(Math.random() * 7);
-
-  }
-
-  checkLogin(){
-    if(!this.isLogged){}
 
   }
 

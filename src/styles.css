@@ -11,6 +11,16 @@
     cursor: pointer;
 }
 
+/*Bold*/
+.bold{
+    font-weight: bold;
+}
+
+/*FontSize*/
+.fs-19{
+    font-size: 19px;
+}
+
 
 /*Positions*/
 .relative{

@@ -13,6 +13,10 @@ export class HeaderComponent implements OnInit {
 
   openMenu:boolean = false;
   profile:any[];
+  username:string;
+
+  isNewUser;
+  mobile = false;
 
   openAside(){
     if(!this.openMenu){
@@ -31,6 +35,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
+    this.isNewUser = localStorage.getItem("new_user")
+
+    var isMobile = window.matchMedia("only screen and (max-width: 576px)");
+    if (isMobile.matches) {
+        this.mobile = true;
+    }
+
+    this.username = localStorage.getItem("username");
+    console.log(this.username)
     var links = $('.links');
     
     links.on('click', function () {
@@ -55,6 +68,7 @@ export class HeaderComponent implements OnInit {
 
   logout(){
     this.auth.logout();
+    location.reload();
   }
 
 }

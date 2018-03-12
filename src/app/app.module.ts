@@ -29,6 +29,9 @@ import { NoticesComponent } from './components/notices/notices.component';
 import { NoticeComponent } from './components/notice/notice.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { CompletePerfilComponent } from './views/complete-perfil/complete-perfil.component';
+import { CompleteGameStatsComponent } from "./views/complete-game-stats/complete-game-stats.component";
+
 
 
 @NgModule({
@@ -44,6 +47,8 @@ import { RegisterComponent } from './views/register/register.component';
     NoticeComponent,
     LoginComponent,
     RegisterComponent,
+    CompletePerfilComponent,
+    CompleteGameStatsComponent,
   ],
   imports: [
     BrowserModule,
