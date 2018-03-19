@@ -11,9 +11,9 @@ export class HomeService {
 
   constructor(private http:Http) {}
 
-  getNotices(){console.log(environment)
+  getNotices(){
 
-    return this.http.get(`${this.backUrl}/api/notice/get-notice/`).map(
+    return this.http.get(`${this.backUrl}/api/notice/get-notice`).map(
       (response) => response.json()
     )
   }

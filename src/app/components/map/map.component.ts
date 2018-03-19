@@ -32,7 +32,6 @@ export class MapComponent implements OnInit {
   ngOnInit() {
 
     this.isNewUser = localStorage.getItem("new_user")
-console.log(this.isNewUser)
     if(this.type != 1){
 
       this.mapService.getClubes(this.lat, this.lng).subscribe(

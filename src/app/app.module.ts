@@ -13,6 +13,7 @@ import { HomeService } from './services/home.service';
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
 import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 
 //Dependencia (Mapa)
 import { AgmCoreModule } from '@agm/core';
@@ -65,7 +66,8 @@ import { CompleteGameStatsComponent } from "./views/complete-game-stats/complete
     HomeService,
     LoginService,
     RegisterService,
-    AuthService
+    AuthService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

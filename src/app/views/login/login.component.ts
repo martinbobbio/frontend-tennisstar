@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
             });
             return;
           }else{
-            this.loginService.setSession(this.form.get("username").value);
+            this.loginService.setSession(this.form.get("username").value,response.data[0].id);
             this.router.navigate(['/']);
           }
         } ,

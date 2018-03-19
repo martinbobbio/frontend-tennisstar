@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 declare let jQuery: any;
 
@@ -11,8 +13,9 @@ declare let jQuery: any;
 export class CompletePerfilComponent implements OnInit {
 
   form:FormGroup;
+  username:string
 
-  constructor() {
+  constructor(public userService:UserService,public router:Router) {
     this.form = new FormGroup({
       'firstname': new FormControl(''),
       'lastname': new FormControl(''),
@@ -21,9 +24,30 @@ export class CompletePerfilComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.username = localStorage.getItem("username");
   }
 
   submitForm(){
+
+    if(this.form.get("firstname").value != "" && this.form.get("lastname").value != "" && this.form.get("age").value != ""){
+      
+      let data = {
+        firstname: this.form.get("firstname").value,
+        lastname: this.form.get("lastname").value,
+        age: this.form.get("age").value,
+      }
+
+      this.userService.sendProfileData(data).subscribe(
+        (response)=>{
+          localStorage.setItem("completeProfile","true");
+          this.router.navigate(['/']);
+        } ,
+        (error) =>{
+         
+        }
+      )
+
+    }
 
   }
 

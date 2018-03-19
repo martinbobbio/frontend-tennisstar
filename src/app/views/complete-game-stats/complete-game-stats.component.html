@@ -10,7 +10,7 @@
         <form (ngSubmit)="submitForm()" [formGroup]="form" novalidate="novalidate" method="post" class="col s12">
           <div class='row'>
             <div class='col s12'>
-                <p class="center-align orange-text">Nombre de usuario</p><br>
+                <p class="center-align orange-text">{{username}}</p><br>
                 <a [routerLink]="['/']">
                   <img src="assets/images/logo.png" class="responsive-img">
                 </a>
@@ -23,15 +23,15 @@
               </div>
               <div class="input-field col s6">
                 <select formControlName="gameLevel" name='gameLevel' id='gameLevel'>
-                  <option value="" disabled selected>Nivel de juego</option>
-                  <option value="1">Principiante</option>
-                  <option value="2">Amateur</option>
-                  <option value="3">Profesional</option>
+                  <option [ngValue]="undefined" disabled selected>Nivel de juego</option>
+                  <option [ngValue]="1">Principiante</option>
+                  <option [ngValue]="2">Amateur</option>
+                  <option [ngValue]="3">Profesional</option>
                 </select>
                 <label>Nivel de juego</label>
             </div>
             <div class="input-field col s6">
-                <select formControlName="backhand" name='backhand' id='backhand'>
+                <select formControlName="typeBackhand" name='typeBackhand' id='backhand'>
                   <option value="" disabled selected>Revés</option>
                   <option value="1">A dos manos</option>
                   <option value="2">A una mano</option>
@@ -55,23 +55,23 @@
                 <p class="green-text bold fs-19">Atributos: </p>
                 <p class="range-field">
                   <span class="grey-text">Drive</span>
-                  <input type="range" id="test5" min="0" max="100" />
+                  <input formControlName="forehand" name="forehand" type="range" id="test5" min="1" max="100" />
                 </p>
                 <p class="range-field">
                   <span class="grey-text">Revés</span>
-                  <input type="range" id="test5" min="0" max="100" />
+                  <input formControlName="backhand" name="backhand" type="range" id="test5" min="1" max="100" />
                 </p>
                 <p class="range-field">
                   <span class="grey-text">Saque</span>
-                  <input type="range" id="test5" min="0" max="100" />
+                  <input formControlName="service" name="service" type="range" id="test5" min="1" max="100" />
                 </p>
                 <p class="range-field">
                   <span class="grey-text">Volea</span>
-                  <input type="range" id="test5" min="0" max="100" />
+                  <input formControlName="volley" name="volley" type="range" id="test5" min="1" max="100" />
                 </p>
                 <p class="range-field">
                   <span class="grey-text">Resistencia</span>
-                  <input type="range" id="test5" min="0" max="100" />
+                  <input formControlName="resistence" name="resistence" type="range" id="test5" min="1" max="100" />
                 </p>
               </div>
           </div>

@@ -13,7 +13,7 @@ export class MapService {
 
   getClubes(latitud:number,longitud:number){
 
-    return this.http.get(`${this.backUrl}/api/map/get-clubes/`).map(
+    return this.http.get(`${this.backUrl}/api/map/get-clubes`).map(
       (response) => response.json()
     )
   }

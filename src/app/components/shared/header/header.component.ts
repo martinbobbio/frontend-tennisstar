@@ -43,7 +43,6 @@ export class HeaderComponent implements OnInit {
     }
 
     this.username = localStorage.getItem("username");
-    console.log(this.username)
     var links = $('.links');
     
     links.on('click', function () {

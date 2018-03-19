@@ -10,7 +10,7 @@
         <form (ngSubmit)="submitForm()" [formGroup]="form" novalidate="novalidate" method="post" class="col s12">
           <div class='row'>
             <div class='col s12'>
-                <p class="center-align orange-text">Nombre de usuario</p><br>
+                <p class="center-align orange-text">{{username}}</p><br>
                 <a [routerLink]="['/']">
                   <img src="assets/images/logo.png" class="responsive-img">
                 </a>
