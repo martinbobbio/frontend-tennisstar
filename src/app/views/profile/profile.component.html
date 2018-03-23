@@ -1,0 +1,68 @@
+<app-header></app-header>
+
+<div  id="profile-page-header" class="card">
+    <div class="card-image">
+        <div *ngIf="mobile" class="orange card-image-desktop"></div>
+        <div *ngIf="!mobile" class="orange card-image-mobile"></div>                
+    </div>
+    <div class="card-content-size">
+      <div class="row">
+        <div *ngIf="!mobile" class="col s2 offset-s2">  
+          <figure class="card-profile-image">
+              <br>
+              <img src="assets/images/foto-perfil-default.png" alt="profile image" class="circle z-depth-2 pointer responsive-img">
+          </figure>
+        </div>
+        <div class="col m8 s12">
+          <h1 *ngIf="!mobile" class="bold white-text">Nombre de usuario </h1>
+          <h3 *ngIf="mobile" class="bold white-text">Nombre de usuario </h3>
+          <a class="waves-effect green waves-light btn activator">Ver atributos</a>
+        </div>
+      </div>
+      <div class="card-content container">
+        <div class="row">                    
+          <div class="col m3 s12">                        
+              <h4 class="card-title bold white-text">Nombre + Apellido</h4>
+              <p class="medium-small bold black-text">Tenista</p>                        
+          </div>
+          <div class="col m3 s12">
+              <h4 class="card-title bold white-text">Nivel de juego</h4>
+              <p class="medium-small bold black-text">Nivel de juego</p>                        
+          </div>
+          <div class="col m3 s12">
+              <h4 class="card-title bold white-text">Estilo de juego</h4>
+              <p class="medium-small bold black-text">Estilo de juego</p>                        
+          </div>                    
+          <div class="col m3 s12">
+              <h4 class="card-title bold white-text">Tipo de reves</h4>
+              <p class="medium-small bold black-text">Tipo de reves</p>                        
+          </div>                    
+        </div>
+      </div>
+    </div>
+    <div style="z-index:1001" class="card-reveal">
+        <div class="container">
+          <p>
+            <span class="card-title grey-text text-darken-4"><i class="right material-icons">clear</i></span>
+          </p>
+          <div class="row">
+            <div class="col m2">
+              <h4 class="green-text">Atributos: </h4>
+            </div>
+            <div class="col m8">
+              <canvas baseChart [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType" style="height: 100px;"></canvas>
+            </div>
+          </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+
+    <h4 class="green-text">Partidos: </h4>
+    <h4 class="green-text">Torneos: </h4>
+
+</div>
+
+<app-footer></app-footer>

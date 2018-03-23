@@ -22,7 +22,7 @@
                 <p class="green-text bold fs-19">Juego: </p><br>
               </div>
               <div class="input-field col s6">
-                <select formControlName="gameLevel" name='gameLevel' id='gameLevel'>
+                <select formControlName="gameLevel" name='gameLevel' id='gameLevel' class='gameLevel'>
                   <option [ngValue]="undefined" disabled selected>Nivel de juego</option>
                   <option [ngValue]="1">Principiante</option>
                   <option [ngValue]="2">Amateur</option>
@@ -31,7 +31,7 @@
                 <label>Nivel de juego</label>
             </div>
             <div class="input-field col s6">
-                <select formControlName="typeBackhand" name='typeBackhand' id='backhand'>
+                <select formControlName="typeBackhand" name='typeBackhand' id='typeBackhand' class='typeBackhand'>
                   <option value="" disabled selected>Revés</option>
                   <option value="1">A dos manos</option>
                   <option value="2">A una mano</option>
@@ -39,7 +39,7 @@
                 <label>Estilo de juego</label>
             </div>
             <div class="input-field col s12">
-                <select formControlName="gameStyle" name='gameStyle' id='gameStyle'>
+                <select formControlName="gameStyle" name='gameStyle' id='gameStyle' class='gameStyle'>
                   <option value="" disabled selected>Estilo de juego</option>
                   <option value="1">Jugador agresivo</option>
                   <option value="2">Jugador defensivo</option>

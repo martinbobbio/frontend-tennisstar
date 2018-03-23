@@ -2,7 +2,7 @@
   <div class="nav-wrapper container">
     <a href="#!" class="brand-logo">Tennis-Star</a>
     <ul class="right">
-      <li *ngIf="!mobile">{{username}}</li>
+      <li [routerLink]="['1/profile']" *ngIf="!mobile" class="pointer">{{username}}</li>
       <li class="hide-on-small-only"><a [routerLink]="['/explorar']"><i class="material-icons">search</i></a></li>
       <li class="button-collapse">
         <a id="menu" (click)="openAside()"><i class="material-icons">menu</i></a>
@@ -23,9 +23,9 @@
     </div>
   </div>
 
-  <p *ngIf="username != null && mobile" class="bold center-align" style="margin-bottom:20px;">{{username}}</p>
+  <p [routerLink]="['1/profile']" *ngIf="username != null && mobile" class="bold center-align" style="margin-bottom:20px;">{{username}}</p>
   <div *ngIf="isNewUser" class="center-align">
-  <img src="assets/images/foto-perfil-default.jpg" height="50" width="50">
+  <img src="assets/images/foto-perfil-default.png" height="50" width="50">
   </div>
 
   <div class="sidebar-links">
@@ -37,7 +37,7 @@
       </a>
 
       <ul class="sub-links">
-        <li><a href="#">Ver perfil</a></li>
+        <li><a [routerLink]="['1/profile']">Ver perfil</a></li>
         <li><a href="#">Editar perfil</a></li>
         <li><a href="#">Cambiar contraseña</a></li>
         <li><a (click)="logout()" href="#">Salir</a></li>

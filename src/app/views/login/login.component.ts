@@ -5,7 +5,7 @@ import { LoginService } from '../../services/login.service';
 import { AuthService } from '../../services/auth.service';
 
 import * as $ from 'jquery';
-import swal from 'sweetalert2';
+import * as swal from 'sweetalert2';
 
 @Component({
   selector: 'login',

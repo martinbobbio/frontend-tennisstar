@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
 
 import * as $ from 'jquery';
-import swal from 'sweetalert2';
+import * as swal from 'sweetalert2';
 
 @Component({
   selector: 'register',
