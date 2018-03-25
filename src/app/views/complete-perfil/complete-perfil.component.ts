@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import * as swal from 'sweetalert2';
 
 declare let jQuery: any;
 
@@ -39,7 +40,6 @@ export class CompletePerfilComponent implements OnInit {
 
       this.userService.sendProfileData(data).subscribe(
         (response)=>{
-          localStorage.setItem("completeProfile","true");
           this.router.navigate(['/']);
         } ,
         (error) =>{
@@ -47,6 +47,12 @@ export class CompletePerfilComponent implements OnInit {
         }
       )
 
+    }else{
+      swal({
+        title: 'Error',
+        text: 'Todos los campos deben estar completos',
+        type: 'error',
+      })
     }
 
   }

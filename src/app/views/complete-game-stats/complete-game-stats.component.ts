@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import * as swal from 'sweetalert2';
 
-declare let jQuery: any;
+declare let $: any;
+
 
 @Component({
   selector: 'app-complete-game-stats',
@@ -30,26 +32,40 @@ export class CompleteGameStatsComponent implements OnInit {
 
   ngOnInit() {
     this.username = localStorage.getItem("username");
-    jQuery('select').material_select();
+    $('select').material_select();
   }
 
   submitForm(){
 
-    let data = {
-      gameLevel: this.form.get("gameLevel").value,
-      gameStyle: this.form.get("gameStyle").value,
-      typeBackhand: this.form.get("typeBackhand").value,
-      forehand: this.form.get("forehand").value,
-      backhand: this.form.get("backhand").value,
-      service: this.form.get("service").value,
-      volley: this.form.get("volley").value,
-      resistence: this.form.get("resistence").value,
+    if($(".gameLevel .active").text() != "" && $(".typeBackhand .active").text() != "" && $(".gameStyle .active").text() != ""){
+      let data = {
+        gameLevel: $(".gameLevel .active").text(),
+        gameStyle: $(".typeBackhand .active").text(),
+        typeBackhand: $(".gameStyle .active").text(),
+        forehand: this.form.get("forehand").value,
+        backhand: this.form.get("backhand").value,
+        service: this.form.get("service").value,
+        volley: this.form.get("volley").value,
+        resistence: this.form.get("resistence").value,
+      }
+
+      this.userService.sendSkillData(data).subscribe(
+        (response)=>{
+          this.router.navigate(['/']);
+        } ,
+        (error) =>{
+         
+        }
+      )
+      
+
+    }else{
+      swal({
+        title: 'Error',
+        text: 'Todos los campos deben estar completos',
+        type: 'error',
+      })
     }
-
-    console.log(this.form.get("gameLevel"))
-
-    
-
 
   }
 

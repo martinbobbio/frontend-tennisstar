@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl:"http://localhost:4200",
-  backUrl:"http://localhost:8000"
+  apiUrl:"http://www.tennis-star.com",
+  backUrl:"http://admin-tenis.tennis-star.com/web/app_dev.php"
 };
