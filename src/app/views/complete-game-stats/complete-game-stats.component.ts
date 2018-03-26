@@ -40,8 +40,8 @@ export class CompleteGameStatsComponent implements OnInit {
     if($(".gameLevel .active").text() != "" && $(".typeBackhand .active").text() != "" && $(".gameStyle .active").text() != ""){
       let data = {
         gameLevel: $(".gameLevel .active").text(),
-        gameStyle: $(".typeBackhand .active").text(),
-        typeBackhand: $(".gameStyle .active").text(),
+        gameStyle: $(".gameStyle .active").text(),
+        typeBackhand: $(".typeBackhand .active").text(),
         forehand: this.form.get("forehand").value,
         backhand: this.form.get("backhand").value,
         service: this.form.get("service").value,

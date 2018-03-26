@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { AuthService } from '../../../services/auth.service'
+import { AuthService } from '../../../services/auth.service';
 
 import * as $ from 'jquery';
 
@@ -62,6 +62,9 @@ export class HeaderComponent implements OnInit {
         });
       }
     }
+
+
+    
 
   }
 

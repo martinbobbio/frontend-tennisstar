@@ -15,7 +15,8 @@ const APP_ROUTES: Routes = [
     { path: 'register', component:RegisterComponent},
     { path: 'completePerfil', component:CompletePerfilComponent},
     { path: 'completeGameStats', component:CompleteGameStatsComponent},
-    { path: ':id/profile', component:ProfileComponent},
+    { path: 'profile', component:ProfileComponent},
+    { path: 'profile/:id', component:ProfileComponent},
     { path: '**', pathMatch:'full', redirectTo:''},
 ]
 

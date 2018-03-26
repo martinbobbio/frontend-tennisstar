@@ -53,4 +53,36 @@ export class UserService {
     )
   }
 
+  getProfile(id:number){
+
+    return this.http.get(`${this.backUrl}/api/user/get-user/${id}`).map(
+      (response) => response.json()
+    )
+
+  }
+
+  getProfileStatus(id:number){
+
+    return this.http.get(`${this.backUrl}/api/user/get-user-status/${id}`).map(
+      (response) => response.json()
+    )
+
+  }
+
+  getUsersRandom(){
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('id', localStorage.getItem("id_user"));
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/user/get-user-random`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+
+  }
+
 }

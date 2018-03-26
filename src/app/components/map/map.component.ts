@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { MapService } from '../../services/map.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'map',
@@ -27,7 +28,13 @@ export class MapComponent implements OnInit {
 
   places:any[];
 
-  constructor(public mapService:MapService) { }
+  //Status Jugador
+  fullPlayer:boolean = null;
+  fullGame:boolean = null;
+  fullCount:number = 0;
+  completeCharge:boolean = true;
+
+  constructor(public mapService:MapService, public userService:UserService) { }
 
   ngOnInit() {
 
@@ -38,6 +45,22 @@ export class MapComponent implements OnInit {
         (data) => {
           this.places = data.data[0].results;
         })
+    }
+
+    if(localStorage.getItem("id_user") != null){
+      this.completeCharge = false;
+      this.userService.getProfileStatus(Number(localStorage.getItem("id_user"))).subscribe(
+        (response)=>{
+          this.fullPlayer = response.data[0]["fullPlayer"];
+          this.fullGame = response.data[0]["fullGame"];
+          if(this.fullGame == true) this.fullCount++;
+          if(this.fullPlayer == true) this.fullCount++;
+          this.completeCharge = true;
+        } ,
+        (error) =>{
+        
+        }
+      )
     }
 
     this.homeImageIndex = Math.floor(Math.random() * 7);

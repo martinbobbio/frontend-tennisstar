@@ -7,23 +7,27 @@
         </ng-container>
       </agm-map>
     </div>
-    <div class="row absolute" style="top:0%;left:15%;width:80%">
+    <div *ngIf="completeCharge" class="row absolute" style="top:0%;left:15%;width:80%">
         <div class="col m6 no-margin-mobile" style="margin-top:50px;">
           <h2 *ngIf="isNewUser == null" class="orange-text text-darken-1 fs-38">Impulsado por los mejores jugadores del mundo.</h2>
-          <h2 *ngIf="isNewUser" class="orange-text text-darken-1 fs-38">Solo faltan dos pasos. 0/2</h2>
+          <h2 *ngIf="isNewUser && fullCount != 2" class="orange-text text-darken-1 fs-38">Solo faltan dos pasos. {{fullCount}}/2</h2>
+          <h2 *ngIf="fullCount == 2" class="orange-text text-darken-1 fs-38">Felicidades eres un Tennisstar</h2>
             <div class="row">
               <div class="col m6">
                 <h3 *ngIf="isNewUser == null" class="orange-text text-darken-1 fs-25">Conviertete en uno de ellos.</h3>
-                <h3 *ngIf="isNewUser" class="orange-text text-darken-1 fs-25">Ingresa tus datos y estilo de juego.</h3>
+                <h3 *ngIf="isNewUser && fullCount != 2" class="orange-text text-darken-1 fs-25">Ingresa tus datos y estilo de juego.</h3>
+                <h3 *ngIf="fullCount == 2" class="orange-text text-darken-1 fs-25">Comienza a interactuar en nuestra red.</h3>
               </div>
               <div class="col m6 hide-on-small-only" style="margin-top:100px;">
                 <dodecaedro></dodecaedro>
               </div>
             </div>
           <a *ngIf="isNewUser == null" [routerLink]="['/login']" class="orange darken-1 waves-effect waves-light btn-large">Ingresa a TennisStar</a>
-          <a *ngIf="isNewUser" [routerLink]="['/completePerfil']" class="orange darken-1 waves-effect waves-light btn-large">Completa tus datos</a>
+          <a *ngIf="isNewUser && fullCount != 2 && fullPlayer != true" [routerLink]="['/completePerfil']" class="orange darken-1 waves-effect waves-light btn-large">Completa tus datos</a>
+          <a *ngIf="fullCount == 2" class="orange darken-1 waves-effect waves-light btn-large">Crear partido</a>
           <br><br>
-          <a *ngIf="isNewUser" [routerLink]="['/completeGameStats']" class="orange darken-1 waves-effect waves-light btn-large">Completa tu perfil</a>
+          <a *ngIf="isNewUser && fullCount != 2  && fullGame != true" [routerLink]="['/completeGameStats']" class="orange darken-1 waves-effect waves-light btn-large">Completa tu perfil</a>
+          <a *ngIf="fullCount == 2" class="orange darken-1 waves-effect waves-light btn-large">Crear torneo</a>
           
         </div>
         <div class="col m6 hide-on-small-only">

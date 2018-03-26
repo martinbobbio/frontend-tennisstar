@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'home-explorar',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeExplorarComponent implements OnInit {
 
-  constructor() { }
+  users;
+
+  constructor(public userService:UserService) { }
 
   ngOnInit() {
+
+    this.userService.getUsersRandom().subscribe(
+      (response)=>{console.log(response);
+        this.users = response.data[0];
+      } ,
+      (error) =>{
+      
+      }
+    )
+
   }
 
 }
