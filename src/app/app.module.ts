@@ -19,6 +19,9 @@ import { UserService } from './services/user.service';
 import { AgmCoreModule } from '@agm/core';
 //Dependencia (Charts)
 import { ChartsModule } from 'ng2-charts';
+//Dependencia (File upload)
+import { FileUploadModule } from 'ng2-file-upload';
+import { FileDropDirective, FileSelectDirective } from 'ng2-file-upload';
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -66,7 +69,8 @@ import { ProfileComponent } from './views/profile/profile.component';
     HttpModule,
     APP_ROUTING,
     ReactiveFormsModule,
-    ChartsModule
+    ChartsModule,
+    FileUploadModule
   ],
   providers: [
     MapService,
@@ -77,5 +81,8 @@ import { ProfileComponent } from './views/profile/profile.component';
     UserService,
   ],
   bootstrap: [AppComponent]
+})
+@NgModule({
+  declarations: [FileDropDirective, FileSelectDirective]
 })
 export class AppModule { }

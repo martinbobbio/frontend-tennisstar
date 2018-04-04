@@ -35,14 +35,8 @@
 
           <div class="row">
             <p class="grey-text">Foto de perfil</p>
-            <div class="file-field input-field">
-              <div class="btn green">
-                <span>Imagen</span>
-                <input type="file">
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-              </div>
+            <div ng2FileDrop  [uploader]="uploader">
+              <input type="file" ng2FileSelect [uploader]="uploader" />
             </div>
           </div>
 
