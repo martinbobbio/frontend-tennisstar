@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
+import { environment } from '../../../environments/environment';
 import * as swal from 'sweetalert2';
 
 
@@ -19,13 +20,13 @@ export class CompletePerfilComponent implements OnInit {
   form:FormGroup;
   username:string;
 
-  uploader = new FileUploader({
-    url: `http://localhost:8000/_uploader/users/upload`,
-    method: "POST",
-    headers: [
-      { name: "Content-Type", value: "multipart/form-data" },
-    ]
+  public uploader:FileUploader = new FileUploader({
+    url: environment.uploaderUrl,
+    autoUpload: true
   });
+  public uploadResult:any = null;
+
+  
 
   constructor(public userService:UserService,public router:Router) {
     this.form = new FormGroup({
@@ -37,11 +38,13 @@ export class CompletePerfilComponent implements OnInit {
 
   ngOnInit() {
     this.username = localStorage.getItem("username");
+
+    this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
+    
   }
 
   submitForm(){
 
-    this.uploader.uploadAll();
 
     /*if(this.form.get("firstname").value != "" && this.form.get("lastname").value != "" && this.form.get("age").value != ""){
       
