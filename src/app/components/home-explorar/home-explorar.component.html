@@ -7,7 +7,7 @@
         <p class="orange-text bold">Usuarios</p>
         <ul *ngFor="let user of users" class="collection">
             <li class="collection-item avatar">
-                <img [routerLink]="['profile/'+user.id]" src="{{pat}}{{user.path}}" alt="" class="circle pointer">
+                <img [routerLink]="['profile/'+user.id]" src="{{path}}{{user.path}}" alt="" class="circle pointer">
                 <span [routerLink]="['profile/'+user.id]" class="title bold pointer">{{user.firstname}} {{user.lastname}}</span>
                 <p>{{user.gameStyle}} <br>
                     {{user.gameLevel}}

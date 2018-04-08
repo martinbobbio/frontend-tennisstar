@@ -4,7 +4,7 @@ import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
 
-import * as $ from 'jquery';
+declare let $: any;
 
 @Component({
   selector: 'app-header',
