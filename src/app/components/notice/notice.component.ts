@@ -12,12 +12,16 @@ export class NoticeComponent implements OnInit {
   @Input() description:string;
   @Input() createdAt:string;
   @Input() imgsrc:string;
+  @Input() videoLink:string;
 
   is_mobile = false;
+  linkVideoYT:string;
 
   constructor() { }
 
   ngOnInit() {
+
+    this.linkVideoYT = `https://www.youtube.com/embed/${this.videoLink}`;
     
     if(screen.width <= 576){
       this.is_mobile = true;

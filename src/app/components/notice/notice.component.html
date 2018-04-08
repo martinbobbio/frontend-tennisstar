@@ -3,12 +3,19 @@
   <ng-container *ngIf="!is_mobile">
     <br>
     <div class="row">
-      <div class="col m6">
-        <img src="http://admin-tenis.tennis-star.com/web/{{imgsrc}}" class="responsive-img">
+      <div class="col m5">
+        <img *ngIf="!videoLink" src="http://admin-tenis.tennis-star.com/web/{{imgsrc}}" class="responsive-img">
+        <iframe *ngIf="videoLink" width="100%" height="100%" [src]="linkVideoYT | safe" allowfullscreen></iframe>
+        <ng-container *ngIf="videoLink">
+            <a href="http://admin-tenis.tennis-star.com/web/{{imgsrc}}" class="waves-effect waves-light btn orange"><i class="material-icons right">image</i>Ver imagen</a>
+        </ng-container>
       </div>
-      <div class="col m6">
+      <div class="col m7">
         <h4 class="orange-text">{{title}} <span class="black-text" style="font-size:16px">({{createdAt}})</span></h4>
         <p [innerHTML]="description"></p>
+        
+        
+        
       </div>
     </div>
   </ng-container>

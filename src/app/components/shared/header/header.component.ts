@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { AuthService } from '../../../services/auth.service';
+import { UserService } from '../../../services/user.service';
+import { environment } from '../../../../environments/environment';
 
 import * as $ from 'jquery';
 
@@ -17,6 +19,9 @@ export class HeaderComponent implements OnInit {
 
   isNewUser;
   mobile = false;
+  
+  pathImg:string;
+  path:string = environment.backPathImage;
 
   openAside(){
     if(!this.openMenu){
@@ -29,7 +34,7 @@ export class HeaderComponent implements OnInit {
       }
   }
 
-  constructor(public auth:AuthService) {
+  constructor(public auth:AuthService,public userService:UserService) {
     auth.handleAuthentication();
   }
 
@@ -64,6 +69,12 @@ export class HeaderComponent implements OnInit {
     }
 
 
+    if(Number(localStorage.getItem("id_user")) != 0){
+    this.userService.getImageProfile(Number(localStorage.getItem("id_user"))).subscribe(
+      (response)=>{
+        this.pathImg = response.data[0]["path"];
+      })
+    }
     
 
   }

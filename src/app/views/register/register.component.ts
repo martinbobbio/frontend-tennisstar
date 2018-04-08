@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
+import { LoginService } from '../../services/login.service';
 
 import * as $ from 'jquery';
 import * as swal from 'sweetalert2';
@@ -14,7 +15,7 @@ import * as swal from 'sweetalert2';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(public registerService:RegisterService, public router:Router) {
+  constructor(public registerService:RegisterService,public loginService:LoginService, public router:Router) {
     this.form = new FormGroup({
       'username': new FormControl(''),
       'password': new FormControl(''),
@@ -64,6 +65,8 @@ export class RegisterComponent implements OnInit {
           })
           return;
         }
+
+        this.loginService.setSession(this.form.get("username").value,response.data[0].id);
 
         this.router.navigate(['/']);
         

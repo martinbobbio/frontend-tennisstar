@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'home-explorar',
   templateUrl: './home-explorar.component.html',
@@ -9,6 +11,8 @@ import { UserService } from '../../services/user.service';
 export class HomeExplorarComponent implements OnInit {
 
   users;
+
+  path:string = environment.backPathImage;
 
   constructor(public userService:UserService) { }
 

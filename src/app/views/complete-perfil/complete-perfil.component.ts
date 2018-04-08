@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 import * as swal from 'sweetalert2';
 
 
-declare let jQuery: any;
+declare let $: any;
 
 
 @Component({
@@ -20,11 +20,15 @@ export class CompletePerfilComponent implements OnInit {
   form:FormGroup;
   username:string;
 
+  user:any;
+
   public uploader:FileUploader = new FileUploader({
     url: environment.uploaderUrl,
     autoUpload: true
   });
-  public uploadResult:any = null;
+  public uploadResult:boolean = false;
+  public uploadPath:any;
+  public pathImgAux;
 
   
 
@@ -34,34 +38,84 @@ export class CompletePerfilComponent implements OnInit {
       'lastname': new FormControl(''),
       'age': new FormControl(''),
     });
+    this.userService.checkIfPlayer(Number(localStorage.getItem("id_user"))).subscribe(
+      (response)=>{
+        this.user = response.data[0];
+        if(this.user["status"]){
+          this.form = new FormGroup({
+            'firstname': new FormControl(this.user["firstname"]),
+            'lastname': new FormControl(this.user["lastname"]),
+            'age': new FormControl(this.user["age"]),
+          });
+          setTimeout(function(){
+            $("#age").focus();
+            $("#lastname").focus();
+            $("#firstname").focus();
+            $("#btn_submit").removeClass("disabled");
+          }, 1000);
+          
+          
+        }
+    })
+
+    this.userService.getImageProfile(Number(localStorage.getItem("id_user"))).subscribe(
+      (response)=>{
+        this.pathImgAux = response.data[0]["path"];
+      })
+
+    
   }
 
   ngOnInit() {
     this.username = localStorage.getItem("username");
 
     this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
-    
+    this.uploader.onSuccessItem = (item, response, status, headers) => {
+      this.uploadResult = true;
+      this.uploadPath = JSON.parse(response);
+      $("#btn_submit").removeClass("disabled");
+    };
+    this.uploader.onErrorItem = (item, response, status, headers) => {
+      this.uploadResult = false;
+    }
   }
 
   submitForm(){
 
-
-    /*if(this.form.get("firstname").value != "" && this.form.get("lastname").value != "" && this.form.get("age").value != ""){
+    if(this.form.get("firstname").value != "" && this.form.get("lastname").value != "" && this.form.get("age").value != ""){
       
-      let data = {
-        firstname: this.form.get("firstname").value,
-        lastname: this.form.get("lastname").value,
-        age: this.form.get("age").value,
-      }
-
-      this.userService.sendProfileData(data).subscribe(
-        (response)=>{
-          this.router.navigate(['/']);
-        } ,
-        (error) =>{
-         
+      
+      if(this.uploadResult == true || this.user["status"]){
+        let pathImg;
+        let pathStatus;
+        if(this.uploadResult){
+          pathImg = this.uploadPath["files"][0]["path"];
+          pathStatus = true;
+        }else{
+          pathImg = this.pathImgAux;
+          pathStatus = false;
         }
-      )
+        let data = {
+          firstname: this.form.get("firstname").value,
+          lastname: this.form.get("lastname").value,
+          age: this.form.get("age").value,
+          path: pathImg,
+          pathStatus: pathStatus,
+        }
+
+        setTimeout(function(){
+          
+        }, 2000);
+        
+        this.userService.sendProfileData(data).subscribe(
+          (response)=>{
+            this.router.navigate(['/']);
+          } ,
+          (error) =>{
+          
+          }
+        )
+      }
 
     }else{
       swal({
@@ -69,7 +123,15 @@ export class CompletePerfilComponent implements OnInit {
         text: 'Todos los campos deben estar completos',
         type: 'error',
       })
-    }*/
+    }
+
+    if(this.uploadResult == false && !this.user["status"]){
+      swal({
+        title: 'Error',
+        text: 'Por favor, revise que exista la imagen y no tenga un tamaño grande',
+        type: 'error',
+      })
+    }
 
   }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute,Params, Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -22,8 +24,11 @@ export class ProfileComponent implements OnInit {
   user_aux;
   user_id:number;
   compareUser:boolean = false;
+  
+  //Path
+  path:string = environment.backPathImage;
 
-  constructor(public userService:UserService, public router:ActivatedRoute) { }
+  constructor(public userService:UserService, public router:ActivatedRoute, public sanitizer:DomSanitizer) { }
 
   ngOnInit() {
 

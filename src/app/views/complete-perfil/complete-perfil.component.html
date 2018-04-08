@@ -25,7 +25,7 @@
             </div>
             <div class='input-field col s6'>
               <input formControlName="lastname" class='validate' type='text' name='lastname' id='lastname' />
-              <label for='password'>Apellido</label>
+              <label for='lastname'>Apellido</label>
             </div>
             <div class='input-field col s12'>
               <input formControlName="age" min="0" max="75" class='validate' type='number' name='age' id='age' />
@@ -35,14 +35,23 @@
 
           <div class="row">
             <p class="grey-text">Foto de perfil</p>
-            <div ng2FileDrop  [uploader]="uploader">
-              <input type="file" ng2FileSelect [uploader]="uploader" />
+            <div class="file-field input-field">
+              <div class="btn green">
+                <span>File</span>
+                <div ng2FileDrop  [uploader]="uploader">
+                  <input type="file" ng2FileSelect [uploader]="uploader" />
+                </div>
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
             </div>
+            
           </div>
 
           <div class='row'>
             <div class="col s12">
-              <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect green'>Guardar</button>
+              <button type='submit' id="btn_submit" name='btn_submit' class='col s12 btn btn-large waves-effect green disabled'>Guardar</button>
             </div>
           </div>
 

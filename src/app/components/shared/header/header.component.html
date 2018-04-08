@@ -25,7 +25,7 @@
 
   <p [routerLink]="['profile']" *ngIf="username != null && mobile" class="bold center-align" style="margin-bottom:20px;">{{username}}</p>
   <div *ngIf="isNewUser" class="center-align">
-  <img src="assets/images/foto-perfil-default.png" height="50" width="50">
+  <img src="{{path}}{{pathImg}}" class="circle" height="50" width="50">
   </div>
 
   <div class="sidebar-links">
@@ -38,7 +38,7 @@
 
       <ul class="sub-links">
         <li><a [routerLink]="['profile']">Ver perfil</a></li>
-        <li><a href="#">Editar perfil</a></li>
+        <li><a [routerLink]="['/completePerfil']">Editar perfil</a></li>
         <li><a href="#">Cambiar contraseña</a></li>
         <li><a (click)="logout()" href="#">Salir</a></li>
       </ul>

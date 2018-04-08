@@ -23,6 +23,9 @@ import { ChartsModule } from 'ng2-charts';
 import { FileUploadModule } from 'ng2-file-upload';
 import { FileDropDirective, FileSelectDirective } from 'ng2-file-upload';
 
+//Pipes
+import { SafePipe } from './pipes/safe.pipe';
+
 //Componentes
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/shared/header/header.component';
@@ -59,6 +62,7 @@ import { ProfileComponent } from './views/profile/profile.component';
     CompleteGameStatsComponent,
     HomeExplorarComponent,
     ProfileComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,

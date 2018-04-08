@@ -21,6 +21,8 @@ export class UserService {
     urlSearchParams.append('firstname', formData.firstname);
     urlSearchParams.append('lastname', formData.lastname);
     urlSearchParams.append('age', formData.age);
+    urlSearchParams.append('path', formData.path);
+    urlSearchParams.append('pathstatus', formData.pathstatus);
 
     let body = urlSearchParams.toString();
 
@@ -61,9 +63,23 @@ export class UserService {
 
   }
 
+  getImageProfile(id:number){
+    return this.http.get(`${this.backUrl}/api/user/get-profile-image/${id}`).map(
+      (response) => response.json()
+    )
+  }
+
   getProfileStatus(id:number){
 
     return this.http.get(`${this.backUrl}/api/user/get-user-status/${id}`).map(
+      (response) => response.json()
+    )
+
+  }
+
+  checkIfPlayer(id:number){
+
+    return this.http.get(`${this.backUrl}/api/user/check-if-player/${id}`).map(
       (response) => response.json()
     )
 
