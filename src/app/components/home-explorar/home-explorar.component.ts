@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-
 import { environment } from '../../../environments/environment';
+import { RequestFriendService } from '../../services/request-friend.service';
+
+import * as swal from 'sweetalert2';
+
+declare let $: any;
+
 
 @Component({
   selector: 'home-explorar',
@@ -14,7 +19,7 @@ export class HomeExplorarComponent implements OnInit {
 
   path:string = environment.backPathImage;
 
-  constructor(public userService:UserService) { }
+  constructor(public userService:UserService, public requestFriendService:RequestFriendService) { }
 
   ngOnInit() {
 
@@ -26,6 +31,28 @@ export class HomeExplorarComponent implements OnInit {
       
       }
     )
+
+  }
+
+  sendRequest(id){
+    let data;
+    data = {
+      id: id,
+    }
+
+    $("#explore-user-"+id).fadeOut(0);
+
+    this.requestFriendService.sendRequest(data).subscribe(
+      (response)=>{
+          swal({
+            title: 'Solicitud enviada!',
+            text: "Espera a que el usuario te acepte",
+            type: 'info',
+          })
+          
+          return;
+      })
+    
 
   }
 

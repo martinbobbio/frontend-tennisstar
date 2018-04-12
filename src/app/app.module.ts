@@ -14,6 +14,7 @@ import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
+import { RequestFriendService } from './services/request-friend.service';
 
 //Dependencia (Mapa)
 import { AgmCoreModule } from '@agm/core';
@@ -83,6 +84,7 @@ import { ProfileComponent } from './views/profile/profile.component';
     RegisterService,
     AuthService,
     UserService,
+    RequestFriendService,
   ],
   bootstrap: [AppComponent]
 })

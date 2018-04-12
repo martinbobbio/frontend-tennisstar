@@ -3,7 +3,8 @@
     <a href="#!" class="brand-logo">Tennis-Star</a>
     <ul class="right">
       <li [routerLink]="['profile']" *ngIf="!mobile" class="pointer">{{username}}</li>
-      <li class="hide-on-small-only"><a [routerLink]="['/explorar']"><i class="material-icons">search</i></a></li>
+      <li class="hide-on-small-only"><a [routerLink]="['/explorar']" id="btn-request"><i class="material-icons">group_add</i></a></li>
+      <li class="hide-on-small-only"><a><i class="material-icons">search</i></a></li>
       <li class="button-collapse">
         <a id="menu" (click)="openAside()"><i class="material-icons">menu</i></a>
       </li>
