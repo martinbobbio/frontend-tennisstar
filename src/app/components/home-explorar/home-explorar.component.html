@@ -5,14 +5,14 @@
     </div>
     <div class="col m4 s12">
         <p class="orange-text bold">Usuarios</p>
-        <ul *ngFor="let user of users" class="collection">
+        <ul *ngFor="let user of users" id="explore-user-{{user.id}}" class="collection">
             <li class="collection-item avatar">
                 <img [routerLink]="['profile/'+user.id]" src="{{path}}{{user.path}}" alt="" class="circle pointer">
                 <span [routerLink]="['profile/'+user.id]" class="title bold pointer">{{user.firstname}} {{user.lastname}}</span>
                 <p>{{user.gameStyle}} <br>
                     {{user.gameLevel}}
                 </p>
-                <a href="#!" class="secondary-content"><i class="material-icons orange-text">person_add</i></a>
+                <a (click)="sendRequest(user.id)" class="secondary-content pointer"><i class="material-icons orange-text">person_add</i></a>
             </li>
         </ul>
     </div>

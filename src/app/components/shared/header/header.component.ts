@@ -3,6 +3,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
+import { RequestFriendService } from '../../../services/request-friend.service';
 
 declare let $: any;
 
@@ -23,6 +24,8 @@ export class HeaderComponent implements OnInit {
   pathImg:string;
   path:string = environment.backPathImage;
 
+  requestFriends:any[];
+
   openAside(){
     if(!this.openMenu){
       $(".sidebar-left-collapse").fadeIn();
@@ -34,11 +37,24 @@ export class HeaderComponent implements OnInit {
       }
   }
 
-  constructor(public auth:AuthService,public userService:UserService) {
+  constructor(public auth:AuthService,public userService:UserService, public requestFriendService:RequestFriendService) {
     auth.handleAuthentication();
   }
 
   ngOnInit() {
+    
+    this.requestFriendService.getRequests().subscribe(
+      (response)=>{
+          
+          this.requestFriends = response.data[0];
+          console.log(this.requestFriends);
+
+          if(this.requestFriends[0]){
+            $("#btn-request").addClass("red-text");
+          }
+          
+          return;
+      })
 
     this.isNewUser = localStorage.getItem("new_user")
 
