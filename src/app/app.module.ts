@@ -23,6 +23,7 @@ import { ChartsModule } from 'ng2-charts';
 //Dependencia (File upload)
 import { FileUploadModule } from 'ng2-file-upload';
 import { FileDropDirective, FileSelectDirective } from 'ng2-file-upload';
+import "materialize-css";
 
 //Pipes
 import { SafePipe } from './pipes/safe.pipe';

@@ -38,11 +38,9 @@
 </ng-container>
 
 <ng-container *ngIf="type == 2">
-  <app-header></app-header>
   <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng" [streetViewControl]=false [zoomControl]=false>
       <ng-container *ngFor="let marker of places">
-          <agm-marker [latitude]="marker.geometry.location.lat" [longitude]="marker.geometry.location.lng" iconUrl="assets/images/marker1.png" [title]="marker.name"></agm-marker>
+          <agm-marker (markerClick)="selectMarker(marker)"  [latitude]="marker.geometry.location.lat" [longitude]="marker.geometry.location.lng" iconUrl="assets/images/marker1.png" [title]="marker.name"></agm-marker>
       </ng-container>
     </agm-map>
-    <app-footer></app-footer>
 </ng-container>

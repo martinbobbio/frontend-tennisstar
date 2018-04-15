@@ -42,6 +42,34 @@ export class RequestFriendService {
     )
   }
 
+  sendResponseFriend(id, status){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('id', id);
+    urlSearchParams.append('status', status);
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/requestfriend/send-response-friend`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+  }
+
+  getFriends(){
+    
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    
+        let urlSearchParams = new URLSearchParams();
+        urlSearchParams.append('id', localStorage.getItem("id_user"));
+    
+        let body = urlSearchParams.toString();
+    
+        return this.http.post(`${this.backUrl}/api/requestfriend/get-friends`,body, {headers: headers}).map(
+          (response) => response.json()
+        )
+      }
 
 }
