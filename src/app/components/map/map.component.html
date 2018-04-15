@@ -24,10 +24,10 @@
             </div>
           <a *ngIf="isNewUser == null" [routerLink]="['/login']" class="orange darken-1 waves-effect waves-light btn-large">Ingresa a TennisStar</a>
           <a *ngIf="isNewUser && fullCount != 2 && fullPlayer != true" [routerLink]="['/completePerfil']" class="orange darken-1 waves-effect waves-light btn-large">Completa tus datos</a>
-          <a *ngIf="fullCount == 2" class="orange darken-1 waves-effect waves-light btn-large">Crear partido</a>
+          <a *ngIf="fullCount == 2" [routerLink]="['explorar']" class="orange darken-1 waves-effect waves-light btn-large">Crear partido</a>
           <br><br>
           <a *ngIf="isNewUser && fullCount != 2  && fullGame != true" [routerLink]="['/completeGameStats']" class="orange darken-1 waves-effect waves-light btn-large">Completa tu perfil</a>
-          <a *ngIf="fullCount == 2" class="orange darken-1 waves-effect waves-light btn-large">Crear torneo</a>
+          <a *ngIf="fullCount == 2" [routerLink]="['explorar']" class="orange darken-1 waves-effect waves-light btn-large">Crear torneo</a>
           
         </div>
         <div class="col m6 hide-on-small-only">
