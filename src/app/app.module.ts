@@ -15,6 +15,7 @@ import { RegisterService } from './services/register.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { RequestFriendService } from './services/request-friend.service';
+import { MatchService } from './services/match.service';
 
 //Dependencia (Mapa)
 import { AgmCoreModule } from '@agm/core';
@@ -45,8 +46,6 @@ import { CompleteGameStatsComponent } from "./views/complete-game-stats/complete
 import { HomeExplorarComponent } from './components/home-explorar/home-explorar.component';
 import { ProfileComponent } from './views/profile/profile.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +63,7 @@ import { ProfileComponent } from './views/profile/profile.component';
     CompleteGameStatsComponent,
     HomeExplorarComponent,
     ProfileComponent,
-    SafePipe
+    SafePipe,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +85,7 @@ import { ProfileComponent } from './views/profile/profile.component';
     AuthService,
     UserService,
     RequestFriendService,
+    MatchService
   ],
   bootstrap: [AppComponent]
 })

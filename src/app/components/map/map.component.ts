@@ -1,9 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { MapService } from '../../services/map.service';
 import { UserService } from '../../services/user.service';
+import { MatchService } from '../../services/match.service';
 import { environment } from '../../../environments/environment';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import * as swal from 'sweetalert2';
+
+declare let $: any;
 
 @Component({
   selector: 'map',
@@ -36,12 +41,50 @@ export class MapComponent implements OnInit {
   fullCount:number = 0;
   completeCharge:boolean = true;
 
-  constructor(public mapService:MapService, public userService:UserService) { }
+  formMatch:FormGroup
+  latMatch;
+  lonMatch;
+  googlePlaceIdMatch;
+  namePlaceMatch = "";
+
+  constructor(public mapService:MapService, public userService:UserService, public matchService:MatchService, public router:Router) {
+    this.formMatch = new FormGroup({
+      'title': new FormControl('',Validators.required),
+      'type': new FormControl('',Validators.required),
+      'isPrivate': new FormControl(0),
+      'date': new FormControl(),
+      'hour': new FormControl(),
+    });
+  }
 
   ngOnInit() {
 
     this.isNewUser = localStorage.getItem("new_user")
     if(this.type != 1){
+
+      $(document).ready(function() {
+        $('select').material_select();
+        $('.datepicker').pickadate({
+          selectMonths: true, // Creates a dropdown to control month
+          selectYears: 15, // Creates a dropdown of 15 years to control year,
+          today: 'Today',
+          clear: 'Clear',
+          close: 'Ok',
+          format: 'yyyy-mm-dd',
+          closeOnSelect: false // Close upon selecting a date,
+        });
+        $('.timepicker').pickatime({
+          default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+          fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+          twelvehour: false, // Use AM/PM or 24-hour format
+          donetext: 'OK', // text for done-button
+          cleartext: 'Clear', // text for clear-button
+          canceltext: 'Cancel', // Text for cancel-button
+          autoclose: false, // automatic close timepicker
+          ampmclickable: true, // make AM PM clickable
+          aftershow: function(){} //Function for after opening timepicker
+        });
+      });
 
       this.mapService.getClubes(this.lat, this.lng).subscribe(
         (data) => {
@@ -130,9 +173,6 @@ export class MapComponent implements OnInit {
       openingHtml = `<p class="grey-text left-align">Horario desconocido</p>`
     }
     
-    
-    
-
     let textHtml = `
     <br>
     <div class="row">
@@ -145,9 +185,8 @@ export class MapComponent implements OnInit {
         <p class="black-text left-align">${ratingHtml}</p>
       </div>
     </div>
-    <a class="waves-effect green waves-light btn-large">Partido</a>
+    <a id="newMatch" class="waves-effect green waves-light btn-large">Partido</a>
     <a class="waves-effect green waves-light btn-large">Torneo</a>
-    
     `;
 
     swal({
@@ -155,6 +194,90 @@ export class MapComponent implements OnInit {
       html: textHtml,  
       showConfirmButton: false 
     });
+
+    $("#newMatch").on('click', () => {
+      this.latMatch = marker.geometry.location.lat;
+      this.lonMatch = marker.geometry.location.lng;
+      this.googlePlaceIdMatch = marker.place_id;
+      this.namePlaceMatch = marker.name;
+      swal.close();
+      $("#newMatchForm").fadeIn();
+      $("html, body").animate({ scrollTop: 650 }, 500);
+    });
+
+  }
+
+  newMatch(){
+
+    let this_aux = this;
+
+    if(this.formMatch.value.title == ""){
+      swal({
+        title: 'Título',
+        text: 'Debes ingresar el título para el partido',
+        type: 'error',
+        confirmButtonColor: "#ff9800",
+      });
+      return;
+    }
+    if($(".type .active").text() == ""){
+      swal({
+        title: 'Tipo de partido',
+        text: 'Debes ingresar el tipo del partido',
+        type: 'error',
+        confirmButtonColor: "#ff9800",
+      });
+      return;
+    }
+    if($('.datepicker')[0].value == ""){
+      swal({
+        title: 'Fecha',
+        text: 'Debes ingresar la fecha para el partido',
+        type: 'error',
+        confirmButtonColor: "#ff9800",
+      });
+      return;
+    }
+    if($('.timepicker')[0].value == ""){
+      swal({
+        title: 'Hora',
+        text: 'Debes ingresar la hora para el partido',
+        type: 'error',
+        confirmButtonColor: "#ff9800",
+      });
+      return;
+    }
+    let date = $('.datepicker')[0].value;
+    let hour = $('.timepicker')[0].value;
+    let type = $(".type .active").text();
+
+    console.log(hour);
+
+    let data = {
+      title: this.formMatch.value.title,
+      type: type,
+      isPrivate: this.formMatch.value.isPrivate,
+      date: date,
+      hour: hour,
+      lon: this.lonMatch,
+      lat: this.latMatch,
+      googlePlaceId: this.googlePlaceIdMatch,
+    }
+
+    this.matchService.createMatch(data).subscribe(
+      (response)=>{
+        swal({
+          title: 'Partido creado!',
+          text: 'Felicidades has creado un partido, espera que otros jugadores se unan',
+          type: 'success',
+          showConfirmButton: false
+        });
+        setTimeout(function(){ this_aux.router.navigate(['/']); }, 3000);
+      } ,
+      (error) =>{
+       
+      }
+    )
   }
 
 }

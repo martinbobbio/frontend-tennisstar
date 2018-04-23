@@ -6,7 +6,6 @@ import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
 import { environment } from '../../../environments/environment';
 import * as swal from 'sweetalert2';
 
-
 declare let $: any;
 
 
@@ -104,7 +103,7 @@ export class CompletePerfilComponent implements OnInit {
         }
 
         setTimeout(function(){
-          
+
         }, 2000);
         
         this.userService.sendProfileData(data).subscribe(

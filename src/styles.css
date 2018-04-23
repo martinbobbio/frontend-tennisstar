@@ -5,6 +5,12 @@
 .fs-25{
     font-size: 25px;
 }
+.fs-11{
+    font-size:11px;
+}
+.fs-19{
+    font-size: 19px;
+}
 
 /*Cursor*/
 .pointer{
@@ -16,10 +22,11 @@
     font-weight: bold;
 }
 
-/*FontSize*/
-.fs-19{
-    font-size: 19px;
+/*Display*/
+.d-none{
+    display: none;
 }
+
 
 
 /*Positions*/

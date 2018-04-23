@@ -99,7 +99,7 @@ export class HeaderComponent implements OnInit {
           textHtml += `
           <ul class="collection">
           <li class="collection-item avatar">
-            <img id="${f.id_user}" src="${this.path}${f.path}" alt="" class="circle pointer goProfile">
+            <img id="${f.id_user}" src="${this.path}${f.path}" alt="" class="circle pointer responsive-img goProfile">
             <p id="${f.id_user}" class="bold left-align goProfile pointer">${f.firstname} ${f.lastname}</p>
             <br>
             <p class="left-align">${f.gameLevel} - ${f.gameStyle}
@@ -203,7 +203,7 @@ export class HeaderComponent implements OnInit {
                 <br>
                 <div class="row">
                   <div class="col s3 left-align ">
-                    <img id="${rf.id_user}" src="${this_aux.path}${rf.path}" alt="" class="circle pointer goProfile">
+                    <img id="${rf.id_user}" src="${this_aux.path}${rf.path}" alt="" class="circle pointer responsive-img goProfile">
                   </div>
                   <div class="col s9 left-align ">
                     <p id="${rf.id_user}" class="pointer goProfile">${rf.firstname} ${rf.lastname}</p>

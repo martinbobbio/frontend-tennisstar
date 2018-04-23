@@ -4,7 +4,7 @@
     <ul class="right">
       <li [routerLink]="['profile']" *ngIf="!mobile" class="pointer">{{username}}</li>
       <li *ngIf="isNewUser != null" class="hide-on-small-only"><a (click)="openRequests()" id="btn-request"><i class="material-icons">group_add</i></a></li>
-      <li [routerLink]="['explorar']" class="hide-on-small-only"><a><i class="material-icons">search</i></a></li>
+      <li [routerLink]="['explorar']" class="hide-on-small-only"><a><i class="material-icons">explore</i></a></li>
       <li *ngIf="isNewUser != null" class="button-collapse">
         <a id="menu" (click)="openAside()"><i class="material-icons">menu</i></a>
       </li>
