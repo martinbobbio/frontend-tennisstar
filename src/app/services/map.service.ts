@@ -18,4 +18,34 @@ export class MapService {
     )
   }
 
+  getClub(googlePlaceId){
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('id_google_place', googlePlaceId);
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/map/get-club`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+  }
+
+  setClubFavorite(googlePlaceId){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('id_google_place', googlePlaceId);
+    urlSearchParams.append('id_user', localStorage.getItem("id_user"));
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/club-favorite/new`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+  }
+
 }

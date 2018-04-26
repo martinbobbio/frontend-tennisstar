@@ -9,17 +9,30 @@
       </div>
       <div class="card-content-size">
         <div class="row">
-          <div *ngIf="!mobile" class="col s2 offset-s2">  
-            <figure class="card-profile-image">
-                <br>
-                <img src="{{path}}{{user.path}}" alt="profile image" class="circle z-depth-2 pointer responsive-img">
-            </figure>
-          </div>
+            <div *ngIf="!mobile" class="col s2 offset-s2">  
+                <figure class="card-profile-image">
+                    <br>
+                    <img src="{{path}}{{user.path}}" alt="profile image" class="circle z-depth-2 pointer white responsive-img">
+                </figure>
+              </div>
+              <div *ngIf="mobile" class="col s8 offset-s2">  
+                <figure class="card-profile-image">
+                    <br>
+                    <img src="{{path}}{{user.path}}" alt="profile image" class="circle z-depth-2 pointer white responsive-img">
+                </figure>
+              </div>
           <div class="col m8 s12">
             <h1 *ngIf="!mobile" class="bold white-text">{{user.username}} </h1>
             <h3 *ngIf="mobile" class="bold white-text">{{user.username}} </h3>
             <a *ngIf="!compareUser" class="waves-effect green waves-light btn activator">Ver atributos</a>
             <a *ngIf="compareUser" class="waves-effect green waves-light btn activator">Comparar atributos</a>
+            <ng-container *ngIf="user.friends">
+              <a *ngIf="user.friends.length != 0" (click)="seeFriends()" class="waves-effect green waves-light btn">Ver Amigos({{user.friends.length}})</a>
+            </ng-container>
+            <ng-container *ngIf="user.googlePlaceId">
+                <br><br>
+                <a href="/club/{{user.googlePlaceId}}" class="waves-effect black waves-light btn">Ver club favorito</a>
+            </ng-container>
           </div>
         </div>
         <div class="card-content container">
@@ -38,25 +51,32 @@
             </div>                    
             <div class="col m3 s12">
                 <h4 class="card-title bold white-text">{{user.backhandType}}</h4>
-                <p class="medium-small bold black-text">Tipo de reves</p>                        
-            </div>                    
+                <p class="medium-small bold black-text">Tipo de reves</p>                 
+            </div>                
           </div>
         </div>
+        
       </div>
       <div style="z-index:1001" class="card-reveal">
           <div class="container">
             <p>
               <span class="card-title grey-text text-darken-4"><i class="right material-icons">clear</i></span>
             </p>
-            <div class="row">
+            <div *ngIf="!mobile" class="row">
               <div class="col m2">
                 <h4 *ngIf="!compareUser" class="green-text">Atributos: </h4>
                 <h4 *ngIf="compareUser" class="green-text">Emparejamiento: </h4>
               </div>
               <div class="col m10">
-                <canvas *ngIf="!compareUser" baseChart scale="25" [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType" style="height: 100px;"></canvas>
-                <canvas *ngIf="compareUser && user_aux" baseChart scale="25" [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType" style="height: 100px;"></canvas>
+                <canvas *ngIf="!compareUser" baseChart scale="25" [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType"></canvas>
+                <canvas *ngIf="compareUser && user_aux" baseChart scale="25" [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType"></canvas>
               </div>
+            </div>
+            <div *ngIf="mobile" class="row">
+                <h4 *ngIf="!compareUser" class="green-text">Atributos: </h4>
+                <h4 *ngIf="compareUser" class="green-text">Emparejamiento: </h4>
+                <canvas *ngIf="!compareUser" baseChart scale="25" [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType"></canvas>
+                <canvas *ngIf="compareUser && user_aux" baseChart scale="25" [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType"></canvas>
             </div>
           </div>
 

@@ -78,7 +78,7 @@ export class HeaderComponent implements OnInit {
 
     }else{
       swal({
-        text: "Aún no tienes solicitudes de amistad", 
+        text: "No tienes solicitudes de amistad", 
         confirmButtonText: "Volver", 
         confirmButtonColor: "#ff9800"
       });
@@ -137,8 +137,6 @@ export class HeaderComponent implements OnInit {
         window.location.href = "/profile/"+this.id;
       });
   }
-
-  
 
   constructor(public auth:AuthService,public userService:UserService, public requestFriendService:RequestFriendService, public router:Router) {
     auth.handleAuthentication();
@@ -217,7 +215,6 @@ export class HeaderComponent implements OnInit {
               </div>
             </div>
               `
-              console.log(rf);
             }
           }
 

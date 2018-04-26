@@ -2,10 +2,11 @@
 
 <div class="orange" style="padding:15px 0;">
     <div class="container">
-        <h4 style="margin:0;" class="white-text bold">Elige donde crear un Partido o Torneo</h4>
+        <h4 *ngIf="type != 3" style="margin:0;" class="white-text bold">Elige donde crear un Partido o Torneo</h4>
+        <h4 *ngIf="type == 3" style="margin:0;" class="white-text bold">Elige club favorito</h4>
     </div>
 </div>
 
-<map type="2"></map>
+<map [type]=type></map>
 
 <app-footer></app-footer>

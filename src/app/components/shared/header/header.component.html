@@ -2,9 +2,13 @@
   <div class="nav-wrapper container">
     <a href="#!" class="brand-logo">Tennis-Star</a>
     <ul class="right">
-      <li [routerLink]="['profile']" *ngIf="!mobile" class="pointer">{{username}}</li>
+      <li *ngIf="!mobile" class="pointer">
+        <a href="/profile">
+          {{username}}
+        </a>
+      </li>
       <li *ngIf="isNewUser != null" class="hide-on-small-only"><a (click)="openRequests()" id="btn-request"><i class="material-icons">group_add</i></a></li>
-      <li [routerLink]="['explorar']" class="hide-on-small-only"><a><i class="material-icons">explore</i></a></li>
+      <li *ngIf="isNewUser != null" class="hide-on-small-only"><a href="/explorar"><i class="material-icons">explore</i></a></li>
       <li *ngIf="isNewUser != null" class="button-collapse">
         <a id="menu" (click)="openAside()"><i class="material-icons">menu</i></a>
       </li>
@@ -13,7 +17,7 @@
 </nav>
 
 
-<aside class="sidebar-left-collapse green">
+<aside class="sidebar-left-collapse green" style="z-index:9999">
   
   <div *ngIf="profile && auth.isAuthenticated()" class="center-align ">
     <div class="col s4">
@@ -24,7 +28,11 @@
     </div>
   </div>
 
-  <p [routerLink]="['profile']" *ngIf="username != null && mobile" class="bold center-align" style="margin-bottom:20px;">{{username}}</p>
+  <p *ngIf="username != null && mobile" class="bold center-align" style="margin-bottom:20px;">
+      <a class="white-text" href="/profile">
+        {{username}}
+      </a>
+  </p>
   <div *ngIf="isNewUser" class="center-align">
   <img src="{{path}}{{pathImg}}" class="circle" height="50" width="50">
   </div>
@@ -38,7 +46,7 @@
       </a>
 
       <ul class="sub-links">
-        <li><a [routerLink]="['profile']">Ver perfil</a></li>
+        <li><a href="/profile" >Ver perfil</a></li>
         <li><a [routerLink]="['/completePerfil']">Editar perfil</a></li>
         <li><a href="#">Cambiar contraseña</a></li>
         <li><a (click)="viewFriends()" class="pointer">Lista de amigos</a></li>
@@ -69,7 +77,7 @@
       </a>
 
       <ul class="sub-links">
-        <li><a href="#">Link 1</a></li>
+        <li><a href="/explorar">Crear partido</a></li>
         <li><a href="#">Link 2</a></li>
         <li><a href="#">Link 3</a></li>
         <li><a href="#">Link 4</a></li>
@@ -79,15 +87,12 @@
 
     <div class="links link-green">
 
-      <a href="#">
+      <a class="pointer">
         <i class="fa fa-map-marker"></i>Clubes
       </a>
 
       <ul class="sub-links">
-        <li><a href="#">Link 1</a></li>
-        <li><a href="#">Link 2</a></li>
-        <li><a href="#">Link 3</a></li>
-        <li><a href="#">Link 4</a></li>
+        <li><a href="/explorar/favoriteClub" class="pointer">Añadir club favorito</a></li>
       </ul>
 
     </div>

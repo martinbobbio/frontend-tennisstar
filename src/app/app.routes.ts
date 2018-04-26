@@ -7,16 +7,19 @@ import { RegisterComponent } from "./views/register/register.component";
 import { CompletePerfilComponent } from "./views/complete-perfil/complete-perfil.component";
 import { CompleteGameStatsComponent } from "./views/complete-game-stats/complete-game-stats.component";
 import { ProfileComponent } from "./views/profile/profile.component";
+import { ClubComponent } from "./views/club/club.component";
 
 const APP_ROUTES: Routes = [
     { path: '', component:HomeComponent},
     { path: 'explorar', component:ExplorarComponent},
+    { path: 'explorar/:option', component:ExplorarComponent},
     { path: 'login', component:LoginComponent},
     { path: 'register', component:RegisterComponent},
     { path: 'completePerfil', component:CompletePerfilComponent},
     { path: 'completeGameStats', component:CompleteGameStatsComponent},
     { path: 'profile', component:ProfileComponent},
     { path: 'profile/:id', component:ProfileComponent},
+    { path: 'club/:id', component:ClubComponent},
     { path: '**', pathMatch:'full', redirectTo:''},
 ]
 

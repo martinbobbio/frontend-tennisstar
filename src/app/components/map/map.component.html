@@ -24,10 +24,10 @@
             </div>
           <a *ngIf="isNewUser == null" [routerLink]="['/login']" class="orange darken-1 waves-effect waves-light btn-large">Ingresa a TennisStar</a>
           <a *ngIf="isNewUser && fullCount != 2 && fullPlayer != true" [routerLink]="['/completePerfil']" class="orange darken-1 waves-effect waves-light btn-large">Completa tus datos</a>
-          <a *ngIf="fullCount == 2" [routerLink]="['explorar']" class="orange darken-1 waves-effect waves-light btn-large">Crear partido</a>
+          <a *ngIf="fullCount == 2" href="/explorar" class="orange darken-1 waves-effect waves-light btn-large">Crear partido</a>
           <br><br>
           <a *ngIf="isNewUser && fullCount != 2  && fullGame != true" [routerLink]="['/completeGameStats']" class="orange darken-1 waves-effect waves-light btn-large">Completa tu perfil</a>
-          <a *ngIf="fullCount == 2" [routerLink]="['explorar']" class="orange darken-1 waves-effect waves-light btn-large">Crear torneo</a>
+          <a *ngIf="fullCount == 2" href="/explorar" class="orange darken-1 waves-effect waves-light btn-large">Crear torneo</a>
           
         </div>
         <div class="col m6 hide-on-small-only">
@@ -37,7 +37,7 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="type == 2">
+<ng-container *ngIf="type == 2 || type == 3">
   <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng" [streetViewControl]=false [zoomControl]=false>
     <ng-container *ngFor="let marker of places">
         <agm-marker (markerClick)="selectMarker(marker)"  [latitude]="marker.geometry.location.lat" [longitude]="marker.geometry.location.lng" iconUrl="assets/images/marker1.png" [title]="marker.name"></agm-marker>

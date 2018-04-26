@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { ActivatedRoute,Params, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
+import * as swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -58,7 +59,6 @@ export class ProfileComponent implements OnInit {
         }else{
           this.userService.getProfile(Number(localStorage.getItem("id_user"))).subscribe(
             (response_aux)=>{
-              console.log(response_aux);
               this.user_aux = response_aux.data[0];
                 this.radarChartData = [
                   {
@@ -81,6 +81,41 @@ export class ProfileComponent implements OnInit {
        
       }
     )
+
+  }
+
+  seeFriends(){
+
+    let textHtml = "";
+    let this_aux = this;
+
+    for (let f of this.user.friends) {
+      textHtml += `
+      <div class="card green">
+      <div class="card-content left-align white-text">
+        <a href="/profile/${f.id_user}"><span id="${f.id_user}" class="card-title white-text pointer goProfile">${f.username}</span></a>
+        <br>
+        <div class="row">
+          <div class="col s3 left-align ">
+            <a href="/profile/${f.id_user}">
+              <img id="${f.id_user}" src="${this_aux.path}${f.path}" alt="" class="circle pointer responsive-img goProfile">
+            </a>
+          </div>
+          <div class="col s9 left-align ">
+            <p id="${f.id_user}" class="pointer goProfile">${f.firstname} ${f.lastname}</p>
+            <p style="margin-top:15px;">${f.gameLevel} - ${f.gameStyle}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+      `
+    }
+
+    swal({
+      title: "Amigos de "+this.user.username, 
+      html: textHtml,  
+      showConfirmButton: false 
+    });
 
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MapService } from '../../services/map.service';
 import { UserService } from '../../services/user.service';
 import { MatchService } from '../../services/match.service';
@@ -47,7 +47,7 @@ export class MapComponent implements OnInit {
   googlePlaceIdMatch;
   namePlaceMatch = "";
 
-  constructor(public mapService:MapService, public userService:UserService, public matchService:MatchService, public router:Router) {
+  constructor(public mapService:MapService, public userService:UserService, public matchService:MatchService, public router:Router,public route:ActivatedRoute) {
     this.formMatch = new FormGroup({
       'title': new FormControl('',Validators.required),
       'type': new FormControl('',Validators.required),
@@ -55,6 +55,7 @@ export class MapComponent implements OnInit {
       'date': new FormControl(),
       'hour': new FormControl(),
     });
+
   }
 
   ngOnInit() {
@@ -114,6 +115,7 @@ export class MapComponent implements OnInit {
 
   selectMarker(marker){console.log(marker);
     
+    
     let photoUrl;
     let ratingHtml;
     let ratingStars;
@@ -172,38 +174,88 @@ export class MapComponent implements OnInit {
     }else{
       openingHtml = `<p class="grey-text left-align">Horario desconocido</p>`
     }
-    
-    let textHtml = `
-    <br>
-    <div class="row">
-      <div class="col s6">
-        <img src="${photoUrl}" class="responsive-img">
-      </div>
-      <div class="col s6">    
-        <p class="black-text left-align">${marker.name}</p>
-        ${openingHtml}
-        <p class="black-text left-align">${ratingHtml}</p>
-      </div>
-    </div>
-    <a id="newMatch" class="waves-effect green waves-light btn-large">Partido</a>
-    <a class="waves-effect green waves-light btn-large">Torneo</a>
-    `;
 
-    swal({
-      title: "Elige que quieres crear", 
-      html: textHtml,  
-      showConfirmButton: false 
-    });
+    if(this.type == 2){
+      let textHtml = `
+      <br>
+      <div class="row">
+        <div class="col s6">
+          <a class="pointer" href="/club/${marker.place_id}">
+            <img src="${photoUrl}" class="responsive-img">
+          </a>
+        </div>
+        <div class="col s6">
+          <a class="orange-text" href="/club/${marker.place_id}">Ver información del club</a>
+          <p class="black-text left-align">${marker.name}</p>
+          ${openingHtml}
+          <p class="black-text left-align">${ratingHtml}</p>
+        </div>
+      </div>
+      <a id="newMatch" class="waves-effect green waves-light btn-large">Partido</a>
+      <a class="waves-effect green waves-light btn-large">Torneo</a>
+      `;
+  
+      swal({
+        title: "Elige que quieres crear", 
+        html: textHtml,  
+        showConfirmButton: false 
+      });
+  
+      $("#newMatch").on('click', () => {
+        this.latMatch = marker.geometry.location.lat;
+        this.lonMatch = marker.geometry.location.lng;
+        this.googlePlaceIdMatch = marker.place_id;
+        this.namePlaceMatch = marker.name;
+        swal.close();
+        $("#newMatchForm").fadeIn();
+        $("html, body").animate({ scrollTop: 650 }, 500);
+      });
+    }
 
-    $("#newMatch").on('click', () => {
-      this.latMatch = marker.geometry.location.lat;
-      this.lonMatch = marker.geometry.location.lng;
-      this.googlePlaceIdMatch = marker.place_id;
-      this.namePlaceMatch = marker.name;
-      swal.close();
-      $("#newMatchForm").fadeIn();
-      $("html, body").animate({ scrollTop: 650 }, 500);
-    });
+    if(this.type == 3){
+      let textHtml = `
+      <br>
+      <div class="row">
+        <div class="col s6">
+          <a class="pointer" href="/club/${marker.place_id}">
+            <img src="${photoUrl}" class="responsive-img">
+          </a>
+        </div>
+        <div class="col s6">
+          <a class="orange-text" href="/club/${marker.place_id}">Ver información del club</a>
+          <p class="black-text left-align">${marker.name}</p>
+          ${openingHtml}
+          <p class="black-text left-align">${ratingHtml}</p>
+        </div>
+      </div>
+      <a id="favoriteclub" class="waves-effect green waves-light btn-large">Asignar favorito</a>
+      <a id="cancel" class="waves-effect red waves-light btn-large">Cancelar</a>
+      `;
+  
+      swal({
+        title: "Asignar como favorito", 
+        html: textHtml,  
+        showConfirmButton: false 
+      });
+  
+      let this_aux = this;
+      $("#favoriteclub").on('click', () => {
+        this.mapService.setClubFavorite(marker.place_id).subscribe(
+          (response)=>{
+            swal({
+              title: 'Club favorito asignado!',
+              text: 'Felicidades, tienes un club favorito!',
+              type: 'success',
+              showConfirmButton: false
+            });
+            setTimeout(function(){ this_aux.router.navigate(['/']); }, 3000);
+          } ,
+        )
+      });
+      $("#cancel").on('click', () => {
+        swal.close();
+      });
+    }
 
   }
 
