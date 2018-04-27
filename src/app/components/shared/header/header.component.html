@@ -3,14 +3,29 @@
     <a href="#!" class="brand-logo">Tennis-Star</a>
     <ul class="right">
       <li *ngIf="!mobile" class="pointer">
-        <a href="/profile">
+        <a href="/profile" class="tooltipped" data-position="bottom" data-tooltip="Ver perfil">
           {{username}}
         </a>
       </li>
-      <li *ngIf="isNewUser != null" class="hide-on-small-only"><a (click)="openRequests()" id="btn-request"><i class="material-icons">group_add</i></a></li>
-      <li *ngIf="isNewUser != null" class="hide-on-small-only"><a href="/explorar"><i class="material-icons">explore</i></a></li>
+      <li *ngIf="isNewUser != null" class="hide-on-small-only">
+        <a (click)="openRequests()" id="btn-request" class="tooltipped" data-position="bottom" data-tooltip="Solicitudes de amistad">
+          <i class="material-icons">group_add</i>
+        </a>
+      </li>
+      <li *ngIf="isNewUser != null" class="hide-on-small-only">
+        <a class="tooltipped" (click)="viewEvents()" data-position="bottom" data-tooltip="Eventos">
+          <i class="material-icons">event</i>
+        </a>
+      </li>
+      <li *ngIf="isNewUser != null" class="hide-on-small-only">
+        <a href="/explorar" class="tooltipped" data-position="bottom" data-tooltip="Explorar mapa">
+          <i class="material-icons">explore</i>
+        </a>
+      </li>
       <li *ngIf="isNewUser != null" class="button-collapse">
-        <a id="menu" (click)="openAside()"><i class="material-icons">menu</i></a>
+        <a id="menu" (click)="openAside()" class="tooltipped" data-position="bottom" data-tooltip="Menú">
+          <i class="material-icons">menu</i>
+        </a>
       </li>
     </ul>
   </div>
@@ -101,6 +116,5 @@
   <br><br><br>
 
 </aside>
-    
 
 

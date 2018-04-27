@@ -3,7 +3,7 @@
     <div class="col m12">
       <h3 class="green-text">Explorar</h3>
     </div>
-    <div class="col m4 s12">
+    <div class="col m6 s12">
         <p class="orange-text bold">Usuarios</p>
         <ul *ngFor="let user of users" id="explore-user-{{user.id}}" class="collection">
             <li class="collection-item avatar">
@@ -16,7 +16,21 @@
             </li>
         </ul>
     </div>
-    <div class="col m4 s12">
+
+    <div class="col m6 s12">
+        <p class="orange-text bold">Clubes</p>
+        <ul *ngFor="let user of users" id="explore-user-{{user.id}}" class="collection">
+            <li class="collection-item avatar">
+                <img [routerLink]="['profile/'+user.id]" src="{{path}}{{user.path}}" alt="" class="circle pointer">
+                <span [routerLink]="['profile/'+user.id]" class="title bold pointer">Nombre del club</span>
+                <p>Direccion <br>
+                    10 usuarios
+                </p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col m6 s12">
         <p class="orange-text bold">Partidos</p>
         <ul *ngFor="let match of matchs" id="explore-match-{{match.id}}" class="collection">
             <li class="collection-item avatar" style="position:relative">
@@ -24,30 +38,30 @@
                     <ng-container *ngIf="match.type == 'Dobles' && match.player1AId != null && match.player1BId != null && match.player2AId != null && match.player2BId != null">
                         <img [routerLink]="['profile/'+match.player1AId]" src="{{path}}{{match.player1APath}}" alt="" class="circle pointer" style="height: 30px;width: 30px">
                         <br><br>
-                        <img [routerLink]="['profile/'+match.player1AId]" src="{{path}}{{match.player1APath}}" alt="" class="circle pointer" style="height: 30px;width: 30px">
+                        <img [routerLink]="['profile/'+match.player1AId]" src="{{path}}{{match.player2APath}}" alt="" class="circle pointer" style="height: 30px;width: 30px">
                     </ng-container>
                     <ng-container *ngIf="match.type == 'Singles' && match.player1AId != null && match.player2AId != null">
-                        <img [routerLink]="['profile/'+match.player1AId]" src="{{path}}{{match.player1APath}}" alt="" class="circle pointer">
+                        <img [routerLink]="['profile/'+match.player1AId]" style="margin-top:15px;" src="{{path}}{{match.player1APath}}" alt="" class="circle pointer">
                     </ng-container>
                 </div>
-                <div style="position:absolute;left:75%;top:7%">
+                <div style="position:absolute;left:80%;top:7%">
                     <ng-container *ngIf="match.type == 'Dobles' && match.player1AId != null && match.player1BId != null && match.player2AId != null && match.player2BId != null">
-                        <img [routerLink]="['profile/'+match.player1AId]" src="{{path}}{{match.player1APath}}" alt="" class="circle pointer" style="height: 30px;width: 30px">
+                        <img [routerLink]="['profile/'+match.player1AId]" src="{{path}}{{match.player1BPath}}" alt="" class="circle pointer" style="height: 30px;width: 30px">
                         <br><br>
-                        <img [routerLink]="['profile/'+match.player1AId]" src="{{path}}{{match.player1APath}}" alt="" class="circle pointer" style="height: 30px;width: 30px">
+                        <img [routerLink]="['profile/'+match.player1AId]" src="{{path}}{{match.player2BPath}}" alt="" class="circle pointer" style="height: 30px;width: 30px">
                     </ng-container>
                     <ng-container *ngIf="match.type == 'Singles' && match.player1AId != null && match.player2AId != null">
-                        <img [routerLink]="['profile/'+match.player2AId]" src="{{path}}{{match.player2APath}}" alt="" class="circle pointer">
+                        <img [routerLink]="['profile/'+match.player2AId]" style="margin-top:15px;" src="{{path}}{{match.player2APath}}" alt="" class="circle pointer">
                     </ng-container>
                 </div>
                 <div style="position:absolute;left:25%;top:12%;text-align:center;width:50%;">
                     <ng-container *ngIf="match.type == 'Dobles' && match.player1AId != null && match.player1BId != null && match.player2AId != null && match.player2BId != null">
-                        <p class="fs-11">
+                        <p class="fs-14">
                             <b><a class="pointer black-text" [routerLink]="['profile/'+match.player1AId]">{{match.player1AUsername}}</a></b> y 
                             <b><a class="pointer black-text" [routerLink]="['profile/'+match.player1BId]">{{match.player1BUsername}}</a></b>
                         </p>
-                        <p class="fs-11">vs</p>
-                        <p class="fs-11">
+                        <p class="fs-14">vs</p>
+                        <p class="fs-14">
                             <b><a class="pointer black-text" [routerLink]="['profile/'+match.player2AId]">{{match.player2AUsername}}</a></b> y 
                             <b><a class="pointer black-text" [routerLink]="['profile/'+match.player2BId]">{{match.player2BUsername}}</a></b>
                         </p>
@@ -71,6 +85,7 @@
                     <a class="secondary-content pointer"><i class="material-icons orange-text">add</i></a>
                 </ng-container>
                 <ng-container *ngIf="match.type == 'Singles' && match.player2AId == null">
+                    <i class="material-icons orange circle">search</i>
                     <p>Singles - <b>
                         <span *ngIf="match.isPrivate != 1" class="green-text">Público</span>
                         <span *ngIf="match.isPrivate == 1" class="red-text">Privado</span>
@@ -82,7 +97,7 @@
                     <a class="secondary-content pointer"><i class="material-icons orange-text">add</i></a>
                 </ng-container>
                 <ng-container *ngIf="match.type == 'Dobles' && (match.player1BId == null || match.player2BId == null)">
-                    <i class="material-icons orange circle">event</i>
+                    <i class="material-icons orange circle">search</i>
                     <p>Dobles - <b>
                         <span *ngIf="match.isPrivate != 1" class="green-text">Público</span>
                         <span *ngIf="match.isPrivate == 1" class="red-text">Privado</span>
@@ -97,8 +112,10 @@
             </li>
         </ul>
     </div>
-    <div class="col m4 s12">
+
+    <div class="col m6 s12">
         <p class="orange-text bold">Torneos</p>
     </div>
+
   </div>
 </div>

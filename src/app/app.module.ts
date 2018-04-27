@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 //Rutas
 import { APP_ROUTING } from "./app.routes";
@@ -25,6 +27,8 @@ import { ChartsModule } from 'ng2-charts';
 import { FileUploadModule } from 'ng2-file-upload';
 import { FileDropDirective, FileSelectDirective } from 'ng2-file-upload';
 import "materialize-css";
+//Dependencia (Menu collapse)
+import { CollapsibleModule } from 'angular2-collapsible';
 
 //Pipes
 import { SafePipe } from './pipes/safe.pipe';
@@ -77,7 +81,9 @@ import { ClubComponent } from './views/club/club.component';
     APP_ROUTING,
     ReactiveFormsModule,
     ChartsModule,
-    FileUploadModule
+    FileUploadModule,
+    BrowserAnimationsModule,
+    CollapsibleModule,
   ],
   providers: [
     MapService,

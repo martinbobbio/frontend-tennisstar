@@ -138,6 +138,23 @@ export class HeaderComponent implements OnInit {
       });
   }
 
+  viewEvents(){
+
+    let textHtml = "";
+
+      if(textHtml == ""){
+        textHtml = "Aún no tienes eventos, inscribete en algún partido o torneo"
+      }
+
+      swal({
+        title: "Eventos", 
+        html: textHtml,  
+        confirmButtonText: "Volver", 
+        confirmButtonColor: "#ff9800"
+      });
+
+  }
+
   constructor(public auth:AuthService,public userService:UserService, public requestFriendService:RequestFriendService, public router:Router) {
     auth.handleAuthentication();
   }

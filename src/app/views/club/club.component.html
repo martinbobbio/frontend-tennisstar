@@ -70,16 +70,40 @@
 
   <div *ngIf="entity" class="container">
 
-      <h4 class="green-text bold">Opiniones</h4>
-        <ul class="collection">
-            <li *ngFor="let review of entity.reviews" class="collection-item avatar">
-              <img src="{{review.profile_photo_url}}" alt="" class="circle">
-              <span class="title">{{review.author_name}}</span>
-              <p>{{review.text}}</p>
-            </li>
-        </ul>
-      <h4 class="green-text">Partidos: </h4>
-      <h4 class="green-text">Torneos: </h4>
+        <collapsible-list [type]="'expandable'" style="margin-top:50px;">
+            <collapsible-list-item >
+                <collapsible-header class="waves-effect green">
+                    <h4 class="white-text">Opiniones </h4>
+                </collapsible-header>
+                <collapsible-body [expanded]="true">
+                    <ul class="collection">
+                        <li *ngFor="let review of entity.reviews" class="collection-item avatar">
+                            <img src="{{review.profile_photo_url}}" alt="" class="circle">
+                            <b><span class="title">{{review.author_name}}</span></b>
+                            <p>{{review.text}}</p>
+                        </li>
+                    </ul>
+                </collapsible-body>
+            </collapsible-list-item>
+
+            <collapsible-list-item >
+                <collapsible-header class="waves-effect green">
+                    <h4 class="white-text">Partidos </h4>
+                </collapsible-header>
+                <collapsible-body [expanded]="true">
+                <p>Lista de partidos</p>
+                </collapsible-body>
+            </collapsible-list-item>
+            
+            <collapsible-list-item>
+                <collapsible-header class="waves-effect green">
+                    <h4 class="white-text">Torneos </h4>
+                </collapsible-header>
+                <collapsible-body [expanded]="true">
+                <p>Lista de torneos</p>
+                </collapsible-body>
+            </collapsible-list-item>
+        </collapsible-list>
 
   </div>
 

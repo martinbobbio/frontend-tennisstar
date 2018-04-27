@@ -29,6 +29,8 @@
             <ng-container *ngIf="user.friends">
               <a *ngIf="user.friends.length != 0" (click)="seeFriends()" class="waves-effect green waves-light btn">Ver Amigos({{user.friends.length}})</a>
             </ng-container>
+            <br><br>
+            <a class="waves-effect orange darken-1 waves-light btn">Enviar solicitud de amistad</a>
             <ng-container *ngIf="user.googlePlaceId">
                 <br><br>
                 <a href="/club/{{user.googlePlaceId}}" class="waves-effect black waves-light btn">Ver club favorito</a>
@@ -85,8 +87,26 @@
 
   <div class="container">
 
-      <h4 class="green-text">Partidos: </h4>
-      <h4 class="green-text">Torneos: </h4>
+    <collapsible-list [type]="'expandable'" style="margin-top:50px;">
+    <collapsible-list-item >
+        <collapsible-header class="waves-effect green">
+            <h4 class="white-text">Partidos </h4>
+        </collapsible-header>
+        <collapsible-body [expanded]="true">
+        <p>Lista de partidos</p>
+        </collapsible-body>
+    </collapsible-list-item>
+    
+    <collapsible-list-item>
+        <collapsible-header class="waves-effect green">
+            <h4 class="white-text">Torneos </h4>
+        </collapsible-header>
+        <collapsible-body [expanded]="true">
+        <p>Lista de torneos</p>
+        </collapsible-body>
+    </collapsible-list-item>
+    </collapsible-list>
+    
 
   </div>
 

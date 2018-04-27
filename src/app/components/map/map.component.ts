@@ -21,6 +21,8 @@ export class MapComponent implements OnInit {
 
   isNewUser;
 
+  mobile = false;
+
   //Imagenes para el home
   homeImages=["federer","djokovic","murray","nadal","del potro","dimitrov","zverev"];
   homeImageIndex;
@@ -59,6 +61,11 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    var isMobile = window.matchMedia("only screen and (max-width: 576px)");
+    if (isMobile.matches) {
+        this.mobile = true;
+    }
 
     this.isNewUser = localStorage.getItem("new_user")
     if(this.type != 1){
