@@ -17,6 +17,7 @@ import { RegisterService } from './services/register.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { RequestFriendService } from './services/request-friend.service';
+import { RequestMatchService } from './services/request-match.service';
 import { MatchService } from './services/match.service';
 
 //Dependencia (Mapa)
@@ -93,6 +94,7 @@ import { ClubComponent } from './views/club/club.component';
     AuthService,
     UserService,
     RequestFriendService,
+    RequestMatchService,
     MatchService
   ],
   bootstrap: [AppComponent]

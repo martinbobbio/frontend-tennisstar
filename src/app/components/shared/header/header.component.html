@@ -8,12 +8,12 @@
         </a>
       </li>
       <li *ngIf="isNewUser != null" class="hide-on-small-only">
-        <a (click)="openRequests()" id="btn-request" class="tooltipped" data-position="bottom" data-tooltip="Solicitudes de amistad">
+        <a (click)="openRequests()" id="btn-request" class="tooltipped" data-position="bottom" data-tooltip="Solicitudes">
           <i class="material-icons">group_add</i>
         </a>
       </li>
       <li *ngIf="isNewUser != null" class="hide-on-small-only">
-        <a class="tooltipped" (click)="viewEvents()" data-position="bottom" data-tooltip="Eventos">
+        <a class="tooltipped" id="btn-event" (click)="viewEvents()" data-position="bottom" data-tooltip="Eventos">
           <i class="material-icons">event</i>
         </a>
       </li>
