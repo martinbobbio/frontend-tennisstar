@@ -31,6 +31,16 @@
   </div>
 </nav>
 
+<div *ngIf="mobile" class="fixed-action-btn">
+  <a class="btn-floating btn-large green">
+    <i class="large material-icons">menu</i>
+  </a>
+  <ul>
+    <li><a (click)="openRequests()" class="btn-floating orange"><i class="material-icons">group_add</i></a></li>
+    <li><a (click)="viewEvents()" class="btn-floating orange"><i class="material-icons">event</i></a></li>
+    <li><a href="/explorar" class="btn-floating orange"><i class="material-icons">explore</i></a></li>
+  </ul>
+</div>
 
 <aside class="sidebar-left-collapse green" style="z-index:9999">
   
