@@ -49,6 +49,8 @@ export class MapComponent implements OnInit {
   googlePlaceIdMatch;
   namePlaceMatch = "";
 
+  location:any;
+
   constructor(public mapService:MapService, public userService:UserService, public matchService:MatchService, public router:Router,public route:ActivatedRoute) {
     this.formMatch = new FormGroup({
       'title': new FormControl('',Validators.required),
@@ -61,6 +63,13 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(position => {
+        this.location = position.coords;
+        console.log(position.coords); 
+      });
+   }
 
     var isMobile = window.matchMedia("only screen and (max-width: 576px)");
     if (isMobile.matches) {
