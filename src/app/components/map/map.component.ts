@@ -31,8 +31,8 @@ export class MapComponent implements OnInit {
   isLogged:boolean = false;
   
   //Latitud y Longitud (Escuela Da Vinci)
-  lat: number = -34.604486;
-  lng: number = -58.396329;
+  lat: number;
+  lng: number;
   zoom: number = 13;
 
   places:any[];
@@ -67,8 +67,22 @@ export class MapComponent implements OnInit {
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition(position => {
         this.location = position.coords;
-        console.log(position.coords); 
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+
+        this.mapService.getClubes(this.lat, this.lng).subscribe(
+          (data) => {
+            this.places = data.data[0].results;
+          })
       });
+   }else{
+    this.lat = -34.604486;
+    this.lng= -58.396329;
+
+    this.mapService.getClubes(this.lat, this.lng).subscribe(
+      (data) => {
+        this.places = data.data[0].results;
+      })
    }
 
     var isMobile = window.matchMedia("only screen and (max-width: 576px)");
@@ -103,10 +117,7 @@ export class MapComponent implements OnInit {
         });
       });
 
-      this.mapService.getClubes(this.lat, this.lng).subscribe(
-        (data) => {
-          this.places = data.data[0].results;
-        })
+      
     }
 
     if(localStorage.getItem("id_user") != null){
@@ -129,7 +140,7 @@ export class MapComponent implements OnInit {
 
   }
 
-  selectMarker(marker){console.log(marker);
+  selectMarker(marker){
     
     
     let photoUrl;

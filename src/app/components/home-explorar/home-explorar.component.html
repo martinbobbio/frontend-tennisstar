@@ -18,19 +18,6 @@
     </div>
 
     <div class="col m6 s12">
-        <p class="orange-text bold">Clubes</p>
-        <ul *ngFor="let user of users" id="explore-user-{{user.id}}" class="collection">
-            <li class="collection-item avatar">
-                <img [routerLink]="['profile/'+user.id]" src="{{path}}{{user.path}}" alt="" class="circle pointer">
-                <span [routerLink]="['profile/'+user.id]" class="title bold pointer">Nombre del club</span>
-                <p>Direccion <br>
-                    10 usuarios
-                </p>
-            </li>
-        </ul>
-    </div>
-
-    <div class="col m6 s12">
         <p class="orange-text bold">Partidos</p>
         <ul *ngFor="let match of matchs" id="explore-match-{{match.id}}" class="collection">
             <li class="collection-item avatar" style="position:relative">
@@ -82,7 +69,10 @@
                         <span *ngIf="match.isPrivate == 1" class="red-text">Privado</span>
                     </b></p>
                     <p>Sin jugadores.</p>
-                    <a class="secondary-content pointer"><i class="material-icons orange-text">add</i></a>
+                    <a (click)="askMatch(match.id)" id="icon-add-{{match.id}}" class="secondary-content pointer"><i class="material-icons orange-text">add</i></a>
+                    <div id="loader-match-{{match.id}}" style="position:absolute; top:10%; right: 5%;display:none">
+                        <loader></loader>
+                    </div>
                 </ng-container>
                 <ng-container *ngIf="match.type == 'Singles' && match.player2AId == null">
                     <i class="material-icons orange circle">search</i>
@@ -94,7 +84,10 @@
                         <b><a class="pointer black-text" [routerLink]="['profile/'+match.player1AId]">{{match.player1AUsername}}</a></b> 
                         está esperando un jugador
                     </p>
-                    <a class="secondary-content pointer"><i class="material-icons orange-text">add</i></a>
+                    <a (click)="askMatch(match.id)" id="icon-add-{{match.id}}" class="secondary-content pointer"><i class="material-icons orange-text">add</i></a>
+                    <div id="loader-match-{{match.id}}" style="position:absolute; top:10%; right: 5%;display:none">
+                        <loader></loader>
+                    </div>
                 </ng-container>
                 <ng-container *ngIf="match.type == 'Dobles' && (match.player1BId == null || match.player2BId == null)">
                     <i class="material-icons orange circle">search</i>
@@ -107,11 +100,30 @@
                     <b *ngIf="match.player1BId != null">, <a class="pointer black-text fs-11" [routerLink]="['profile/'+match.player1BId]">{{match.player1BUsername}}</a></b>
                     <b *ngIf="match.player2BId != null">, <a class="pointer black-text fs-11" [routerLink]="['profile/'+match.player2BId]">{{match.player2BUsername}}</a></b>
                     <span class="fs-11">buscan jugadores</span>
-                    <a class="secondary-content pointer"><i class="material-icons orange-text">add</i></a>
+                    <a (click)="askMatch(match.id)" id="icon-add-{{match.id}}" class="secondary-content pointer"><i class="material-icons orange-text">add</i></a>
+                    <div id="loader-match-{{match.id}}" style="position:absolute; top:10%; right: 5%;display:none">
+                        <loader></loader>
+                    </div>
                 </ng-container>
             </li>
         </ul>
     </div>
+
+    </div>
+    <div class="row">
+
+    <div class="col m6 s12">
+        <p class="orange-text bold">Clubes</p>
+        <ul *ngFor="let club of clubs" class="collection">
+            <li class="collection-item avatar">
+                <img [routerLink]="['club/'+club.key]" [src]="getPhotoClub(club.photo)" alt="" class="circle pointer">
+                <span [routerLink]="['club/'+club.key]" class="title bold pointer">{{club.title}}</span>
+                <p [innerHTML]="getRatingClub(club.rating)"></p>
+                    {{club.cantidad}} usuarios
+            </li>
+        </ul>
+    </div>
+
 
     <div class="col m6 s12">
         <p class="orange-text bold">Torneos</p>

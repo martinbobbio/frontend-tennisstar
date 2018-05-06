@@ -11,11 +11,21 @@ export class MapService {
 
   constructor(private http:Http) {}
 
-  getClubes(latitud:number,longitud:number){
+  getClubes(latitud,longitud){
 
-    return this.http.get(`${this.backUrl}/api/map/get-clubes`).map(
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('lat', latitud);
+    urlSearchParams.append('lon', longitud);
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/map/get-clubes`,body, {headers: headers}).map(
       (response) => response.json()
     )
+
   }
 
   getClub(googlePlaceId){
@@ -46,6 +56,15 @@ export class MapService {
     return this.http.post(`${this.backUrl}/api/club-favorite/new`,body, {headers: headers}).map(
       (response) => response.json()
     )
+  }
+
+
+  getClubesMost(){
+
+    return this.http.get(`${this.backUrl}/api/club-favorite/get-clubes`).map(
+      (response) => response.json()
+    )
+
   }
 
 }

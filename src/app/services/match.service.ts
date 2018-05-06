@@ -57,4 +57,21 @@ export class MatchService {
     )
   }
 
+  checkMatch(userMatch){
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+
+    urlSearchParams.append('id_um', userMatch);
+    urlSearchParams.append('id_user', localStorage.getItem("id_user"));
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/match/check-match`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+  }
+
 }

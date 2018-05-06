@@ -51,6 +51,7 @@ import { CompleteGameStatsComponent } from "./views/complete-game-stats/complete
 import { HomeExplorarComponent } from './components/home-explorar/home-explorar.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { ClubComponent } from './views/club/club.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { ClubComponent } from './views/club/club.component';
     ProfileComponent,
     SafePipe,
     ClubComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
