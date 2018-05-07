@@ -5,6 +5,9 @@
         <ng-container *ngFor="let marker of places">
             <agm-marker [latitude]="marker.geometry.location.lat" [longitude]="marker.geometry.location.lng" iconUrl="assets/images/marker1.png"></agm-marker>
         </ng-container>
+        <ng-container *ngIf="isLocation">
+            <agm-marker [latitude]="lat" [longitude]="lng" iconUrl="assets/images/marker-person.png" title="Tu posición"></agm-marker>
+        </ng-container>
       </agm-map>
     </div>
     <div *ngIf="completeCharge" class="row absolute" style="top:0%;left:15%;width:80%">
@@ -42,6 +45,9 @@
   <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng" [streetViewControl]=false [zoomControl]=false>
     <ng-container *ngFor="let marker of places">
         <agm-marker (markerClick)="selectMarker(marker)"  [latitude]="marker.geometry.location.lat" [longitude]="marker.geometry.location.lng" iconUrl="assets/images/marker1.png" [title]="marker.name"></agm-marker>
+    </ng-container>
+    <ng-container *ngIf="isLocation">
+        <agm-marker [latitude]="lat" [longitude]="lng" iconUrl="assets/images/marker-person.png" title="Tu posición"></agm-marker>
     </ng-container>
   </agm-map>
 

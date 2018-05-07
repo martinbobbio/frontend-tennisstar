@@ -31,8 +31,8 @@ export class MapComponent implements OnInit {
   isLogged:boolean = false;
   
   //Latitud y Longitud (Escuela Da Vinci)
-  lat: number;
-  lng: number;
+  lat: number = -34.604486;
+  lng: number = -58.396329;
   zoom: number = 13;
 
   places:any[];
@@ -50,6 +50,7 @@ export class MapComponent implements OnInit {
   namePlaceMatch = "";
 
   location:any;
+  isLocation:boolean = false;
 
   constructor(public mapService:MapService, public userService:UserService, public matchService:MatchService, public router:Router,public route:ActivatedRoute) {
     this.formMatch = new FormGroup({
@@ -69,6 +70,7 @@ export class MapComponent implements OnInit {
         this.location = position.coords;
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
+        this.isLocation = true;
 
         this.mapService.getClubes(this.lat, this.lng).subscribe(
           (data) => {
@@ -76,9 +78,6 @@ export class MapComponent implements OnInit {
           })
       });
    }else{
-    this.lat = -34.604486;
-    this.lng= -58.396329;
-
     this.mapService.getClubes(this.lat, this.lng).subscribe(
       (data) => {
         this.places = data.data[0].results;
