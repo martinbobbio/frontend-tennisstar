@@ -8,6 +8,7 @@ import { CompletePerfilComponent } from "./views/complete-perfil/complete-perfil
 import { CompleteGameStatsComponent } from "./views/complete-game-stats/complete-game-stats.component";
 import { ProfileComponent } from "./views/profile/profile.component";
 import { ClubComponent } from "./views/club/club.component";
+import { TournamentComponent } from "./views/tournament/tournament.component";
 
 const APP_ROUTES: Routes = [
     { path: '', component:HomeComponent},
@@ -20,6 +21,7 @@ const APP_ROUTES: Routes = [
     { path: 'profile', component:ProfileComponent},
     { path: 'profile/:id', component:ProfileComponent},
     { path: 'club/:id', component:ClubComponent},
+    { path: 'tournament/:id', component:TournamentComponent},
     { path: '**', pathMatch:'full', redirectTo:''},
 ]
 

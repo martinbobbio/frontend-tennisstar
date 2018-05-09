@@ -1,0 +1,60 @@
+<app-header></app-header>
+
+  <div id="profile-page-header" class="orange">
+      <div class="card-content-size">
+        <div class="container">
+          <div class="row">
+            <div class="col s12">
+              <h1 *ngIf="!mobile" class="bold white-text">nombre del torneo</h1>
+              <h3 *ngIf="mobile" class="bold white-text">nombre del torneo</h3>
+
+              <a class="waves-effect waves-light green btn">Inscribirse</a>
+              <br><br>
+              <a class="waves-effect waves-light black btn">Ver club</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-content container">
+          <div *ngIf="!mobile" class="row">  
+            <div class="col m3 s12">
+                <p style="height: 20px;" class="bold white-text">status</p>
+                <p class="medium-small bold black-text">Estado</p>                        
+            </div>                  
+            <div class="col m3 s12">                        
+                <p style="height: 20px;" class="card-title bold white-text">fecha</p>
+                <p class="medium-small bold black-text">Fecha</p>                        
+            </div>
+            <div class="col m3 s12">
+                <p style="height: 20px;" class="card-title bold white-text">0/8</p>
+                <p class="medium-small bold black-text">Limite de jugadores</p>                        
+            </div>                    
+            <div class="col m3 s12">
+                <p style="height: 20px;" class="card-title bold white-text">club</p>
+                <p class="medium-small bold black-text">Club</p>                        
+            </div>                    
+          </div>
+          <div *ngIf="mobile" class="row">  
+              <div class="col m3 s6">
+                  <span class="medium-small bold black-text">Estado</span>  
+                  <p style="height: 40px;" class="bold white-text">status</p>
+              </div>                  
+              <div class="col m3 s6">    
+                  <span class="medium-small bold black-text">Fecha</span>                      
+                  <p style="height: 40px;" class="card-title bold white-text">fecha</p>
+              </div>
+              <div class="col m3 s6" style="margin-top:30px;">
+                  <span class="medium-small bold black-text">Limite de jugadores</span>  
+                  <p style="height: 40px;" class="card-title bold white-text">0/8</p>
+              </div>                    
+              <div class="col m3 s6" style="margin-top:30px;">
+                  <span class="medium-small bold black-text">Club</span>  
+                  <p style="height: 40px;" class="card-title bold white-text">club</p>
+              </div>                    
+            </div>
+        </div>
+      </div>
+  </div>
+
+  <tournament-draw players=8></tournament-draw>
+
+<app-footer></app-footer>

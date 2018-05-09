@@ -65,6 +65,8 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
 
+    let this_aux = this;
+
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition(position => {
         this.location = position.coords;
@@ -76,12 +78,12 @@ export class MapComponent implements OnInit {
           (data) => {
             this.places = data.data[0].results;
           })
-      });
-   }else{
-    this.mapService.getClubes(this.lat, this.lng).subscribe(
+      }, function(error){
+        this_aux.mapService.getClubes(this_aux.lat, this_aux.lng).subscribe(
       (data) => {
-        this.places = data.data[0].results;
+        this_aux.places = data.data[0].results;
       })
+    });
    }
 
     var isMobile = window.matchMedia("only screen and (max-width: 576px)");

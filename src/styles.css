@@ -34,13 +34,15 @@
 }
 
 
-
 /*Positions*/
 .relative{
     position: relative;
 }
 .absolute{
-    position: absolute
+    position: absolute;
+}
+.fixed{
+    position:fixed;
 }
 
 /*Scrollbar*/

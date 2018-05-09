@@ -52,6 +52,8 @@ import { HomeExplorarComponent } from './components/home-explorar/home-explorar.
 import { ProfileComponent } from './views/profile/profile.component';
 import { ClubComponent } from './views/club/club.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { TournamentDrawComponent } from './components/tournament-draw/tournament-draw.component';
+import { TournamentComponent } from './views/tournament/tournament.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     SafePipe,
     ClubComponent,
     LoaderComponent,
+    TournamentDrawComponent,
+    TournamentComponent,
   ],
   imports: [
     BrowserModule,
