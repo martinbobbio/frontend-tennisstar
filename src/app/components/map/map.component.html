@@ -28,10 +28,10 @@
           <span id="buttons-map">
           <a *ngIf="isNewUser == null" [routerLink]="['/login']" [ngClass]="{'btn-large': !mobile, 'btn': mobile}" class="orange darken-1 waves-effect waves-light">Ingresa a TennisStar</a>
           <a *ngIf="isNewUser && fullCount != 2 && fullPlayer != true" [routerLink]="['/completePerfil']" [ngClass]="{'btn-large': !mobile, 'btn': mobile}" class="orange darken-1 waves-effect waves-light">Completa tus datos</a>
-          <a *ngIf="fullCount == 2" href="/explorar" [ngClass]="{'btn-large': !mobile, 'btn': mobile}" class="orange darken-1 waves-effect waves-light">Crear partido</a>
+          <a *ngIf="fullCount == 2" href="/explorar/match" [ngClass]="{'btn-large': !mobile, 'btn': mobile}" class="orange darken-1 waves-effect waves-light">Crear partido</a>
           <br><br>
           <a *ngIf="isNewUser && fullCount != 2  && fullGame != true" [routerLink]="['/completeGameStats']" [ngClass]="{'btn-large': !mobile, 'btn': mobile}" class="orange darken-1 waves-effect waves-light">Completa tu perfil</a>
-          <a *ngIf="fullCount == 2" href="/explorar" [ngClass]="{'btn-large': !mobile, 'btn': mobile}" class="orange darken-1 waves-effect waves-light">Crear torneo</a>
+          <a *ngIf="fullCount == 2" href="/explorar/tournament" [ngClass]="{'btn-large': !mobile, 'btn': mobile}" class="orange darken-1 waves-effect waves-light">Crear torneo</a>
           </span>
         </div>
         <div class="col m6 hide-on-small-only">
@@ -86,6 +86,44 @@
               <div class="col s12">
                 <br>
                 <button type='submit' id="btn_submit" name='btn_submit' class='col s12 btn btn-large waves-effect orange'>Crear partido</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </ng-container>
+
+
+  <ng-container>
+    <div id="newTournamentForm" class="container d-none">
+      <h3 class="orange-text">Torneo en {{namePlaceTournament}}</h3>
+      <div class="row">
+          <form (ngSubmit)="newTournament()" [formGroup]="formTournament" novalidate="novalidate" class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <input formControlName="title" id="title" type="text" class="validate">
+                <label for="title">Nombre del torneo</label>
+              </div>
+              <div class="input-field col s12">
+                <select formControlName="count" name='count' id='count' class='count'>
+                  <option [ngValue]="undefined" disabled selected>Límite de jugadores</option>
+                  <option [ngValue]="4">4 Jugadores</option>
+                  <option [ngValue]="8">8 Jugadores</option>
+                  <option [ngValue]="16">16 Jugadores</option>
+                </select>
+                <label>Límite de jugadores</label>
+              </div>
+              <div class="col s6">
+                  <small class="grey-text">Fecha</small>
+                  <input formControlName="date" type="text" class="datepicker">
+              </div>
+              <div class="col s6">
+                  <small class="grey-text">Hora</small>
+                  <input formControlName="hour" type="text" class="timepicker">
+              </div>
+              <div class="col s12">
+                <br>
+                <button type='submit' id="btn_submit" name='btn_submit' class='col s12 btn btn-large waves-effect orange'>Crear torneo</button>
               </div>
             </div>
           </form>

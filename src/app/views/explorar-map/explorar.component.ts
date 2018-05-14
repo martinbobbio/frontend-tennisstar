@@ -10,11 +10,20 @@ export class ExplorarComponent implements OnInit {
 
   type = 2;
 
+  createMatch:boolean = false;;
+  createTournament:boolean = false;
+
   constructor(public route:ActivatedRoute) {
 
     this.route.params.forEach((params: Params) => {
       if(params['option'] && params['option'] == "favoriteClub"){
         this.type = 3;
+      }
+      if(params['option'] && params['option'] == "match"){
+        this.createMatch = true;
+      }
+      if(params['option'] && params['option'] == "tournament"){
+        this.createTournament = true;
       }
     });
 

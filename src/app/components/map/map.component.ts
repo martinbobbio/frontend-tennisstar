@@ -18,6 +18,8 @@ declare let $: any;
 export class MapComponent implements OnInit {
 
   @Input() type:number = 1;
+  @Input() createMatch:boolean = false;
+  @Input() createTournament:boolean = false;
 
   isNewUser;
 
@@ -43,11 +45,17 @@ export class MapComponent implements OnInit {
   fullCount:number = 0;
   completeCharge:boolean = true;
 
-  formMatch:FormGroup
+  formMatch:FormGroup;
+  formTournament:FormGroup;
+
   latMatch;
   lonMatch;
   googlePlaceIdMatch;
   namePlaceMatch = "";
+  latTournament;
+  lonTournament;
+  googlePlaceIdTournament;
+  namePlaceTournament = "";
 
   location:any;
   isLocation:boolean = false;
@@ -57,6 +65,12 @@ export class MapComponent implements OnInit {
       'title': new FormControl('',Validators.required),
       'type': new FormControl('',Validators.required),
       'isPrivate': new FormControl(0),
+      'date': new FormControl(),
+      'hour': new FormControl(),
+    });
+    this.formTournament = new FormGroup({
+      'title': new FormControl('',Validators.required),
+      'count': new FormControl('',Validators.required),
       'date': new FormControl(),
       'hour': new FormControl(),
     });
@@ -218,10 +232,15 @@ export class MapComponent implements OnInit {
           ${openingHtml}
           <p class="black-text left-align">${ratingHtml}</p>
         </div>
-      </div>
-      <a id="newMatch" class="waves-effect green waves-light btn-large">Partido</a>
-      <a class="waves-effect green waves-light btn-large">Torneo</a>
-      `;
+      </div>`
+      if(this.createMatch)
+        textHtml += `<a id="newMatch" class="waves-effect green waves-light btn-large">Partido</a>`
+      if(this.createTournament)
+        textHtml += `<a id="newTournament" class="waves-effect green waves-light btn-large">Torneo</a>`
+      if(!this.createMatch && !this.createTournament){
+        textHtml += `<a style="margin-right:20px;" id="newMatch" class="waves-effect green waves-light btn-large">Partido</a>`
+        textHtml += `<a id="newTournament" class="waves-effect green waves-light btn-large">Torneo</a>`
+      }
   
       swal({
         title: "Elige que quieres crear", 
@@ -235,9 +254,22 @@ export class MapComponent implements OnInit {
         this.googlePlaceIdMatch = marker.place_id;
         this.namePlaceMatch = marker.name;
         swal.close();
+        $("#newTournamentForm").fadeOut();
         $("#newMatchForm").fadeIn();
         $("html, body").animate({ scrollTop: 650 }, 500);
       });
+
+      $("#newTournament").on('click', () => {
+        this.latTournament = marker.geometry.location.lat;
+        this.latTournament = marker.geometry.location.lng;
+        this.googlePlaceIdTournament = marker.place_id;
+        this.namePlaceTournament = marker.name;
+        swal.close();
+        $("#newMatchForm").fadeOut();
+        $("#newTournamentForm").fadeIn();
+        $("html, body").animate({ scrollTop: 650 }, 500);
+      });
+
     }
 
     if(this.type == 3){
@@ -331,8 +363,6 @@ export class MapComponent implements OnInit {
     let hour = $('.timepicker')[0].value;
     let type = $(".type .active").text();
 
-    console.log(hour);
-
     let data = {
       title: this.formMatch.value.title,
       type: type,
@@ -359,5 +389,10 @@ export class MapComponent implements OnInit {
       }
     )
   }
+
+  newTournament(){
+
+  }
+
 
 }
