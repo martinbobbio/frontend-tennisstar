@@ -1,35 +1,37 @@
 <app-header></app-header>
 
-  <div id="profile-page-header" class="orange">
+  <div *ngIf="tournament" id="profile-page-header" class="orange">
       <div class="card-content-size">
         <div class="container">
           <div class="row">
             <div class="col s12">
-              <h1 *ngIf="!mobile" class="bold white-text">nombre del torneo</h1>
-              <h3 *ngIf="mobile" class="bold white-text">nombre del torneo</h3>
+              <h1 *ngIf="!mobile" class="bold white-text">{{tournament.title}}</h1>
+              <h3 *ngIf="mobile" class="bold white-text">{{tournament.title}}</h3>
 
               <a class="waves-effect waves-light green btn">Inscribirse</a>
               <br><br>
-              <a class="waves-effect waves-light black btn">Ver club</a>
+              <a href="club/{{tournament.googlePlaceId}}" class="waves-effect waves-light black btn">Ver club</a>
             </div>
           </div>
         </div>
         <div class="card-content container">
           <div *ngIf="!mobile" class="row">  
             <div class="col m3 s12">
-                <p style="height: 20px;" class="bold white-text">status</p>
+                <p style="height: 20px;" class="bold white-text">
+                    {{statusText}}
+                </p>
                 <p class="medium-small bold black-text">Estado</p>                        
             </div>                  
             <div class="col m3 s12">                        
-                <p style="height: 20px;" class="card-title bold white-text">fecha</p>
+                <p style="height: 20px;" class="card-title bold white-text">{{tournament.date}}</p>
                 <p class="medium-small bold black-text">Fecha</p>                        
             </div>
             <div class="col m3 s12">
-                <p style="height: 20px;" class="card-title bold white-text">0/8</p>
+                <p style="height: 20px;" class="card-title bold white-text">{{tournament.countStatus}}/{{tournament.countTotal}}</p>
                 <p class="medium-small bold black-text">Limite de jugadores</p>                        
             </div>                    
             <div class="col m3 s12">
-                <p style="height: 20px;" class="card-title bold white-text">club</p>
+                <p style="height: 20px;" class="card-title bold white-text">{{tournament.clubTitle}}</p>
                 <p class="medium-small bold black-text">Club</p>                        
             </div>                    
           </div>
@@ -40,15 +42,15 @@
               </div>                  
               <div class="col m3 s6">    
                   <span class="medium-small bold black-text">Fecha</span>                      
-                  <p style="height: 40px;" class="card-title bold white-text">fecha</p>
+                  <p style="height: 40px;" class="card-title bold white-text">{{tournament.date}}</p>
               </div>
               <div class="col m3 s6" style="margin-top:30px;">
                   <span class="medium-small bold black-text">Limite de jugadores</span>  
-                  <p style="height: 40px;" class="card-title bold white-text">0/8</p>
+                  <p style="height: 40px;" class="card-title bold white-text">{{tournament.countStatus}}/{{tournament.countTotal}}</p>
               </div>                    
               <div class="col m3 s6" style="margin-top:30px;">
                   <span class="medium-small bold black-text">Club</span>  
-                  <p style="height: 40px;" class="card-title bold white-text">club</p>
+                  <p style="height: 40px;" class="card-title bold white-text">{{tournament.clubTitle}}</p>
               </div>                    
             </div>
         </div>

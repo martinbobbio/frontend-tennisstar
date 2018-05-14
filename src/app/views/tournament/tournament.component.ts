@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TournamentService } from '../../services/tournament.service';
+import { ActivatedRoute,Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tournament',
@@ -8,8 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class TournamentComponent implements OnInit {
 
   mobile = false;
+  tournament;
+  tournament_id;
 
-  constructor() { }
+  statusText = "Esperando jugadores";
+
+  constructor(public tournamentService:TournamentService,public router:ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -17,6 +23,21 @@ export class TournamentComponent implements OnInit {
     if (isMobile.matches) {
         this.mobile = true;
     }
+
+    this.router.params.forEach((params: Params) => {
+      if(params['id']){
+        this.tournament_id = params['id'];
+      }
+    })
+
+    this.tournamentService.getTournament(this.tournament_id).subscribe(
+      (response)=>{
+        this.tournament = response.data[0];
+        if(this.tournament.status == 1){
+          this.statusText = "Torneo comenzado";
+        }
+      });
+
 
   }
 

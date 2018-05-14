@@ -127,19 +127,19 @@
 
     <div class="col m6 s12">
         <p class="orange-text bold">Torneos</p>
-        <ul class="collection">
+        <ul *ngFor="let tournament of tournaments" class="collection">
             <li class="collection-item avatar">
                 <i class="material-icons orange circle">event</i>
                 <div class="row" style="margin-bottom:0px;">
                     <div class="col m6 s12">
-                        <p class="bold">nombre del torneo</p>
+                        <p class="bold">{{tournament.title}}</p>
                     </div>
                     <div class="col m6 s12 right-align">
-                        <a href="tournament/1" class="btn-flat green-text bold">Ver info</a>
+                        <a href="tournament/{{tournament.id}}" class="btn-flat green-text bold">Ver info</a>
                     </div>
                     <div class="col s12">
-                        <p>0/8 jugadores</p>
-                        <p>04/08/2018 16:00hs</p>
+                        <p>{{tournament.countStatus}}/{{tournament.countTotal}} jugadores</p>
+                        <p>{{tournament.date}}</p>
                     </div>
                 </div>
             </li>

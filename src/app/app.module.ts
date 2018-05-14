@@ -19,6 +19,7 @@ import { UserService } from './services/user.service';
 import { RequestFriendService } from './services/request-friend.service';
 import { RequestMatchService } from './services/request-match.service';
 import { MatchService } from './services/match.service';
+import { TournamentService } from './services/tournament.service';
 
 //Dependencia (Mapa)
 import { AgmCoreModule } from '@agm/core';
@@ -99,6 +100,7 @@ import { TournamentComponent } from './views/tournament/tournament.component';
     RegisterService,
     AuthService,
     UserService,
+    TournamentService,
     RequestFriendService,
     RequestMatchService,
     MatchService

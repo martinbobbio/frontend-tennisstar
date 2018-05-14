@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { environment } from '../../../environments/environment';
 import { RequestFriendService } from '../../services/request-friend.service';
 import { MatchService } from '../../services/match.service';
+import { TournamentService } from '../../services/tournament.service';
 import { MapService } from '../../services/map.service';
 
 import * as swal from 'sweetalert2';
@@ -19,14 +20,14 @@ export class HomeExplorarComponent implements OnInit {
 
   users;
   matchs;
-
+  tournaments;
   clubs;
   clubPhotoHtml="";
   clubRatingHtml="";
 
   path:string = environment.backPathImage;
 
-  constructor(public userService:UserService,public mapService:MapService, public requestFriendService:RequestFriendService, public matchService:MatchService) { }
+  constructor(public userService:UserService,public mapService:MapService,public tournamentService:TournamentService, public requestFriendService:RequestFriendService, public matchService:MatchService) { }
 
   ngOnInit() {
 
@@ -49,8 +50,16 @@ export class HomeExplorarComponent implements OnInit {
     this.mapService.getClubesMost().subscribe(
       (response)=>{
         this.clubs = response.data[0];
-        console.log(this.clubs);
+        
+      } ,
+      (error) =>{
+      }
+    )
 
+    this.tournamentService.getTournamentRandom().subscribe(
+      (response)=>{
+        this.tournaments = response.data[0];
+        console.log(this.tournaments);
         
       } ,
       (error) =>{
