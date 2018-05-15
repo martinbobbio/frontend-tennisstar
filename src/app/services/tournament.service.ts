@@ -34,8 +34,7 @@ export class TournamentService {
 
     urlSearchParams.append('id_user', localStorage.getItem("id_user"));
     urlSearchParams.append('title', formData.title);
-    urlSearchParams.append('type', formData.type);
-    urlSearchParams.append('isPrivate', formData.isPrivate);
+    urlSearchParams.append('count', formData.count);
     urlSearchParams.append('date', formData.date);
     urlSearchParams.append('hour', formData.hour);
     urlSearchParams.append('lon', formData.lon);

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MapService } from '../../services/map.service';
 import { UserService } from '../../services/user.service';
 import { MatchService } from '../../services/match.service';
+import { TournamentService } from '../../services/tournament.service';
 import { environment } from '../../../environments/environment';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -60,7 +61,7 @@ export class MapComponent implements OnInit {
   location:any;
   isLocation:boolean = false;
 
-  constructor(public mapService:MapService, public userService:UserService, public matchService:MatchService, public router:Router,public route:ActivatedRoute) {
+  constructor(public mapService:MapService, public userService:UserService,public tournamentService:TournamentService, public matchService:MatchService, public router:Router,public route:ActivatedRoute) {
     this.formMatch = new FormGroup({
       'title': new FormControl('',Validators.required),
       'type': new FormControl('',Validators.required),
@@ -120,6 +121,26 @@ export class MapComponent implements OnInit {
           closeOnSelect: false // Close upon selecting a date,
         });
         $('.timepicker').pickatime({
+          default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+          fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+          twelvehour: false, // Use AM/PM or 24-hour format
+          donetext: 'OK', // text for done-button
+          cleartext: 'Clear', // text for clear-button
+          canceltext: 'Cancel', // Text for cancel-button
+          autoclose: false, // automatic close timepicker
+          ampmclickable: true, // make AM PM clickable
+          aftershow: function(){} //Function for after opening timepicker
+        });
+        $('.datepicker2').pickadate({
+          selectMonths: true, // Creates a dropdown to control month
+          selectYears: 15, // Creates a dropdown of 15 years to control year,
+          today: 'Today',
+          clear: 'Clear',
+          close: 'Ok',
+          format: 'yyyy-mm-dd',
+          closeOnSelect: false // Close upon selecting a date,
+        });
+        $('.timepicker2').pickatime({
           default: 'now', // Set default time: 'now', '1:30AM', '16:30'
           fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
           twelvehour: false, // Use AM/PM or 24-hour format
@@ -261,7 +282,7 @@ export class MapComponent implements OnInit {
 
       $("#newTournament").on('click', () => {
         this.latTournament = marker.geometry.location.lat;
-        this.latTournament = marker.geometry.location.lng;
+        this.lonTournament = marker.geometry.location.lng;
         this.googlePlaceIdTournament = marker.place_id;
         this.namePlaceTournament = marker.name;
         swal.close();
@@ -391,6 +412,84 @@ export class MapComponent implements OnInit {
   }
 
   newTournament(){
+
+    let this_aux = this;
+    
+      if(this.formTournament.value.title == ""){
+        swal({
+          title: 'Título',
+          text: 'Debes ingresar el título para el torneo',
+          type: 'error',
+          confirmButtonColor: "#ff9800",
+        });
+        return;
+      }
+      if($(".count .active").text() == ""){
+        swal({
+          title: 'Límite de jugadores',
+          text: 'Debes indicar de cuantos jugadores es el torneo',
+          type: 'error',
+          confirmButtonColor: "#ff9800",
+        });
+        return;
+      }
+      if($('.datepicker2')[0].value == ""){
+        swal({
+          title: 'Fecha',
+          text: 'Debes ingresar la fecha para el torneo',
+          type: 'error',
+          confirmButtonColor: "#ff9800",
+        });
+        return;
+      }
+      if($('.timepicker2')[0].value == ""){
+        swal({
+          title: 'Hora',
+          text: 'Debes ingresar la hora para el torneo',
+          type: 'error',
+          confirmButtonColor: "#ff9800",
+        });
+        return;
+      }
+      let date = $('.datepicker2')[0].value;
+      let hour = $('.timepicker2')[0].value;
+      let count;
+
+      if($(".count .active").text() == "4 Jugadores"){
+        count = 4;
+      }
+      if($(".count .active").text() == "8 Jugadores"){
+        count = 8;
+      }
+      if($(".count .active").text() == "16 Jugadores"){
+        count = 16;
+      }
+  
+      let data = {
+        title: this.formTournament.value.title,
+        count: count,
+        date: date,
+        hour: hour,
+        lon: this.lonTournament,
+        lat: this.latTournament,
+        googlePlaceId: this.googlePlaceIdTournament,
+      }
+
+      this.tournamentService.createTournament(data).subscribe(
+        (response)=>{
+          swal({
+            title: 'Torneo creado!',
+            text: 'Felicidades has creado un torneo, espera que otros jugadores se unan',
+            type: 'success',
+            showConfirmButton: false
+          });
+          setTimeout(function(){ this_aux.router.navigate(['/']); }, 3000);
+        } ,
+        (error) =>{
+          
+        }
+      )
+
 
   }
 

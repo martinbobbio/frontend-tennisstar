@@ -38,7 +38,7 @@
           <div *ngIf="mobile" class="row">  
               <div class="col m3 s6">
                   <span class="medium-small bold black-text">Estado</span>  
-                  <p style="height: 40px;" class="bold white-text">status</p>
+                  <p style="height: 40px;" class="bold white-text">{{statusText}}</p>
               </div>                  
               <div class="col m3 s6">    
                   <span class="medium-small bold black-text">Fecha</span>                      
@@ -57,6 +57,8 @@
       </div>
   </div>
 
-  <tournament-draw *ngIf="!mobile" players=16></tournament-draw>
+  <div style="overflow-x: scroll">
+    <tournament-draw players={{tournament.countTotal}}></tournament-draw>
+  </div>
 
 <app-footer></app-footer>

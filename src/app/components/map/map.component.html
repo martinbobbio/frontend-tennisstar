@@ -107,19 +107,19 @@
               <div class="input-field col s12">
                 <select formControlName="count" name='count' id='count' class='count'>
                   <option [ngValue]="undefined" disabled selected>Límite de jugadores</option>
-                  <option [ngValue]="4">4 Jugadores</option>
-                  <option [ngValue]="8">8 Jugadores</option>
-                  <option [ngValue]="16">16 Jugadores</option>
+                  <option id="4" [ngValue]="4">4 Jugadores</option>
+                  <option id="8" [ngValue]="8">8 Jugadores</option>
+                  <option id ="16" [ngValue]="16">16 Jugadores</option>
                 </select>
                 <label>Límite de jugadores</label>
               </div>
               <div class="col s6">
                   <small class="grey-text">Fecha</small>
-                  <input formControlName="date" type="text" class="datepicker">
+                  <input formControlName="date" type="text" class="datepicker2">
               </div>
               <div class="col s6">
                   <small class="grey-text">Hora</small>
-                  <input formControlName="hour" type="text" class="timepicker">
+                  <input formControlName="hour" type="text" class="timepicker2">
               </div>
               <div class="col s12">
                 <br>
