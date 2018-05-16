@@ -137,6 +137,14 @@ body{
 	color: #86be2e;
 }
 
+.sidebar-links div.link-black > a {
+	border-color: black;
+}
+
+.sidebar-links div.link-black > a i.fa {
+	color: black;
+}
+
 /* Making the sidebar responsive */
 
 @media (max-width: 900px) {

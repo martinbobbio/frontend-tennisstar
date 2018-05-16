@@ -264,9 +264,10 @@ export class MapComponent implements OnInit {
       }
   
       swal({
-        title: "Elige que quieres crear", 
+        title: "Elige opción", 
         html: textHtml,  
-        showConfirmButton: false 
+        showConfirmButton: false,
+        showCloseButton: true
       });
   
       $("#newMatch").on('click', () => {
@@ -327,6 +328,7 @@ export class MapComponent implements OnInit {
               title: 'Club favorito asignado!',
               text: 'Felicidades, tienes un club favorito!',
               type: 'success',
+              showCloseButton: true,
               showConfirmButton: false
             });
             setTimeout(function(){ this_aux.router.navigate(['/']); }, 3000);
