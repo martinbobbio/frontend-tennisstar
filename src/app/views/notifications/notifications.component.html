@@ -1,0 +1,56 @@
+<app-header></app-header>
+
+<div *ngIf="notifications" class="container">
+  <div class="row">
+
+      <div class="col s12 m12">
+        <h3 class="green-text">Notificaciones</h3>
+      </div>
+      <div class="col s4 m4">
+        <div class="input-field">
+            <select>
+              <option value="undefined" disabled selected>Acción</option>
+              <option value="add">Agregar</option>
+              <option value="edit">Editar</option>
+              <option value="remove">Borrar</option>
+            </select>
+            <label>Acción</label>
+        </div>
+      </div>
+      <div class="col s4 m4">
+          <div class="input-field">
+            <select>
+              <option value="undefined" disabled selected>Entidades</option>
+              <option value="user">Usuarios</option>
+              <option value="match">Partidos</option>
+              <option value="tournament">Torneos</option>
+              <option value="requestFriend">Solicitud de amistad</option>
+              <option value="requestMatch">Solicitud de partido</option>
+              <option value="clubFavorite">Club Favorito</option>
+              <option value="notice">Noticias</option>
+            </select>
+            <label>Entidades</label>
+          </div>
+      </div>
+      <div class="col s4 m4" style="margin-top:20px;">
+          <button (click)="filter()" class="waves-effect waves-light btn gradient-45deg-green-teal z-depth-4 mr-1">Filtrar <i class="material-icons right">search</i></button>
+      </div>
+  </div>
+
+  <div class="row">
+    <ng-container *ngFor="let n of notifications">
+      <div class="col s12 m3">
+        <div [ngClass]="{'gradient-edit': n.type == 'edit', 'gradient-add': n.type == 'add', 'gradient-delete': n.type == 'delete'}"
+        class="card gradient-shadow border-radius-3 white-text">
+          <div class="card-content center">
+            <i class="material-icons background-round mt-5">{{n.entity}}</i>
+            <h5 class="white-text lighten-4">{{n.environment}}</h5>
+            <p class="white-text lighten-4">{{n.title}}</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<app-footer></app-footer>

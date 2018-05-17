@@ -9,6 +9,7 @@ import { CompleteGameStatsComponent } from "./views/complete-game-stats/complete
 import { ProfileComponent } from "./views/profile/profile.component";
 import { ClubComponent } from "./views/club/club.component";
 import { TournamentComponent } from "./views/tournament/tournament.component";
+import { NotificationsComponent } from "./views/notifications/notifications.component";
 
 const APP_ROUTES: Routes = [
     { path: '', component:HomeComponent},
@@ -22,6 +23,7 @@ const APP_ROUTES: Routes = [
     { path: 'profile/:id', component:ProfileComponent},
     { path: 'club/:id', component:ClubComponent},
     { path: 'tournament/:id', component:TournamentComponent},
+    { path: 'admin/notificaciones', component:NotificationsComponent},
     { path: '**', pathMatch:'full', redirectTo:''},
 ]
 

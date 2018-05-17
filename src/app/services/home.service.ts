@@ -18,4 +18,11 @@ export class HomeService {
     )
   }
 
+  getNotifications(){
+
+    return this.http.get(`${this.backUrl}/api/notification/get-notifications`).map(
+      (response) => response.json()
+    )
+  }
+
 }
