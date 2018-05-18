@@ -1,14 +1,20 @@
 <app-header></app-header>
 
 <div *ngIf="notifications" class="container">
-  <div class="row">
 
-      <div class="col s12 m12">
-        <h3 class="green-text">Notificaciones</h3>
+  <div class="row">
+      <div class="col s9 m9">
+        <h3 class="orange-text">Notificaciones</h3>
       </div>
-      <div class="col s4 m4">
+      <div *ngIf="!mobile" class="col s3 m3">
+        <button (click)="viewInfo()" style="margin-top:30px;" class="waves-effect waves-light btn gradient-45deg-orange-teal z-depth-4 mr-1">Referencias <i class="material-icons right">info</i></button>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col s4 m3">
         <div class="input-field">
-            <select>
+            <select class="action">
               <option value="undefined" disabled selected>Acción</option>
               <option value="add">Agregar</option>
               <option value="edit">Editar</option>
@@ -17,9 +23,9 @@
             <label>Acción</label>
         </div>
       </div>
-      <div class="col s4 m4">
+      <div class="col s4 m3">
           <div class="input-field">
-            <select>
+            <select class="entity">
               <option value="undefined" disabled selected>Entidades</option>
               <option value="user">Usuarios</option>
               <option value="match">Partidos</option>
@@ -32,8 +38,21 @@
             <label>Entidades</label>
           </div>
       </div>
-      <div class="col s4 m4" style="margin-top:20px;">
-          <button (click)="filter()" class="waves-effect waves-light btn gradient-45deg-green-teal z-depth-4 mr-1">Filtrar <i class="material-icons right">search</i></button>
+      <div class="col s4 m3">
+          <div class="input-field">
+            <select class="environment">
+              <option value="undefined" disabled selected>Entorno</option>
+              <option value="frontend">Frontend</option>
+              <option value="backend">Backend</option>
+            </select>
+            <label>Entorno</label>
+          </div>
+      </div>
+      <div class="col s4 m3" style="margin-top:20px;">
+          <button (click)="filter()" class="waves-effect waves-light btn gradient-45deg-orange-teal z-depth-4 mr-1">Filtrar <i class="material-icons right">search</i></button>
+      </div>
+      <div class="col s4 m3" style="margin-top:20px;">
+          <button *ngIf="mobile" (click)="viewInfo()" class="waves-effect waves-light btn gradient-45deg-orange-teal z-depth-4 mr-1">Referencias <i class="material-icons right">info</i></button>
       </div>
   </div>
 
@@ -46,6 +65,8 @@
             <i class="material-icons background-round mt-5">{{n.entity}}</i>
             <h5 class="white-text lighten-4">{{n.environment}}</h5>
             <p class="white-text lighten-4">{{n.title}}</p>
+            <p class="white-text bold lighten-4" style="margin-top:10px">{{n.date.date | date:'dd/MM/yyyy hh:ss'}}hs</p>
+
           </div>
         </div>
       </div>

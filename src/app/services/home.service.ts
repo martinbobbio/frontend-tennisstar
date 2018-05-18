@@ -25,4 +25,21 @@ export class HomeService {
     )
   }
 
+  getNotificationsBy(action,entity,environment){
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('action', action);
+    urlSearchParams.append('entity', entity);
+    urlSearchParams.append('environment', environment);
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/notification/get-notifications-by`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+  }
+
 }

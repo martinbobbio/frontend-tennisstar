@@ -403,7 +403,8 @@ export class MapComponent implements OnInit {
           title: 'Partido creado!',
           text: 'Felicidades has creado un partido, espera que otros jugadores se unan',
           type: 'success',
-          showConfirmButton: false
+          showConfirmButton: false,
+          showCloseButton: true
         });
         setTimeout(function(){ this_aux.router.navigate(['/']); }, 3000);
       } ,
@@ -483,7 +484,8 @@ export class MapComponent implements OnInit {
             title: 'Torneo creado!',
             text: 'Felicidades has creado un torneo, espera que otros jugadores se unan',
             type: 'success',
-            showConfirmButton: false
+            showConfirmButton: false,
+            showCloseButton: true
           });
           setTimeout(function(){ this_aux.router.navigate(['/']); }, 3000);
         } ,
