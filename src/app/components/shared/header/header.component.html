@@ -60,6 +60,7 @@
   </p>
   <div *ngIf="isNewUser" class="center-align">
   <img src="{{path}}{{pathImg}}" class="circle" height="50" width="50">
+  <p *ngIf="isAdmin == 1" class="bold">ADMIN</p>
   </div>
 
   <div class="sidebar-links">
@@ -119,7 +120,7 @@
 
     </div>
 
-    <div class="links link-black">
+    <div *ngIf="isAdmin == 1" class="links link-black">
 
       <a class="pointer">
         <i class="fa fa-unlock"></i>Administrador

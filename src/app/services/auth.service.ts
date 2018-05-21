@@ -59,6 +59,7 @@ export class AuthService {
     localStorage.removeItem('id_user');
     localStorage.removeItem('new_user');
     localStorage.removeItem('username');
+    localStorage.removeItem('isAdmin');
     // Go back to the home route
     this.router.navigate(['/']);
   }

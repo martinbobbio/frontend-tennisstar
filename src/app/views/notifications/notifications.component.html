@@ -15,10 +15,10 @@
       <div class="col s4 m3">
         <div class="input-field">
             <select class="action">
-              <option value="undefined" disabled selected>Acción</option>
+              <option value="" disabled selected>Acción</option>
               <option value="add">Agregar</option>
               <option value="edit">Editar</option>
-              <option value="remove">Borrar</option>
+              <option value="delete">Borrar</option>
             </select>
             <label>Acción</label>
         </div>
@@ -26,7 +26,7 @@
       <div class="col s4 m3">
           <div class="input-field">
             <select class="entity">
-              <option value="undefined" disabled selected>Entidades</option>
+              <option value="" disabled selected>Entidades</option>
               <option value="user">Usuarios</option>
               <option value="match">Partidos</option>
               <option value="tournament">Torneos</option>
@@ -41,9 +41,9 @@
       <div class="col s4 m3">
           <div class="input-field">
             <select class="environment">
-              <option value="undefined" disabled selected>Entorno</option>
-              <option value="frontend">Frontend</option>
-              <option value="backend">Backend</option>
+              <option value="" disabled selected>Entorno</option>
+              <option value="Frontend">Frontend</option>
+              <option value="Backend">Backend</option>
             </select>
             <label>Entorno</label>
           </div>
@@ -56,7 +56,15 @@
       </div>
   </div>
 
-  <div class="row">
+  <div id="loader" class="row" style="display:none;">
+    <div class="progress">
+      <div class="col s12">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="notifications" class="row">
     <ng-container *ngFor="let n of notifications">
       <div class="col s12 m3">
         <div [ngClass]="{'gradient-edit': n.type == 'edit', 'gradient-add': n.type == 'add', 'gradient-delete': n.type == 'delete'}"

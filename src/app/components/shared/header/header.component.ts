@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   openMenu:boolean = false;
   profile:any[];
   username:string;
+  isAdmin;
 
   isNewUser;
   mobile = false;
@@ -194,6 +195,7 @@ export class HeaderComponent implements OnInit {
     this.chargueRequests();
     this.chargueEvents();
 
+    this.isAdmin = localStorage.getItem("isAdmin");
     this.isNewUser = localStorage.getItem("new_user");
     var isMobile = window.matchMedia("only screen and (max-width: 576px)");
     if (isMobile.matches) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HomeService } from '../../services/home.service';
 
 import * as swal from 'sweetalert2';
@@ -14,14 +15,20 @@ export class NotificationsComponent implements OnInit {
 
   notifications;
   mobile = false;
+  isAdmin;
 
-  constructor(public homeService:HomeService) { }
+  constructor(public homeService:HomeService, public router:Router) { }
 
   ngOnInit() {
 
+    this.isAdmin = localStorage.getItem("isAdmin");
     var isMobile = window.matchMedia("only screen and (max-width: 576px)");
     if (isMobile.matches) {
         this.mobile = true;
+    }
+
+    if(this.isAdmin != 1){
+      this.router.navigate(['/']);
     }
 
     this.homeService.getNotifications().subscribe(data =>{
@@ -33,36 +40,7 @@ export class NotificationsComponent implements OnInit {
         });
       }, 1000);
 
-      for(let n of this.notifications){
-
-        if(n["entity"] == "user"){
-          n["entity"] = "account_circle";
-        }
-        if(n["entity"] == "playerUser"){
-          n["entity"] = "account_box";
-        }
-        if(n["entity"] == "skillUser"){
-          n["entity"] = "donut_small";
-        }
-        if(n["entity"] == "notice"){
-          n["entity"] = "new_releases";
-        }
-        if(n["entity"] == "match"){
-          n["entity"] = "event";
-        }
-        if(n["entity"] == "tournament"){
-          n["entity"] = "stars";
-        }
-        if(n["entity"] == "requestFriend"){
-          n["entity"] = "person_add";
-        }
-        if(n["entity"] == "requestMatch"){
-          n["entity"] = "record_voice_over";
-        }
-        if(n["entity"] == "clubFavorite"){
-          n["entity"] = "place";
-        }
-      }
+      this.setValues(this.notifications);
       
     });
 
@@ -145,7 +123,53 @@ export class NotificationsComponent implements OnInit {
     let action = $(".action")[1]["value"];
     let entity = $(".entity")[1]["value"];
     let environment = $(".environment")[1]["value"];
+
+    $("#notifications").fadeOut();
+    $("#loader").fadeIn();
+
+    this.homeService.getNotificationsBy(action,entity,environment).subscribe(
+      (response)=>{
+
+        $("#loader").fadeOut();
+        $("#notifications").fadeIn();
+
+        this.notifications=response.data[0];
+        this.setValues(this.notifications);
+      })
     
+  }
+
+  setValues(notifications){
+    for(let n of this.notifications){
+
+      if(n["entity"] == "user"){
+        n["entity"] = "account_circle";
+      }
+      if(n["entity"] == "playerUser"){
+        n["entity"] = "account_box";
+      }
+      if(n["entity"] == "skillUser"){
+        n["entity"] = "donut_small";
+      }
+      if(n["entity"] == "notice"){
+        n["entity"] = "new_releases";
+      }
+      if(n["entity"] == "match"){
+        n["entity"] = "event";
+      }
+      if(n["entity"] == "tournament"){
+        n["entity"] = "stars";
+      }
+      if(n["entity"] == "requestFriend"){
+        n["entity"] = "person_add";
+      }
+      if(n["entity"] == "requestMatch"){
+        n["entity"] = "record_voice_over";
+      }
+      if(n["entity"] == "clubFavorite"){
+        n["entity"] = "place";
+      }
+    }
   }
 
 }
