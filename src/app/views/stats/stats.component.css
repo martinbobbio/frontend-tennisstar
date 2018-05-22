@@ -1,0 +1,14 @@
+.gradient-45deg-deep-orange-orange {
+    background: #bf360c;
+    background: -webkit-linear-gradient(45deg, #bf360c 0%, #f57c00 100%);
+    background: linear-gradient(45deg, #bf360c 0%, #f57c00 100%);
+}
+.card{
+    overflow: hidden;
+}
+
+.green-gradient{
+    background: #4caf50;
+    background: -webkit-linear-gradient(45deg, #4caf50 0%, #2e7d32 100%);
+    background: linear-gradient(45deg, #4caf50 0%, #2e7d32 100%);
+}

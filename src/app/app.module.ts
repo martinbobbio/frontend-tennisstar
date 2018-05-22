@@ -56,6 +56,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { TournamentDrawComponent } from './components/tournament-draw/tournament-draw.component';
 import { TournamentComponent } from './views/tournament/tournament.component';
 import { NotificationsComponent } from './views/notifications/notifications.component';
+import { StatsComponent } from './views/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { NotificationsComponent } from './views/notifications/notifications.comp
     TournamentDrawComponent,
     TournamentComponent,
     NotificationsComponent,
+    StatsComponent,
   ],
   imports: [
     BrowserModule,

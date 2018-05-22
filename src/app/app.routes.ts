@@ -10,6 +10,7 @@ import { ProfileComponent } from "./views/profile/profile.component";
 import { ClubComponent } from "./views/club/club.component";
 import { TournamentComponent } from "./views/tournament/tournament.component";
 import { NotificationsComponent } from "./views/notifications/notifications.component";
+import { StatsComponent } from "./views/stats/stats.component";
 
 const APP_ROUTES: Routes = [
     { path: '', component:HomeComponent},
@@ -24,6 +25,7 @@ const APP_ROUTES: Routes = [
     { path: 'club/:id', component:ClubComponent},
     { path: 'tournament/:id', component:TournamentComponent},
     { path: 'admin/notificaciones', component:NotificationsComponent},
+    { path: 'admin/estadisticas', component:StatsComponent},
     { path: '**', pathMatch:'full', redirectTo:''},
 ]
 

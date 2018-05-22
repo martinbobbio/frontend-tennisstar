@@ -10,8 +10,11 @@ export class ExplorarComponent implements OnInit {
 
   type = 2;
 
-  createMatch:boolean = false;;
+  createMatch:boolean = false;
   createTournament:boolean = false;
+  viewMatch:boolean = false;
+  viewTournament:boolean = false;
+
 
   constructor(public route:ActivatedRoute) {
 
@@ -24,6 +27,12 @@ export class ExplorarComponent implements OnInit {
       }
       if(params['option'] && params['option'] == "tournament"){
         this.createTournament = true;
+      }
+      if(params['option'] && params['option'] == "verPartidos"){
+        this.viewMatch = true;
+      }
+      if(params['option'] && params['option'] == "verTorneos"){
+        this.viewTournament = true;
       }
     });
 

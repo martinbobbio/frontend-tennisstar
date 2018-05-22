@@ -203,14 +203,18 @@ export class HeaderComponent implements OnInit {
     }
 
     this.username = localStorage.getItem("username");
-    var links = $('.links');
     
-    links.on('click', function () {
+    
+    setTimeout(()=> {
+      var links = $('.links');
 
+      links.on('click', function () {
       links.removeClass('selected');
       $(this).addClass('selected');
+      });
+    }, 1);
 
-    });
+    
 
     
     if (this.auth.userProfile) {

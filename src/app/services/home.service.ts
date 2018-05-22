@@ -25,6 +25,13 @@ export class HomeService {
     )
   }
 
+  getStats(){
+    
+    return this.http.get(`${this.backUrl}/api/notification/get-stats`).map(
+      (response) => response.json()
+    )
+  }
+
   getNotificationsBy(action,entity,environment){
 
     let headers = new Headers();

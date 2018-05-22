@@ -21,6 +21,8 @@ export class MapComponent implements OnInit {
   @Input() type:number = 1;
   @Input() createMatch:boolean = false;
   @Input() createTournament:boolean = false;
+  @Input() viewMatch:boolean = false;
+  @Input() viewTournament:boolean = false;
 
   isNewUser;
 
@@ -81,25 +83,32 @@ export class MapComponent implements OnInit {
   ngOnInit() {
 
     let this_aux = this;
+    if(this.viewMatch == false && this.viewTournament == false){
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(position => {
+          this.location = position.coords;
+          this.lat = position.coords.latitude;
+          this.lng = position.coords.longitude;
+          this.isLocation = true;
 
-    if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition(position => {
-        this.location = position.coords;
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        this.isLocation = true;
+          this.mapService.getClubes(this.lat, this.lng).subscribe(
+            (data) => {
+              this.places = data.data[0].results;
+            })
+        }, function(error){
+          this_aux.mapService.getClubes(this_aux.lat, this_aux.lng).subscribe(
+        (data) => {
+          this_aux.places = data.data[0].results;
+        })
+      });
+    }
+    }
 
-        this.mapService.getClubes(this.lat, this.lng).subscribe(
-          (data) => {
-            this.places = data.data[0].results;
-          })
-      }, function(error){
-        this_aux.mapService.getClubes(this_aux.lat, this_aux.lng).subscribe(
-      (data) => {
-        this_aux.places = data.data[0].results;
-      })
-    });
-   }
+    if(this.viewMatch == true){
+
+    }
+    if(this.viewTournament == true){
+    }
 
     var isMobile = window.matchMedia("only screen and (max-width: 576px)");
     if (isMobile.matches) {

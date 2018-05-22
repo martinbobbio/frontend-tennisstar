@@ -1,0 +1,87 @@
+<app-header></app-header>
+
+<div *ngIf="stats" class="container">
+
+  <div class="row">
+      <div class="col s12 m12">
+        <h3 class="orange-text">Estadísticas</h3>
+      </div>
+      
+      <div class="col s12 m4">
+        <div class="card gradient-45deg-deep-orange-orange">
+          <div class="card-content white-text right-align pr-0">
+            <span class="card-title left-align position-absolute">Usuarios</span>
+            <img src="assets/images/bg-notice.png">
+          </div>
+          <div class="card-action pt-0" style="min-height: 160px;">
+            <p class="white-text">Total: {{stats.userCount}}</p>
+          </div>
+          <div class="card-action border-non center">
+            <a href="http://admin-tenis.tennis-star.com/web/app_dev.php/admin/user" class="waves-effect waves-light btn green-gradient white-text">Ver todos</a>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m4">
+        <div class="card gradient-45deg-deep-orange-orange">
+          <div class="card-content white-text right-align pr-0">
+            <span class="card-title left-align position-absolute">Torneos</span>
+            <img src="assets/images/bg-notice.png">
+          </div>
+          <div class="card-action pt-0" style="min-height: 160px;">
+            <p class="white-text">Total: {{stats.tournamentCount}}</p>
+          </div>
+          <div class="card-action border-non center">
+            <a href="http://admin-tenis.tennis-star.com/web/app_dev.php/admin/tournament" class="waves-effect waves-light btn green-gradient white-text">Ver todos</a>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m4">
+        <div class="card gradient-45deg-deep-orange-orange">
+          <div class="card-content white-text right-align pr-0">
+            <span class="card-title left-align position-absolute">Clubes favoritos</span>
+            <img src="assets/images/bg-notice.png">
+          </div>
+          <div class="card-action pt-0" style="min-height: 160px;">
+            <p class="white-text">Total: {{stats.clubFavoriteCount}}</p>
+          </div>
+          <div class="card-action border-non center">
+            <a href="http://admin-tenis.tennis-star.com/web/app_dev.php/admin/favoriteclub" class="waves-effect waves-light btn green-gradient white-text">Ver todos</a>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m4">
+        <div class="card gradient-45deg-deep-orange-orange">
+          <div class="card-content white-text right-align pr-0">
+            <span class="card-title left-align position-absolute">Partidos</span>
+            <img src="assets/images/bg-notice.png">
+          </div>
+          <div class="card-action pt-0" style="min-height: 160px;">
+            <p class="white-text">Total: {{stats.matchCount}}</p>
+            <p class="white-text">Singles: {{stats.matchSinglesCount}}</p>
+            <p class="white-text">Dobles: {{stats.matchDoblesCount}}</p>
+          </div>
+          <div class="card-action border-non center">
+            <a href="http://admin-tenis.tennis-star.com/web/app_dev.php/admin/match" class="waves-effect waves-light btn green-gradient white-text">Ver todos</a>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m4">
+        <div class="card gradient-45deg-deep-orange-orange">
+          <div class="card-content white-text right-align pr-0">
+            <span class="card-title left-align position-absolute">Noticias</span>
+            <img src="assets/images/bg-notice.png">
+          </div>
+          <div class="card-action pt-0" style="min-height: 160px;">
+            <p class="white-text">Total: {{stats.noticeCount}}</p>
+          </div>
+          <div class="card-action border-non center">
+            <a href="http://admin-tenis.tennis-star.com/web/app_dev.php/admin/notice" class="waves-effect waves-light btn green-gradient white-text">Ver todos</a>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+</div>
+
+<app-footer></app-footer>
