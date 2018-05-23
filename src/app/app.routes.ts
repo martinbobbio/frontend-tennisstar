@@ -11,6 +11,7 @@ import { ClubComponent } from "./views/club/club.component";
 import { TournamentComponent } from "./views/tournament/tournament.component";
 import { NotificationsComponent } from "./views/notifications/notifications.component";
 import { StatsComponent } from "./views/stats/stats.component";
+import { SearchUsersComponent } from "./views/search-users/search-users.component";
 
 const APP_ROUTES: Routes = [
     { path: '', component:HomeComponent},
@@ -21,6 +22,7 @@ const APP_ROUTES: Routes = [
     { path: 'completePerfil', component:CompletePerfilComponent},
     { path: 'completeGameStats', component:CompleteGameStatsComponent},
     { path: 'profile', component:ProfileComponent},
+    { path: 'buscarUsuarios', component:SearchUsersComponent},
     { path: 'profile/:id', component:ProfileComponent},
     { path: 'club/:id', component:ClubComponent},
     { path: 'tournament/:id', component:TournamentComponent},

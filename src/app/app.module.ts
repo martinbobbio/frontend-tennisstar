@@ -57,6 +57,7 @@ import { TournamentDrawComponent } from './components/tournament-draw/tournament
 import { TournamentComponent } from './views/tournament/tournament.component';
 import { NotificationsComponent } from './views/notifications/notifications.component';
 import { StatsComponent } from './views/stats/stats.component';
+import { SearchUsersComponent } from './views/search-users/search-users.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { StatsComponent } from './views/stats/stats.component';
     TournamentComponent,
     NotificationsComponent,
     StatsComponent,
+    SearchUsersComponent,
   ],
   imports: [
     BrowserModule,

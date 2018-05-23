@@ -42,6 +42,7 @@
 </ng-container>
 
 <ng-container *ngIf="type == 2 || type == 3">
+  
   <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng" [streetViewControl]=false [zoomControl]=false>
     <ng-container *ngFor="let marker of places">
         <agm-marker (markerClick)="selectMarker(marker)"  [latitude]="marker.geometry.location.lat" [longitude]="marker.geometry.location.lng" iconUrl="assets/images/marker1.png" [title]="marker.name"></agm-marker>
@@ -49,9 +50,15 @@
     <ng-container *ngIf="isLocation">
         <agm-marker [latitude]="lat" [longitude]="lng" iconUrl="assets/images/marker-person.png" title="Tu posición"></agm-marker>
     </ng-container>
+    <ng-container *ngFor="let match of matchs">
+      <agm-marker (markerClick)="seeMatch(match)"  [latitude]="match.lon" [longitude]="match.lat" iconUrl="assets/images/marker1.png" [title]="match.title"></agm-marker>
+    </ng-container>
+    <ng-container *ngFor="let tournament of tournaments">
+      <agm-marker (markerClick)="seeTournament(tournament)"  [latitude]="tournament.lon" [longitude]="tournament.lat" iconUrl="assets/images/marker1.png" [title]="tournament.title"></agm-marker>
+    </ng-container>
   </agm-map>
 
-  <ng-container>
+  <ng-container *ngIf="!viewMatch && !viewTournament">
     <div id="newMatchForm" class="container d-none">
       <h3 class="orange-text">Partido en {{namePlaceMatch}}</h3>
       <div class="row">
@@ -94,7 +101,7 @@
   </ng-container>
 
 
-  <ng-container>
+  <ng-container *ngIf="!viewMatch && !viewTournament">
     <div id="newTournamentForm" class="container d-none">
       <h3 class="orange-text">Torneo en {{namePlaceTournament}}</h3>
       <div class="row">

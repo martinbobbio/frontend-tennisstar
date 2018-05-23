@@ -25,6 +25,13 @@ export class TournamentService {
     )
   }
 
+  getTournaments(){
+
+    return this.http.get(`${this.backUrl}/api/tournament/get-tournaments`).map(
+      (response) => response.json()
+    )
+  }
+
   createTournament(formData){
     
     let headers = new Headers();

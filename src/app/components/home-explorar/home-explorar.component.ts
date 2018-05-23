@@ -59,8 +59,6 @@ export class HomeExplorarComponent implements OnInit {
     this.tournamentService.getTournamentRandom().subscribe(
       (response)=>{
         this.tournaments = response.data[0];
-        console.log(this.tournaments);
-        
       } ,
       (error) =>{
       }

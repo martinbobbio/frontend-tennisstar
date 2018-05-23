@@ -101,4 +101,20 @@ export class UserService {
 
   }
 
+  getAllUsers(){
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('id', localStorage.getItem("id_user"));
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/user/get-all-users`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+
+  }
+
 }

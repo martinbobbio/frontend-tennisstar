@@ -40,7 +40,10 @@ export class MapComponent implements OnInit {
   lng: number = -58.396329;
   zoom: number = 13;
 
+  //Markers
   places:any[];
+  matchs:any[];
+  tournaments:any[];
 
   //Status Jugador
   fullPlayer:boolean = null;
@@ -83,7 +86,7 @@ export class MapComponent implements OnInit {
   ngOnInit() {
 
     let this_aux = this;
-    if(this.viewMatch == false && this.viewTournament == false){
+    
       if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(position => {
           this.location = position.coords;
@@ -91,24 +94,51 @@ export class MapComponent implements OnInit {
           this.lng = position.coords.longitude;
           this.isLocation = true;
 
-          this.mapService.getClubes(this.lat, this.lng).subscribe(
-            (data) => {
-              this.places = data.data[0].results;
-            })
+          if(this.viewMatch == false && this.viewTournament == false){
+            this.mapService.getClubes(this.lat, this.lng).subscribe(
+              (data) => {
+                this.places = data.data[0].results;
+                console.log(this.places);
+              })
+          }
+          if(this.viewMatch == true){
+            this.matchService.getAllMatchs().subscribe(
+              (data) => {
+                this.matchs = data.data[0];
+                console.log(this.matchs);
+              })
+          }
+          if(this.viewTournament == true){
+            this.tournamentService.getTournaments().subscribe(
+              (data) => {
+                this.tournaments = data.data[0];
+                console.log(this.tournaments);
+              })
+          }
+        
         }, function(error){
+          if(this.viewMatch == false && this.viewTournament == false){
           this_aux.mapService.getClubes(this_aux.lat, this_aux.lng).subscribe(
         (data) => {
           this_aux.places = data.data[0].results;
         })
-      });
-    }
+      }
+      if(this.viewMatch == true){
+        this.matchService.getAllMatchs().subscribe(
+          (data) => {
+            this.matchs = data.data[0];
+          })
+      }
+      if(this.viewTournament == true){
+        this.tournamentService.getTournaments().subscribe(
+          (data) => {
+            this.tournaments = data.data[0];
+          })
+      }
+    });
     }
 
-    if(this.viewMatch == true){
-
-    }
-    if(this.viewTournament == true){
-    }
+    
 
     var isMobile = window.matchMedia("only screen and (max-width: 576px)");
     if (isMobile.matches) {
@@ -182,6 +212,94 @@ export class MapComponent implements OnInit {
     }
 
     this.homeImageIndex = Math.floor(Math.random() * 7);
+
+  }
+
+  seeMatch(match){
+
+    let textHtml = `<br>`;
+    for(let match_aux of this.matchs){
+      if(match_aux["googlePlaceId"] == match["googlePlaceId"]){
+        let privateText = (match_aux["isPrivate"]) ? "Privado" : "Público";
+        let playersText;
+        if(match_aux["type"] == "Singles"){
+          if(match_aux["player2AId"] == null){
+          playersText = `${match_aux["player1AUsername"]} está esperando un jugador más`;
+          }else{
+          playersText = `${match_aux["player1AUsername"]} vs ${match_aux["player2AUsername"]}`;
+          }
+        }
+        if(match_aux["type"] == "Dobles"){
+          let player1A = match_aux["player1AUsername"];
+          let player2A = match_aux["player2AUsername"];
+          let player1B = match_aux["player1BUsername"];
+          let player2B = match_aux["player2BUsername"];
+          if(player1A != null && player1B != null && player2A != null && player2B != null){
+            playersText = `${player1A} y ${player1B} VS ${player2A} y ${player2B}`;
+          }else{
+            playersText = `${player1A}`
+            if(player2A != null){
+              playersText += `, ${player2A}`
+            }
+            if(player1B != null){
+              playersText += `, ${player1B}`
+            }
+            if(player2B != null){
+              playersText += `, ${player2B}`
+            }
+            playersText += ` esperando...`;
+          }
+        }
+        textHtml += `
+        <div class="row">
+          <div class="col m12 left-align">
+            <p class="fs-19 bold"><span class="green-text">${match_aux.type}</span> (${privateText})</p>
+            <p><span class="bold">${match_aux.creator}:</span> ${match_aux.title}</p>
+            <p class="fs-14">${match_aux.date}</p>
+            <p class="orange-text">${playersText}</p>
+          </div>
+        </div>
+        <hr>
+        `;
+      }
+    }
+
+    swal({
+      title: "Partidos", 
+      html: textHtml,  
+      showConfirmButton: false,
+      showCloseButton: true
+    });
+
+  }
+
+  seeTournament(tournament){
+
+    let textHtml = `<br>`;
+    for(let tournament_aux of this.tournaments){
+      if(tournament_aux["googlePlaceId"] == tournament["googlePlaceId"]){
+        textHtml += `
+        <div class="row">
+          <div class="col m12 left-align">
+            <p><span class="bold">${tournament_aux.creator}:</span> ${tournament_aux.title}</p>
+            <p class="fs-14">${tournament_aux.date}</p>
+            <p class="orange-text">${tournament.countStatus}/${tournament.countTotal} Jugadores</p>
+            <div class="center-align">
+            <a class="waves-effect waves-light btn white-text green ">Inscribirse</a>
+            </div>
+          </div>
+        </div>
+        <hr>
+        `;
+      }
+    }
+
+    swal({
+      title: "Torneos", 
+      html: textHtml,  
+      showConfirmButton: false,
+      showCloseButton: true
+    });
 
   }
 

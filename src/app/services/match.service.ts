@@ -18,6 +18,13 @@ export class MatchService {
     )
   }
 
+  getAllMatchs(){
+
+    return this.http.get(`${this.backUrl}/api/match/get-all-matchs`).map(
+      (response) => response.json()
+    )
+  }
+
   getMatchs(){
 
     let headers = new Headers();

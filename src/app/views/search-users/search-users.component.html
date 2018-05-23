@@ -1,0 +1,38 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="row">
+      <div class="col s12 m12">
+        <h3 class="orange-text">Buscar usuarios</h3>
+      </div>
+      <div class="input-field col s6">
+        <input id="password" type="text">
+        <label for="password">Buscar usuario</label>
+      </div>
+      <div class="col s2" style="margin-top:20px;">
+          <button class="waves-effect waves-light btn gradient-45deg-orange-teal z-depth-4 mr-1">Buscar <i class="material-icons right">search</i></button>
+      </div>
+  </div>
+
+  <div class="row">
+    <div *ngFor="let user of users" class="col m3 s6">
+        <div id="profile-card" class="card">
+            <div class="card-content" style="max-height: 500px !important">
+              <img src="{{path}}{{user.path}}" style="padding:0 30px;" class="circle responsive-img card-profile-image padding-2">
+              <a *ngIf="!user.isFriend" class="btn-floating btn-move-up waves-effect waves-light green z-depth-4 right">
+                <i class="material-icons">add</i>
+              </a>
+              <h5 class="card-title grey-text text-darken-4">{{user.firstname}} {{user.lastname}}</h5>
+              <p>
+                <i class="material-icons">perm_identity</i> {{user.username}}</p>
+              <p>
+                <i class="material-icons">account_balance</i> {{user.gameLevel}}</p>
+              <p>
+                <i class="material-icons">pie_chart</i> {{user.gameStyle}}</p>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
