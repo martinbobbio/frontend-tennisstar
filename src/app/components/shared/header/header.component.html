@@ -74,7 +74,7 @@
       <ul class="sub-links">
         <li><a href="/profile" >Ver perfil</a></li>
         <li><a [routerLink]="['/completePerfil']">Editar perfil</a></li>
-        <li><a href="#">Cambiar contraseña</a></li>
+        <li><a (click)="changuePassword()" class="pointer">Cambiar contraseña</a></li>
         <li><a (click)="viewFriends()" class="pointer">Lista de amigos</a></li>
         <li><a (click)="logout()" class="pointer">Salir</a></li>
       </ul>

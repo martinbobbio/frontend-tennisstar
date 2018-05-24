@@ -238,6 +238,79 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  changuePassword(){
+
+    let textHtml = `
+    <br>
+    <div class="row">
+      <div class='input-field col s12'>
+        <input type='password' id="new-pass"/>
+        <label>Contraseña nueva</label>
+      </div>
+      <div class='input-field col s12'>
+        <input type='password' id="pass1"/>
+        <label>Contraseña anterior</label>
+      </div>
+      <div class='input-field col s12'>
+        <input type='password' id="pass2"/>
+        <label>Repite la contraseña anterior</label>
+      </div>
+      <div class="col s12">
+        <a id="changePassword" class="waves-effect waves-light btn green">Cambiar contraseña</a>
+      </div>
+    </div>
+    `;
+
+    swal({
+      title: "Cambiar contraseña", 
+      html: textHtml,  
+      showConfirmButton: false,
+      showCloseButton: true
+    });
+
+    $("#changePassword").on('click', () => {
+
+      let newPass = $("#new-pass")[0].value;
+      let pass1 = $("#pass1")[0].value;
+      let pass2 = $("#pass2")[0].value;
+      
+      let data = {
+        newPass: newPass,
+        pass1: pass1,
+        pass2: pass2,
+      }
+
+      this.userService.changePassword(data).subscribe(
+        (response)=>{
+          swal.close();
+          let status = response.data[0];
+          if(status == 1){
+            swal({
+              title: "Éxito", 
+              text: "Se ha cambiado tu contraseña",
+              type: "success",  
+              showConfirmButton: false,
+              showCloseButton: true
+            });
+          }else if(status == 0){
+            swal({
+              title: "Error", 
+              text: "Las contraseñas no coinciden",
+              type: "error",  
+              showConfirmButton: false,
+              showCloseButton: true
+            });
+          }
+          
+        }
+      );
+
+      
+      
+    });
+    
+  }
+
   chargueEvents(){
 
     this.matchService.getMatchs().subscribe(

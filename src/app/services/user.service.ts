@@ -101,6 +101,24 @@ export class UserService {
 
   }
 
+  changePassword(formData){
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('id', localStorage.getItem("id_user"));
+    urlSearchParams.append('newPass', formData.newPass);
+    urlSearchParams.append('pass1', formData.pass1);
+    urlSearchParams.append('pass2', formData.pass2);
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/user/change-password`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+  }
+
   getAllUsers(){
     
     let headers = new Headers();
