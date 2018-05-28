@@ -57,7 +57,8 @@ export class HeaderComponent implements OnInit {
       swal({
         html: this.requestFriendsHtml+this.requestMatchHtml,
         confirmButtonText: "Volver", 
-        confirmButtonColor: "#ff9800"
+        confirmButtonColor: "#ff9800",
+        showCloseButton: true,
       });
 
       let this_aux = this;
@@ -181,7 +182,8 @@ export class HeaderComponent implements OnInit {
       swal({
         html: this.matchHtml,  
         confirmButtonText: "Volver", 
-        confirmButtonColor: "#ff9800"
+        confirmButtonColor: "#ff9800",
+        showCloseButton: true,
       });
 
   }
@@ -192,9 +194,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.chargueRequests();
-    this.chargueEvents();
-
     this.isAdmin = localStorage.getItem("isAdmin");
     this.isNewUser = localStorage.getItem("new_user");
     var isMobile = window.matchMedia("only screen and (max-width: 576px)");
@@ -203,7 +202,6 @@ export class HeaderComponent implements OnInit {
     }
 
     this.username = localStorage.getItem("username");
-    
     
     setTimeout(()=> {
       var links = $('.links');
@@ -214,9 +212,9 @@ export class HeaderComponent implements OnInit {
       });
     }, 1);
 
-    
+    this.chargueRequests();
+    this.chargueEvents();
 
-    
     if (this.auth.userProfile) {
       this.profile = this.auth.userProfile;
     } else {
@@ -257,6 +255,13 @@ export class HeaderComponent implements OnInit {
       </div>
       <div class="col s12">
         <a id="changePassword" class="waves-effect waves-light btn green">Cambiar contraseña</a>
+        <div id="loader" class="row" style="display:none;">
+          <div class="progress">
+            <div class="col s12">
+              <div class="indeterminate"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     `;
@@ -269,6 +274,9 @@ export class HeaderComponent implements OnInit {
     });
 
     $("#changePassword").on('click', () => {
+
+      $("#changePassword").fadeOut();
+      $("#loader").fadeIn();
 
       let newPass = $("#new-pass")[0].value;
       let pass1 = $("#pass1")[0].value;
@@ -312,6 +320,11 @@ export class HeaderComponent implements OnInit {
   }
 
   chargueEvents(){
+
+    setTimeout(()=> {
+      $("#btn-event").fadeOut();
+      $("#load-events").fadeIn();
+    }, 1);
 
     this.matchService.getMatchs().subscribe(
       (response)=>{
@@ -440,14 +453,13 @@ export class HeaderComponent implements OnInit {
               if((m.type == "Singles" && m.count == 2) || (m.type == "Dobles" && m.count == 4)){
                 this.matchHtml += `
                 <div class="card-action white">
-                  <a style="margin-right:0px;" id="${m.idMatch}" class="acceptRequestFriend green-text pointer">Subir resultado</a>
+                  <a style="margin-right:0px;" id="${m.idMatch}" class="uploadResult green-text pointer">Subir resultado</a>
                 </div>
                 `
               }
               this.matchHtml += ` 
           </div>
             `
-
         }
       }
 
@@ -455,11 +467,146 @@ export class HeaderComponent implements OnInit {
         window.location.href = "/profile/"+this.id;
       });
 
+      $(document).on('click', ".uploadResult", function(e) {
+
+        let id_match = e.target.id;
+        swal.close();
+
+        let textHtml = `<br>
+        <div class="row">
+          <div class="input-field col s4">
+            <input id="set1a" type="number" min=0 max=7 class="validate">
+            <label for="set1a">Primer set tuyo</label>
+          </div>
+          <div class="input-field col s4">
+            <input id="set2a" type="number" min=0 max=7 class="validate">
+            <label for="set2a">Segundo set tuyo</label>
+          </div>
+          <div class="input-field col s4">
+            <input id="set3a" type="number" min=0 max=7 class="validate">
+            <label for="set3a">Tercer set tuyo</label>
+          </div>
+          <div class="input-field col s4">
+            <input id="set1b" type="number" min=0 max=7 class="validate">
+            <label for="set1b">Primer set rival</label>
+          </div>
+          <div class="input-field col s4">
+            <input id="set2b" type="number" min=0 max=7 class="validate">
+            <label for="set2b">Segundo set rival</label>
+          </div>
+          <div class="input-field col s4">
+            <input id="set3b" type="number" min=0 max=7 class="validate">
+            <label for="set3b">Tercer set rival</label>
+          </div>
+          <div class="col s12">
+            <div id="loaderMatch" class="progress" style="display:none;">
+                <div class="indeterminate"></div>
+            </div>
+            <a id="buttonUpload" class="uploadScore waves-effect waves-light btn green">Subir</a>
+            <br><br>
+            <span id="warning-score" class="red-text"></span>
+          </div>
+        </div>
+        `
+
+        swal({
+          title: "Subir resultado", 
+          html: textHtml,  
+          showConfirmButton: false,
+          showCloseButton: true
+        });
+
+        $(document).on('click', ".uploadScore", function() {
+          let set1a = "";
+          let set1b = "";
+          let set1c = "";
+          let set2a = "";
+          let set2b = "";
+          let set2c = "";
+          let win = false;
+
+          set1a = $("#set1a")[0]["value"];
+          set1b = $("#set2a")[0]["value"];
+          set1c = $("#set3a")[0]["value"];
+          set2a = $("#set1b")[0]["value"];
+          set2b = $("#set2b")[0]["value"];
+          set2c = $("#set3b")[0]["value"];
+
+          if(set1a == "" || set1b == "" || set2a == "" || set2b == ""){
+            $("#warning-score").text("*El primer y segundo set deben ser completados");
+            return;
+          }
+          if((set1a == set2a) || (set1b == set2b) || (set1c == set2c && set1c != "" && set2c != "")){
+            $("#warning-score").text("*El set no puede terminar empatado");
+            return;
+          }
+          if(Number(set1a) > 7){
+            $("#warning-score").text("*La máxima cantidad de games son 6 o 7(tiebreak)");
+            return;
+          }
+          if(set1a > set2a && set2b > set1b && set1c == "" && set2c == ""){
+            $("#warning-score").text("Set iguales, completar el 3er set");
+            return;
+          }
+          if(set2a > set1a && set1b > set2b && set1c == "" && set2c == ""){
+            $("#warning-score").text("Set iguales, completar el 3er set");
+            return;
+          }
+          if(set1a > set2a && set1b > set2b){
+            win = true;
+          }else if(set1c > set2c && set1c != "" && set2c != "" && ((set1a > set2a && set1b < set2b) || (set1a < set2a && set1b > set2b))){
+            win = true;
+          }
+
+          $("#warning-score").text("");
+          $("#buttonUpload").fadeOut();
+          $("#loaderMatch").fadeIn();
+
+          let data = {
+            set1a: set1a,
+            set1b: set1b,
+            set1c: set1c,
+            set2a: set2a,
+            set2b: set2b,
+            set2c: set2c,
+            idMatch: id_match,
+            win:win
+          }
+    
+          this_aux.matchService.uploadScore(data).subscribe(
+            (response)=>{
+              this_aux.matchHtml = "";
+              this_aux.chargueEvents();
+              swal({
+                title: "Partido",
+                type:"success",
+                text: "Partido subido con exito!",
+                confirmButtonText: "Volver", 
+                confirmButtonColor: "#ff9800"
+              });
+            });
+
+        });
+
+  
       });
+
+      $("#btn-event").fadeIn();
+      $("#load-events").fadeOut();
+
+      });
+
+      
 
   }
 
   chargueRequests(){
+
+    setTimeout(()=> {
+      $("#btn-request").fadeOut();
+      $("#load-requests").fadeIn();
+    }, 1);
+
     this.requestFriendService.getRequests().subscribe(
       (response)=>{
           
@@ -493,6 +640,9 @@ export class HeaderComponent implements OnInit {
               `
             }
           }
+
+          $("#btn-request").fadeIn();
+          $("#load-requests").fadeOut();
 
           return;
       })
@@ -529,6 +679,9 @@ export class HeaderComponent implements OnInit {
                 `
               }
             }
+
+            $("#btn-request").fadeIn();
+            $("#load-requests").fadeOut();
   
             return;
         })

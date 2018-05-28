@@ -25,6 +25,30 @@ export class MatchService {
     )
   }
 
+  uploadScore(formData){
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+
+    urlSearchParams.append('id_user', localStorage.getItem("id_user"));
+    urlSearchParams.append('id_match', formData.idMatch);
+    urlSearchParams.append('set1a', formData.set1a);
+    urlSearchParams.append('set1b', formData.set1b);
+    urlSearchParams.append('set1c', formData.set1c);
+    urlSearchParams.append('set2a', formData.set2a);
+    urlSearchParams.append('set2b', formData.set2b);
+    urlSearchParams.append('set2c', formData.set2c);
+    urlSearchParams.append('win', formData.win);
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/match/upload-score`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+  }
+
   getMatchs(){
 
     let headers = new Headers();

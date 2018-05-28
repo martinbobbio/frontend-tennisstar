@@ -11,11 +11,33 @@
         <a (click)="openRequests()" id="btn-request" class="tooltipped" data-position="bottom" data-tooltip="Solicitudes">
           <i class="material-icons">group_add</i>
         </a>
+        <div id="load-requests" class="preloader-wrapper small active loaders-sm" style="margin-right: 10px;">
+          <div class="spinner-layer spinner-red-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
       </li>
       <li *ngIf="isNewUser != null" class="hide-on-small-only">
         <a class="tooltipped" id="btn-event" (click)="viewEvents()" data-position="bottom" data-tooltip="Eventos">
           <i class="material-icons">event</i>
         </a>
+        <div id="load-events" class="preloader-wrapper small active loaders-sm">
+          <div class="spinner-layer spinner-red-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
       </li>
       <li *ngIf="isNewUser != null" class="hide-on-small-only">
         <a href="/explorar" class="tooltipped" data-position="bottom" data-tooltip="Explorar mapa">
