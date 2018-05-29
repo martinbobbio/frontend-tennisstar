@@ -2,33 +2,42 @@
 
 <div class="container">
   <div class="row">
+      <form>
       <div class="col s12 m12">
         <h3 class="orange-text">Buscar usuarios</h3>
       </div>
       <div class="input-field col s6">
-        <input id="password" type="text">
-        <label for="password">Buscar usuario</label>
+        <input id="search" type="text">
+        <label for="search">Buscar usuarios</label>
       </div>
       <div class="col s2" style="margin-top:20px;">
-          <button class="waves-effect waves-light btn gradient-45deg-orange-teal z-depth-4 mr-1">Buscar <i class="material-icons right">search</i></button>
+          <button (click)="searchUsers()" class="waves-effect waves-light btn gradient-45deg-orange-teal z-depth-4 mr-1">Buscar <i class="material-icons right">search</i></button>
       </div>
+      <div *ngIf="users" class="col s12">
+        <p class="orange-text bold" id="search-count" style="display:none">Usuarios encontrados: {{users.length}}</p>
+      </div>
+      </form>
   </div>
 
   <div class="row">
-    <div *ngFor="let user of users" class="col m3 s6">
-        <div id="profile-card" class="card">
-            <div class="card-content" style="max-height: 500px !important">
-              <img src="{{path}}{{user.path}}" style="padding:0 30px;" class="circle responsive-img card-profile-image padding-2">
+    <div *ngFor="let user of users" class="col m4 s12">
+        <div id="profile-card" style="height:450px;" class="card">
+            <div class="card-content">
+              <a href="profile/{{user.id}}">
+                <img src="{{path}}{{user.path}}" style="padding:0 30px;" class="circle responsive-img card-profile-image padding-2">
+              </a>
               <a *ngIf="!user.isFriend" class="btn-floating btn-move-up waves-effect waves-light green z-depth-4 right">
                 <i class="material-icons">add</i>
               </a>
-              <h5 class="card-title grey-text text-darken-4">{{user.firstname}} {{user.lastname}}</h5>
+              <a href="profile/{{user.id}}">
+                <h5 class="card-title grey-text text-darken-4">{{user.username}}</h5>
+              </a>
               <p>
-                <i class="material-icons">perm_identity</i> {{user.username}}</p>
+                <i class="material-icons">perm_identity</i> {{user.firstname}} {{user.lastname}}</p>
               <p>
-                <i class="material-icons">account_balance</i> {{user.gameLevel}}</p>
+                <i class="material-icons">account_balance</i> {{user.gameLevel}} - {{user.gameStyle}}</p>
               <p>
-                <i class="material-icons">pie_chart</i> {{user.gameStyle}}</p>
+                <i class="material-icons">pie_chart</i> {{user.level}}</p>
             </div>
           </div>
     </div>

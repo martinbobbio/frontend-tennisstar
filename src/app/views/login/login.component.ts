@@ -30,6 +30,41 @@ export class LoginComponent implements OnInit {
 
   }
 
+  newPass(){
+
+    let textHtml = `
+    <br>
+    <div class="row">
+      <div class='input-field col s12 m12'>
+        <input type='text' id="email"/>
+        <label>Email</label>
+      </div>
+      <div class="col s12">
+        <a id="changePassword" class="waves-effect waves-light btn green">Enviar mail</a>
+        <div id="loader" class="row" style="display:none;">
+          <div class="progress">
+            <div class="col s12">
+              <div class="indeterminate"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `;
+
+    swal({
+      title: "Olvido su contraseña?", 
+      html: textHtml,
+      showConfirmButton: false,
+      showCloseButton: true
+    });
+
+    $("#changePassword").on('click', () => {
+      
+    });
+
+  }
+
   login(){
     this.authService.login();
   }

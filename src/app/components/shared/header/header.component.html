@@ -1,6 +1,6 @@
 <nav class="green">
   <div class="nav-wrapper container">
-    <a href="#!" class="brand-logo">Tennis-Star</a>
+    <a href="" class="brand-logo">Tennis-Star</a>
     <ul class="right">
       <li *ngIf="!mobile" class="pointer">
         <a href="/profile" class="tooltipped" data-position="bottom" data-tooltip="Ver perfil">
@@ -75,14 +75,15 @@
     </div>
   </div>
 
+  
+  <div *ngIf="isNewUser" class="center-align">
+  <img src="{{path}}{{pathImg}}" class="circle" height="50" width="50">
   <p *ngIf="username != null && mobile" class="bold center-align" style="margin-bottom:20px;">
       <a class="white-text" href="/profile">
         {{username}}
       </a>
   </p>
-  <div *ngIf="isNewUser" class="center-align">
-  <img src="{{path}}{{pathImg}}" class="circle" height="50" width="50">
-  <p *ngIf="isAdmin == 1" class="bold">ADMIN</p>
+  <p *ngIf="isAdmin == 1" class="bold black-text">ADMIN</p>
   </div>
 
   <div class="sidebar-links">

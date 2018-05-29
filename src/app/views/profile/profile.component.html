@@ -52,7 +52,14 @@
           </div>
         </div>
         <div class="card-content container">
-          <div class="row">                    
+          <div class="row">
+            <div class="col m12 s12">
+            <hr>
+            <h4 *ngIf="!mobile" class="bold white-text">{{user.level}}</h4>
+            <h5 *ngIf="mobile" class="bold white-text">Nivel 5 - Amateur TennisStar (20 puntos)</h5>
+            <hr>
+            <br>
+            </div>                 
             <div class="col m3 s12">                        
                 <h4 class="card-title bold white-text">{{user.firstname}} {{user.lastname}}</h4>
                 <p class="medium-small bold black-text">Tenista</p>                        
@@ -70,6 +77,7 @@
                 <p class="medium-small bold black-text">Tipo de reves</p>                 
             </div>                
           </div>
+          
         </div>
         
       </div>
@@ -126,15 +134,185 @@
   </div>
 
 
-  <div class="container">
+  <div *ngIf="user" class="container">
 
     <collapsible-list [type]="'expandable'" style="margin-top:50px;">
-    <collapsible-list-item >
+
+    <collapsible-list-item *ngIf="user_aux && compareUser">
+        <collapsible-header class="waves-effect green">
+            <h4 class="white-text">Frente a frente </h4>
+        </collapsible-header>
+        <collapsible-body [expanded]="true">
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>{{user.username}}</th>
+                        <th>{{user_aux.username}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="bold">Nivel</td>
+                        <td>{{user.level}}</td>
+                        <td>{{user_aux.level}}</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Categoria</td>
+                        <td>{{user.gameLevel}} - {{user.gameStyle}}</td>
+                        <td>{{user_aux.gameLevel}} - {{user_aux.gameStyle}}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #d0d0d0;">
+                        <td class="bold">Edad</td>
+                        <td class="black-text">{{user.age}} años</td>
+                        <td>{{user_aux.age}} años</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Partido Singles</td>
+                        <td><span class="green-text">{{user.countSinglesWin}}W</span> <span class="red-text">{{user.countSinglesLoss}}L</span> ({{user.percentSingles}}%)</td>
+                        <td><span class="green-text">{{user_aux.countSinglesWin}}W</span> <span class="red-text">{{user_aux.countSinglesLoss}}L</span> ({{user_aux.percentSingles}}%)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #d0d0d0;">
+                        <td class="bold">Partido Dobles</td>
+                        <td><span class="green-text">{{user.countDoblesWin}}W</span> <span class="red-text">{{user.countDoblesLoss}}L</span> ({{user.percentDobles}}%)</td>
+                        <td><span class="green-text">{{user_aux.countDoblesWin}}W</span> <span class="red-text">{{user_aux.countDoblesLoss}}L</span> ({{user_aux.percentDobles}}%)</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Torneo pequeño</td>
+                        <td>
+                            Semifinal: <br>
+                            Final: <br>
+                            Campeón:
+                        </td>
+                        <td>
+                            Semifinal: <br>
+                            Final: <br>
+                            Campeón:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Torneo mediano</td>
+                        <td>
+                            Cuartos de final: <br>
+                            Semifinal: <br>
+                            Final: <br>
+                            Campeón:
+                        </td>
+                        <td>
+                            Cuartos de final: <br>
+                            Semifinal: <br>
+                            Final: <br>
+                            Campeón:
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #d0d0d0;">
+                        <td class="bold" >Torneo grande</td>
+                        <td>
+                            Octavos de final: <br>
+                            Cuartos de final: <br>
+                            Semifinal: <br>
+                            Final: <br>
+                            Campeón:
+                        </td>
+                        <td>
+                            Octavos de final: <br>
+                            Cuartos de final: <br>
+                            Semifinal: <br>
+                            Final: <br>
+                            Campeón:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Frente a Frente</td>
+                        <td>
+                            <div class="row">
+                                <div *ngIf="!mobile" class="col m2">
+                                    <img src="{{path}}{{user.path}}" style="margin-top:15px;" alt="profile image" class="circle z-depth-2 white" width="50" height="50">
+                                </div>
+                                <div class="col m10">
+                                    <p>Singles {{user.h2hSingles}}</p>
+                                    <p>Dobles {{user.h2hDobles}}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div *ngIf="!mobile" class="col m2">
+                                    <img src="{{path}}{{user_aux.path}}" style="margin-top:15px;" alt="profile image" class="circle z-depth-2 white" width="50" height="50">
+                                </div>
+                                <div class="col m10">
+                                    <p>Singles {{user_aux.h2hSingles}}</p>
+                                    <p>Dobles {{user_aux.h2hDobles}}</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </collapsible-body>
+    </collapsible-list-item>
+
+    <collapsible-list-item *ngIf="user.userMatch">
         <collapsible-header class="waves-effect green">
             <h4 class="white-text">Partidos </h4>
         </collapsible-header>
         <collapsible-body [expanded]="true">
-        <p>Lista de partidos</p>
+        <p class="bold">Singles</p>
+            <ul class="collection">
+                <ng-container *ngFor="let um of user.userMatch">
+                <li *ngIf="um.matchType == 'Singles'" class="collection-item">
+                    <div class="row">
+                        <div class="col s6">
+                            <p style="margin-bottom:7px !important;">{{um.matchTitle}}</p>
+                            <p style="margin-top:0px !important;">
+                                <ng-container *ngIf="um.win == true">
+                                    <span class="green-text bold">W</span>
+                                </ng-container>
+                                <ng-container *ngIf="um.win == false">
+                                    <span class="red-text bold">L</span>
+                                </ng-container>
+                                {{um.score}}
+                            </p>
+                        </div>
+                        <div class="col s6 center-align">
+                            <p style="margin-bottom:7px !important;">
+                                <a href="profile/{{um.team1aId}}" class="bold black-text">{{um.team1a}}</a> 
+                                vs 
+                                <a href="profile/{{um.team2aId}}" class="bold black-text">{{um.team2a}}</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                </ng-container>
+            </ul>
+            <p class="bold">Dobles</p>
+            <ul class="collection">
+                <ng-container *ngFor="let um of user.userMatch">
+                <li *ngIf="um.matchType == 'Dobles'" class="collection-item">
+                    <div class="row">
+                        <div class="col s6">
+                            <p style="margin-bottom:7px !important;">{{um.matchTitle}}</p>
+                            <p style="margin-top:0px !important;">
+                                <ng-container *ngIf="um.win == true">
+                                    <span class="green-text bold">W</span>
+                                </ng-container>
+                                <ng-container *ngIf="um.win == false">
+                                    <span class="red-text bold">L</span>
+                                </ng-container>
+                                {{um.score}}
+                            </p>
+                        </div>
+                        <div class="col s6 center-align">
+                            <p style="margin-bottom:7px !important;">
+                                <a href="profile/{{um.team1aId}}" class="bold black-text">{{um.team1a}}</a> - <a href="profile/{{um.team1bId}}" class="bold black-text">{{um.team1b}}</a><br>
+                                vs<br>
+                                <a href="profile/{{um.team2aId}}" class="bold black-text">{{um.team2a}}</a> - <a href="profile/{{um.team2bId}}" class="bold black-text">{{um.team2b}}</a><br>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                </ng-container>
+            </ul>
         </collapsible-body>
     </collapsible-list-item>
     

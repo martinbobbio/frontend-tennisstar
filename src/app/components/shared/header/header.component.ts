@@ -241,9 +241,13 @@ export class HeaderComponent implements OnInit {
     let textHtml = `
     <br>
     <div class="row">
-      <div class='input-field col s12'>
+      <div class='input-field col s12 m6'>
         <input type='password' id="new-pass"/>
         <label>Contraseña nueva</label>
+      </div>
+      <div class='input-field col s12 m6'>
+        <input type='password' id="new-pass2"/>
+        <label>Repite contraseña nueva</label>
       </div>
       <div class='input-field col s12'>
         <input type='password' id="pass1"/>
@@ -279,9 +283,23 @@ export class HeaderComponent implements OnInit {
       $("#loader").fadeIn();
 
       let newPass = $("#new-pass")[0].value;
+      let newPass2 = $("#new-pass2")[0].value;
       let pass1 = $("#pass1")[0].value;
       let pass2 = $("#pass2")[0].value;
+
+      if(newPass == "" && newPass2 == "" && pass1 == "" && pass2 == ""){
+        swal({
+          title: "Cambio de contraseña", 
+          text: "Los campos no pueden estar vacios",
+          type: "info",  
+          showConfirmButton: false,
+          showCloseButton: true
+        });
+        return;
+      }
       
+      if(newPass == newPass2){
+
       let data = {
         newPass: newPass,
         pass1: pass1,
@@ -303,7 +321,7 @@ export class HeaderComponent implements OnInit {
           }else if(status == 0){
             swal({
               title: "Error", 
-              text: "Las contraseñas no coinciden",
+              text: "Las contraseñas anteriores no coinciden",
               type: "error",  
               showConfirmButton: false,
               showCloseButton: true
@@ -312,6 +330,16 @@ export class HeaderComponent implements OnInit {
           
         }
       );
+
+    }else{
+      swal({
+        title: "Error", 
+        text: "Las contraseñas nuevas no coinciden",
+        type: "error",  
+        showConfirmButton: false,
+        showCloseButton: true
+      });
+    }
 
       
       

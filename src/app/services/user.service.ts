@@ -135,4 +135,21 @@ export class UserService {
 
   }
 
+  getAllUsersFilter(filter){
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('id', localStorage.getItem("id_user"));
+    urlSearchParams.append('filter', filter);
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/user/get-all-users-filter`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+
+  }
+
 }

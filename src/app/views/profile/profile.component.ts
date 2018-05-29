@@ -96,6 +96,25 @@ export class ProfileComponent implements OnInit {
     this.userService.getProfile(this.user_id).subscribe(
       (response)=>{
         this.user = response.data[0];
+
+        let percentSingles = 0;
+        if(this.user["countSinglesLoss"]){
+          if(this.user["countSinglesLoss"] != 0){
+            percentSingles = Math.trunc((this.user["countSinglesWin"] / (this.user["countSinglesWin"] + this.user["countSinglesLoss"])) * 100);
+          }
+        }else{
+          percentSingles = 100;
+        }
+        this.user["percentSingles"] = percentSingles;
+        let percentDobles = 0;
+        if(this.user["countDoblesLoss"]){
+          if(this.user["countDoblesLoss"] != 0){
+            percentDobles = Math.trunc((this.user["countDoblesWin"] / (this.user["countDoblesWin"] + this.user["countDoblesLoss"])) * 100);
+          }
+        }else{
+          percentDobles = 100;
+        }
+        this.user["percentDobles"] = percentDobles;
         if(this.user.friends){
           this.user.friends.forEach(friend => {
             if(friend.id_user == localStorage.getItem("id_user")){
@@ -138,6 +157,54 @@ export class ProfileComponent implements OnInit {
           this.userService.getProfile(Number(localStorage.getItem("id_user"))).subscribe(
             (response_aux)=>{
               this.user_aux = response_aux.data[0];
+              let percentSingles = 0;
+              console.log(this.user_aux);
+              if(this.user_aux["countSinglesLoss"]){
+                if(this.user_aux["countSinglesLoss"] != 0){
+                  percentSingles = Math.trunc((this.user_aux["countSinglesWin"] / (this.user_aux["countSinglesWin"] + this.user_aux["countSinglesLoss"])) * 100);
+                }
+              }else{
+                percentSingles = 100;
+              }
+              this.user_aux["percentSingles"] = percentSingles;
+              let percentDobles = 0;
+              if(this.user_aux["countDoblesLoss"]){
+                if(this.user_aux["countDoblesLoss"] != 0){
+                  percentDobles = Math.trunc((this.user_aux["countDoblesWin"] / (this.user_aux["countDoblesWin"] + this.user_aux["countDoblesLoss"])) * 100);
+                }
+              }else{
+                percentDobles = 100;
+              }
+              this.user_aux["percentDobles"] = percentDobles;
+              let uWinSingles = 0;
+              let uaWinSingles = 0;
+              let uWinDobles = 0;
+              let uaWinDobles = 0;
+              for(let um of this.user.userMatch){
+                if(um.matchType == "Singles"){
+                  if(um.team2aId == this.user_aux.id){
+                    if(um.win){
+                      uWinSingles++;
+                    }else{
+                      uaWinSingles++;
+                    }
+                  }
+                }
+                if(um.matchType == "Dobles"){
+                  if(um.team2aId == this.user_aux.id){
+                    if(um.win){
+                      uWinDobles++;
+                    }else{
+                      uaWinDobles++;
+                    }
+                  }
+                }
+              }
+              this.user["h2hSingles"] = uWinSingles;
+              this.user_aux["h2hSingles"] = uaWinSingles;
+              this.user["h2hDobles"] = uWinDobles;
+              this.user_aux["h2hDobles"] = uaWinDobles;
+
                 this.radarChartData = [
                   {
                     data: [this.user.forehand, this.user.backhand, this.user.service, this.user.volley, this.user.resistence],
@@ -192,7 +259,8 @@ export class ProfileComponent implements OnInit {
     swal({
       title: "Amigos de "+this.user.username, 
       html: textHtml,  
-      showConfirmButton: false 
+      showConfirmButton: false, 
+      showCloseButton: true,
     });
 
   }

@@ -25,11 +25,18 @@ export class HomeExplorarComponent implements OnInit {
   clubPhotoHtml="";
   clubRatingHtml="";
 
+  mobile = false;
+
   path:string = environment.backPathImage;
 
   constructor(public userService:UserService,public mapService:MapService,public tournamentService:TournamentService, public requestFriendService:RequestFriendService, public matchService:MatchService) { }
 
   ngOnInit() {
+
+    var isMobile = window.matchMedia("only screen and (max-width: 576px)");
+    if (isMobile.matches) {
+        this.mobile = true;
+    }
 
     this.userService.getUsersRandom().subscribe(
       (response)=>{

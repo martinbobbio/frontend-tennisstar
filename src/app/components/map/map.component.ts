@@ -217,6 +217,9 @@ export class MapComponent implements OnInit {
 
   seeMatch(match){
 
+    let this_aux = this;
+
+    let buttonAdd = false;
     let textHtml = `<br>`;
     for(let match_aux of this.matchs){
       if(match_aux["googlePlaceId"] == match["googlePlaceId"]){
@@ -225,6 +228,7 @@ export class MapComponent implements OnInit {
         if(match_aux["type"] == "Singles"){
           if(match_aux["player2AId"] == null){
           playersText = `${match_aux["player1AUsername"]} está esperando un jugador más`;
+          buttonAdd = true;
           }else{
           playersText = `${match_aux["player1AUsername"]} vs ${match_aux["player2AUsername"]}`;
           }
@@ -237,17 +241,21 @@ export class MapComponent implements OnInit {
           if(player1A != null && player1B != null && player2A != null && player2B != null){
             playersText = `${player1A} y ${player1B} VS ${player2A} y ${player2B}`;
           }else{
-            playersText = `${player1A}`
+            playersText = "";
+            if(player1A != null){
+              playersText += ` ${player2A}`
+            }
             if(player2A != null){
-              playersText += `, ${player2A}`
+              playersText += ` ${player2A}`
             }
             if(player1B != null){
-              playersText += `, ${player1B}`
+              playersText += ` ${player1B}`
             }
             if(player2B != null){
-              playersText += `, ${player2B}`
+              playersText += ` ${player2B}`
             }
             playersText += ` esperando...`;
+            buttonAdd = true;
           }
         }
         textHtml += `
@@ -257,12 +265,40 @@ export class MapComponent implements OnInit {
             <p><span class="bold">${match_aux.creator}:</span> ${match_aux.title}</p>
             <p class="fs-14">${match_aux.date}</p>
             <p class="orange-text">${playersText}</p>
+            `
+            if(buttonAdd && match_aux.player1AId != localStorage.getItem("id_user") && match_aux.player1BId != localStorage.getItem("id_user")
+              && match_aux.player2BId != localStorage.getItem("id_user") && match_aux.player2AId != localStorage.getItem("id_user")){
+              textHtml += `<a id="${match_aux.id_m}" class="addMatch waves-effect waves-light btn green">Participar</a>`
+            }
+            textHtml += `
           </div>
         </div>
         <hr>
         `;
       }
+      
     }
+
+    $(document).on('click', ".addMatch", function() {
+      let idMatch = $(".addMatch")[0].id;
+      $(".addMatch").fadeOut();
+      this_aux.matchService.checkMatch(idMatch).subscribe(
+        (response)=>{
+          swal({
+            title: "Te has unido al partido!",
+            type: "success",
+            confirmButtonText: "Volver", 
+            confirmButtonColor: "#ff9800"
+         })
+         setTimeout(function() {
+          location.href = "/explorar/verPartidos";
+         }, 2500);
+        } ,
+      )
+      return;
+    });
+
+    
 
     swal({
       title: "Partidos", 

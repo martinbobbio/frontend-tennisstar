@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { environment } from '../../../environments/environment';
 
+import * as swal from 'sweetalert2';
+
 @Component({
   selector: 'app-search-users',
   templateUrl: './search-users.component.html',
@@ -20,7 +22,30 @@ export class SearchUsersComponent implements OnInit {
     this.userService.getAllUsers().subscribe(
       (response)=>{
         this.users = response.data[0];
-        console.log(this.users);
+      } 
+    )
+  }
+  
+  searchUsers(){
+
+    let filter = $("#search")[0]["value"];
+
+    if(filter == ""){
+      swal({
+        title: 'Busqueda',
+        text: 'El campo de busqueda esta vacio',
+        type: 'info',
+        showCloseButton: true
+      })
+      return;
+    }
+
+    this.userService.getAllUsersFilter(filter).subscribe(
+      (response)=>{
+        $("#search-count").fadeIn();
+        this.users = null;
+        this.users = response.data[0];
+        alert(this.users.length);
       } 
     )
   }

@@ -85,24 +85,24 @@
                     </b></p>
                     <p>
                         <b><a class="pointer black-text" [routerLink]="['profile/'+match.player1AId]">{{match.player1AUsername}}</a></b> 
-                        está esperando un jugador
+                        está esperando un jugador<br>{{match.date}}
                     </p>
                     <a (click)="askMatch(match.id)" id="icon-add-{{match.id}}" class="secondary-content pointer"><i class="material-icons orange-text">add</i></a>
                     <div id="loader-match-{{match.id}}" style="position:absolute; top:10%; right: 5%;display:none">
                         <loader></loader>
                     </div>
                 </ng-container>
-                <ng-container *ngIf="match.type == 'Dobles' && (match.player1BId == null || match.player2BId == null)">
+                <ng-container *ngIf="match.type == 'Dobles' && (match.player1BId == null || match.player2BId == null || match.player1AId == null)">
                     <i class="material-icons orange circle">search</i>
                     <p>Dobles - <b>
                         <span *ngIf="match.isPrivate != 1" class="green-text">Público</span>
                         <span *ngIf="match.isPrivate == 1" class="red-text">Privado</span>
                     </b></p>
-                    <b><a class="pointer black-text fs-11" [routerLink]="['profile/'+match.player1AId]">{{match.player1AUsername}}</a>, </b>
-                    <b><a class="pointer black-text fs-11" [routerLink]="['profile/'+match.player2AId]">{{match.player2AUsername}}</a></b>
-                    <b *ngIf="match.player1BId != null">, <a class="pointer black-text fs-11" [routerLink]="['profile/'+match.player1BId]">{{match.player1BUsername}}</a></b>
-                    <b *ngIf="match.player2BId != null">, <a class="pointer black-text fs-11" [routerLink]="['profile/'+match.player2BId]">{{match.player2BUsername}}</a></b>
-                    <span class="fs-11">buscan jugadores</span>
+                    <b><a class="pointer black-text fs-11" [routerLink]="['profile/'+match.player1AId]">{{match.player1AUsername}}</a> </b>
+                    <b><a class="pointer black-text fs-11" [routerLink]="['profile/'+match.player2AId]">{{match.player2AUsername}}</a> </b>
+                    <b *ngIf="match.player1BId != null"> <a class="pointer black-text fs-11" [routerLink]="['profile/'+match.player1BId]">{{match.player1BUsername}}</a></b>
+                    <b *ngIf="match.player2BId != null"> <a class="pointer black-text fs-11" [routerLink]="['profile/'+match.player2BId]">{{match.player2BUsername}}</a></b>
+                    <span class="fs-11">buscando..<br>{{match.date}}</span>
                     <a (click)="askMatch(match.id)" id="icon-add-{{match.id}}" class="secondary-content pointer"><i class="material-icons orange-text">add</i></a>
                     <div id="loader-match-{{match.id}}" style="position:absolute; top:10%; right: 5%;display:none">
                         <loader></loader>
@@ -144,7 +144,8 @@
                         <p class="bold">{{tournament.title}}</p>
                     </div>
                     <div class="col m6 s12 right-align">
-                        <a href="tournament/{{tournament.id}}" class="btn-flat green-text bold">Ver info</a>
+                        <a *ngIf="!mobile" href="tournament/{{tournament.id}}" class="btn-flat green-text bold">Ver info</a>
+                        <a *ngIf="mobile" href="tournament/{{tournament.id}}" class="btn-flat green-text bold">Ver</a>
                     </div>
                     <div class="col s12">
                         <p>{{tournament.countStatus}}/{{tournament.countTotal}} jugadores</p>

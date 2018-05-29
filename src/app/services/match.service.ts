@@ -13,9 +13,20 @@ export class MatchService {
 
   getMatchRandom(){
 
-    return this.http.get(`${this.backUrl}/api/match/get-match-random`).map(
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+
+    urlSearchParams.append('id_user', localStorage.getItem("id_user"));
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/match/get-match-random`,body, {headers: headers}).map(
       (response) => response.json()
     )
+
+    
   }
 
   getAllMatchs(){
