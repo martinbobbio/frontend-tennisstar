@@ -23,11 +23,13 @@
     <div *ngFor="let user of users" class="col m4 s12">
         <div id="profile-card" style="height:450px;" class="card">
             <div class="card-content">
-              <a href="profile/{{user.id}}">
-                <img src="{{path}}{{user.path}}" style="padding:0 30px;" class="circle responsive-img card-profile-image padding-2">
-              </a>
-              <a *ngIf="!user.isFriend" class="btn-floating btn-move-up waves-effect waves-light green z-depth-4 right">
-                <i class="material-icons">add</i>
+              <div class="center-align">
+                <a href="profile/{{user.id}}">
+                  <img src="{{path}}{{user.path}}" class="card-profile-image padding-2" height="175px" width="175px">
+                </a>
+              </div>
+              <a *ngIf="!user.isFriend" id="button-add-{{user.id}}" style="margin-top:7px;" class="btn-floating btn-move-up waves-effect waves-light green z-depth-4 right">
+                <i class="material-icons" (click)="sendRequest(user.id)">add</i>
               </a>
               <a href="profile/{{user.id}}">
                 <h5 class="card-title grey-text text-darken-4">{{user.username}}</h5>

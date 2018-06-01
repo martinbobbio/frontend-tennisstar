@@ -10,7 +10,7 @@
         </ng-container>
       </agm-map>
     </div>
-    <div *ngIf="completeCharge" class="row absolute" style="top:0%;left:15%;width:80%">
+    <div *ngIf="completeCharge" id="display-map" class="row absolute" style="top:0%;left:15%;width:80%">
         <div class="col m6 no-margin-mobile" style="margin-top:50px;">
           <h2 *ngIf="isNewUser == null" class="orange-text text-darken-1 fs-38">Impulsado por los mejores jugadores del mundo.</h2>
           <h2 *ngIf="isNewUser && fullCount != 2" class="orange-text text-darken-1 fs-38">Solo faltan dos pasos. {{fullCount}}/2</h2>

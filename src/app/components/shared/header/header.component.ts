@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
+import { TournamentService } from '../../../services/tournament.service';
 import { MatchService } from '../../../services/match.service';
 import { environment } from '../../../../environments/environment';
 import { RequestFriendService } from '../../../services/request-friend.service';
@@ -18,7 +19,24 @@ declare let $: any;
 })
 export class HeaderComponent implements OnInit {
 
+  @HostListener("window:scroll", []) onWindowScroll() {
+    const scrollVertical = window.pageYOffset ||document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+    if(!this.mobile && scrollVertical > 600 && !this.openMenuScroll && $("nav").width() > 1350){
+      $(".sidebar-left-collapse").fadeIn();
+      this.openMenuScroll = true;
+      this.openMenu = true;
+    }
+    if(!this.mobile && scrollVertical < 600 && this.openMenuScroll && $("nav").width() > 1350){
+      $(".sidebar-left-collapse").fadeOut();
+      this.openMenuScroll = false;
+      this.openMenu = false;
+    }
+
+  }
+
   openMenu:boolean = false;
+  openMenuScroll = false;
   profile:any[];
   username:string;
   isAdmin;
@@ -38,6 +56,8 @@ export class HeaderComponent implements OnInit {
 
   matchs:any[];
   matchHtml:string = "";
+
+  myTournaments:any[];
 
   openAside(){
     if(!this.openMenu){
@@ -149,7 +169,8 @@ export class HeaderComponent implements OnInit {
           title: "Amigos", 
           html: textHtml,  
           confirmButtonText: "Volver", 
-          confirmButtonColor: "#ff9800"
+          confirmButtonColor: "#ff9800",
+          showCloseButton: true
         });
       });
 
@@ -188,7 +209,7 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  constructor(public auth:AuthService,public matchService:MatchService,public userService:UserService,public requestMatchService:RequestMatchService, public requestFriendService:RequestFriendService, public router:Router) {
+  constructor(public auth:AuthService,public tournamentService:TournamentService, public matchService:MatchService,public userService:UserService,public requestMatchService:RequestMatchService, public requestFriendService:RequestFriendService, public router:Router) {
     auth.handleAuthentication();
   }
 
@@ -212,6 +233,11 @@ export class HeaderComponent implements OnInit {
       });
     }, 1);
 
+    this.tournamentService.getMyTournaments().subscribe(
+      (response)=>{
+        this.myTournaments = response.data[0];
+      });
+
     this.chargueRequests();
     this.chargueEvents();
 
@@ -233,6 +259,51 @@ export class HeaderComponent implements OnInit {
       })
     }
     
+
+  }
+
+  adminTournament(){
+
+    let textHtml = `
+    <br>
+    <div class="row">
+    `
+    for (let t of this.myTournaments) {
+      textHtml += `
+      <div class="card green">
+        <div class="card-content left-align white-text">
+          <div class="col s8">
+          </div>
+          <div class="col s4">
+            <a href="/club/${t["googlePlaceId"]}" class="waves-effect waves-light btn black">Club</a>
+          </div>
+          <span class="card-x fs-19">${t["title"]}</span>
+          <br> <span class="bold fs-14">${t["date"]}</span>
+          <br><br>
+          <span class="bold fs-14">${t["clubTitle"]}</span>
+          <br>
+          <span class="bold fs-14">${t["countStatus"]}/${t["countTotal"]} Jugadores</span>
+        </div>
+        <div class="card-action white">
+          <a style="margin-right:0px;" href="/tournament/${t["id"]}" class="green-text pointer">Administrar</a>
+        </div>
+      </div>
+        `
+      }
+      textHtml += `
+    </div>
+    `
+    if(this.myTournaments.length == 0){
+      textHtml = "No has creado ningun torneo, crea uno y empeza a subir resultados!";
+    }
+
+    swal({
+      title: "Mis torneos", 
+      html: textHtml,  
+      showConfirmButton: false,
+      showCloseButton: true
+    });
+
 
   }
 
@@ -378,31 +449,31 @@ export class HeaderComponent implements OnInit {
                   this.matchHtml += `
                   <div class ="row">
                     <div class ="col s6">
-                      <img id="${m.player1AId}" src="${this_aux.path}${m.player1APath}" alt="z" class="circle pointer responsive-img goProfile">
+                      <img id="${m.player1AId}" src="${this_aux.path}${m.player1APath}" width="35px" height="35px" alt="z" class="circle pointer goProfile">
                     </div>
                     <div class ="col s6">
-                      <img id="${m.player2AId}" src="${this_aux.path}${m.player2APath}" alt="z" class="circle pointer responsive-img goProfile">
+                      <img id="${m.player2AId}" src="${this_aux.path}${m.player2APath}" width="35px" height="35px" alt="z" class="circle pointer goProfile">
                     </div>
                   </div>
                   `
                 }
                 if(m.type == "Singles" && m.count == 1){
                   this.matchHtml += `
-                    <img id="${m.player1AId}" src="${this_aux.path}${m.player1APath}" alt="z" class="circle pointer responsive-img goProfile">
+                    <img id="${m.player1AId}" src="${this_aux.path}${m.player1APath}" width="35px" height="35px" alt="z" class="circle pointer goProfile">
                   `
                 }
                 if(m.type == "Dobles" && m.count == 4){
                   this.matchHtml += `
                   <div class ="row">
                     <div class ="col s6">
-                      <img id="${m.player1AId}" src="${this_aux.path}${m.player1APath}" alt="z" class="circle pointer responsive-img goProfile">
+                      <img id="${m.player1AId}" src="${this_aux.path}${m.player1APath}" width="35px" height="35px" alt="z" class="circle pointer goProfile">
                       <br><br>
-                      <img id="${m.player2AId}" src="${this_aux.path}${m.player2APath}" alt="z" class="circle pointer responsive-img goProfile">
+                      <img id="${m.player2AId}" src="${this_aux.path}${m.player2APath}" width="35px" height="35px" alt="z" class="circle pointer goProfile">
                     </div>
                     <div class ="col s6">
-                      <img id="${m.player1BId}" src="${this_aux.path}${m.player1BPath}" alt="z" class="circle pointer responsive-img goProfile">
+                      <img id="${m.player1BId}" src="${this_aux.path}${m.player1BPath}" width="35px" height="35px" alt="z" class="circle pointer goProfile">
                       <br><br>
-                      <img id="${m.player2BId}" src="${this_aux.path}${m.player2BPath}" alt="z" class="circle pointer responsive-img goProfile">
+                      <img id="${m.player2BId}" src="${this_aux.path}${m.player2BPath}" width="35px" height="35px" alt="z" class="circle pointer goProfile">
                     </div>
                   </div>
                   `
@@ -414,28 +485,28 @@ export class HeaderComponent implements OnInit {
                   if(m.player1AId != null){
                     this.matchHtml += `
                     <div class ="col s6">
-                      <img id="${m.player1AId}" src="${this_aux.path}${m.player1APath}" alt="z" class="circle pointer responsive-img goProfile">
+                      <img id="${m.player1AId}" src="${this_aux.path}${m.player1APath}" width="35px" height="35px" alt="z" class="circle pointer goProfile">
                     </div>
                     `
                   }
                   if(m.player1BId != null){
                     this.matchHtml += `
                     <div class ="col s6">
-                      <img id="${m.player1BId}" src="${this_aux.path}${m.player1BPath}" alt="z" class="circle pointer responsive-img goProfile">
+                      <img id="${m.player1BId}" src="${this_aux.path}${m.player1BPath}" width="35px" height="35px" alt="z" class="circle pointer goProfile">
                     </div>
                     `
                   }
                   if(m.player2AId != null){
                     this.matchHtml += `
                     <div class ="col s6">
-                      <img id="${m.player2AId}" src="${this_aux.path}${m.player2APath}" alt="z" class="circle pointer responsive-img goProfile">
+                      <img id="${m.player2AId}" src="${this_aux.path}${m.player2APath}" width="35px" height="35px" alt="z" class="circle pointer goProfile">
                     </div>
                     `
                   }
                   if(m.player2BId != null){
                     this.matchHtml += `
                     <div class ="col s6">
-                      <img id="${m.player2BId}" src="${this_aux.path}${m.player2BPath}" alt="z" class="circle pointer responsive-img goProfile">
+                      <img id="${m.player2BId}" src="${this_aux.path}${m.player2BPath}" width="35px" height="35px" alt="z" class="circle pointer goProfile">
                     </div>
                     `
                   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { RequestFriendService } from '../../services/request-friend.service';
 import { environment } from '../../../environments/environment';
 
 import * as swal from 'sweetalert2';
@@ -15,7 +16,7 @@ export class SearchUsersComponent implements OnInit {
 
   path:string = environment.backPathImage;
 
-  constructor(public userService:UserService) { }
+  constructor(public userService:UserService, public requestFriendService:RequestFriendService) { }
 
   ngOnInit() {
 
@@ -45,9 +46,30 @@ export class SearchUsersComponent implements OnInit {
         $("#search-count").fadeIn();
         this.users = null;
         this.users = response.data[0];
-        alert(this.users.length);
       } 
     )
+  }
+
+  sendRequest(id){
+    let data;
+    data = {
+      id: id,
+    }
+
+    $("#button-add-"+id).fadeOut(0);
+
+    this.requestFriendService.sendRequest(data).subscribe(
+      (response)=>{
+        
+          swal({
+            title: 'Solicitud enviada!',
+            text: "Espera a que el usuario te acepte",
+            type: 'info',
+          })
+          
+          return;
+      })
+    
   }
 
 }

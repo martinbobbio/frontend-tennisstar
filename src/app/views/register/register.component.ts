@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  registerForm(){
+  registerForm(){console.log(this.form.get("email"));
     let data;
     if(this.form.get("password").value === this.form.get("password2").value){
       data = {
@@ -50,6 +50,30 @@ export class RegisterComponent implements OnInit {
       swal({
         title: 'Error',
         text: 'Debe ingresar contraseña',
+        type: 'error',
+      })
+      return;
+    }
+    if(this.form.get("password").value == "" || this.form.get("password2").value == ""){
+      swal({
+        title: 'Error',
+        text: 'Debe ingresar contraseña',
+        type: 'error',
+      })
+      return;
+    }
+    if(this.form.get("password").value.length < 8){
+      swal({
+        title: 'Error',
+        text: 'La contraseña debe tener 8 caracteres como mínimo',
+        type: 'error',
+      })
+      return;
+    }
+    if(!this.form.get("email").valid){
+      swal({
+        title: 'Error',
+        text: 'No has ingresado un email correcto',
         type: 'error',
       })
       return;

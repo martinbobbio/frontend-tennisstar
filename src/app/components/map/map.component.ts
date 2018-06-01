@@ -46,10 +46,11 @@ export class MapComponent implements OnInit {
   tournaments:any[];
 
   //Status Jugador
-  fullPlayer:boolean = null;
-  fullGame:boolean = null;
-  fullCount:number = 0;
-  completeCharge:boolean = true;
+  @Input() fullPlayer:boolean = null;
+  @Input() fullGame:boolean = null;
+  @Input() completeCharge:boolean = true;
+  @Input() fullCount:number = 0;
+  
 
   formMatch:FormGroup;
   formTournament:FormGroup;
@@ -98,21 +99,18 @@ export class MapComponent implements OnInit {
             this.mapService.getClubes(this.lat, this.lng).subscribe(
               (data) => {
                 this.places = data.data[0].results;
-                console.log(this.places);
               })
           }
           if(this.viewMatch == true){
             this.matchService.getAllMatchs().subscribe(
               (data) => {
                 this.matchs = data.data[0];
-                console.log(this.matchs);
               })
           }
           if(this.viewTournament == true){
             this.tournamentService.getTournaments().subscribe(
               (data) => {
                 this.tournaments = data.data[0];
-                console.log(this.tournaments);
               })
           }
         
@@ -145,7 +143,7 @@ export class MapComponent implements OnInit {
         this.mobile = true;
     }
 
-    this.isNewUser = localStorage.getItem("new_user")
+    this.isNewUser = localStorage.getItem("new_user");
     if(this.type != 1){
 
       $(document).ready(function() {
@@ -193,22 +191,6 @@ export class MapComponent implements OnInit {
       });
 
       
-    }
-
-    if(localStorage.getItem("id_user") != null){
-      this.completeCharge = false;
-      this.userService.getProfileStatus(Number(localStorage.getItem("id_user"))).subscribe(
-        (response)=>{
-          this.fullPlayer = response.data[0]["fullPlayer"];
-          this.fullGame = response.data[0]["fullGame"];
-          if(this.fullGame == true) this.fullCount++;
-          if(this.fullPlayer == true) this.fullCount++;
-          this.completeCharge = true;
-        } ,
-        (error) =>{
-        
-        }
-      )
     }
 
     this.homeImageIndex = Math.floor(Math.random() * 7);

@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  googleApiKey: "AIzaSyAQZGWfnDR3C28jqGEiJqEQT4BvTXRy_bM",
+  googleApiKey: "AIzaSyAhPtTAhzM__YAfQI1Cyg_QY6Ox-lF8Yks",
   apiUrl:"http://www.tennis-star.com",
   backUrl:"https://admin-tenis.tennis-star.com/web/app_dev.php",
   //backUrl: "http://localhost:8000",

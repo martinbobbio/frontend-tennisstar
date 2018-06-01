@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { environment } from '../../../environments/environment';
 import { RequestFriendService } from '../../services/request-friend.service';
@@ -24,6 +24,9 @@ export class HomeExplorarComponent implements OnInit {
   clubs;
   clubPhotoHtml="";
   clubRatingHtml="";
+
+  @Input() fullPlayer:boolean = null;
+  @Input() fullGame:boolean = null
 
   mobile = false;
 
@@ -138,7 +141,6 @@ export class HomeExplorarComponent implements OnInit {
           return;
       })
     
-
   }
 
   askMatch(userMatch){

@@ -5,12 +5,18 @@
         <div class="container">
           <div class="row">
             <div class="col s12">
+              <p *ngIf="isCreator" class="bold">*Eres el administrador del torneo (debes subir los resultados de los partidos)</p>
               <h1 *ngIf="!mobile" class="bold white-text">{{tournament.title}}</h1>
               <h3 *ngIf="mobile" class="bold white-text">{{tournament.title}}</h3>
 
-              <a class="waves-effect waves-light green btn">Inscribirse</a>
+              <a *ngIf="!tournament.inscription" (click)="inscription()" id="inscription-button" class="waves-effect waves-light green btn">Inscribirse</a>
+              <a *ngIf="tournament.inscription" class="waves-effect waves-light green btn disabled">Estás participando..</a>
+              <div id="inscription-loader" class="progress" style="display:none;">
+                <div class="indeterminate"></div>
+              </div>
               <br><br>
               <a href="club/{{tournament.googlePlaceId}}" class="waves-effect waves-light black btn">Ver club</a>
+              <p *ngIf="tournament.inscriptionFull" class="black-text bold">Torneo lleno..</p>
             </div>
           </div>
         </div>
@@ -57,8 +63,8 @@
       </div>
   </div>
 
-  <div style="overflow-x: scroll">
-    <tournament-draw players={{tournament.countTotal}}></tournament-draw>
+  <div *ngIf="tournament" style="overflow-x: scroll">
+    <tournament-draw count={{tournament.countTotal}} [isAdmin]="isCreator" [matchs]="tournament.matchs" idTournament="{{tournament_id}}"></tournament-draw>
   </div>
 
 <app-footer></app-footer>

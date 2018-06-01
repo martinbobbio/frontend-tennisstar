@@ -1,8 +1,12 @@
 <app-header></app-header>
 
-<map></map>
+<ng-container *ngIf="completeCharge">
+    <map [fullPlayer]="fullPlayer" [fullGame]="fullGame" [fullCount]="fullCount" [completeCharge]="completeCharge"></map>
+</ng-container>
 
-<home-explorar></home-explorar>
+<ng-container *ngIf="!userAnom">
+    <home-explorar [fullPlayer]="fullPlayer" [fullGame]="fullGame"></home-explorar>
+</ng-container>
 
 <ng-container *ngIf="notices">
     <notices [notices] = "notices"></notices>
