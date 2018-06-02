@@ -91,7 +91,32 @@
                     <h4 class="white-text">Partidos </h4>
                 </collapsible-header>
                 <collapsible-body [expanded]="true">
-                <p>Lista de partidos</p>
+                    <ul *ngIf="matchs.length != 0" class="collection">
+                        <li *ngFor="let m of matchs" class="collection-item avatar">
+                            <b><span class="title">{{m.title}}</span></b> - {{m.type}}
+                            <br><br>
+                            <p>
+                                Resultado:<br>
+                                <ng-container *ngIf="m.type == 'Singles'">
+                                    {{m.p1a}} vs {{m.p2a}}
+                                </ng-container>
+                                <ng-container *ngIf="m.type == 'Dobles'">
+                                    {{m.p1a}} {{m.p1b}} vs {{m.p2a}} {{m.p2b}}
+                                </ng-container>
+                                <br>
+                                <ng-container *ngIf="m.p1win == true">
+                                    <span class="green-text bold">W</span>
+                                </ng-container>
+                                <ng-container *ngIf="m.p1win == false">
+                                    <span class="red-text bold">L</span>
+                                </ng-container>
+                                {{m.p1score}}
+                            </p>
+                        </li>
+                    </ul>
+                    <ng-container *ngIf="matchs.length == 0">
+                        <p>No se han jugado partidos aqui</p>
+                    </ng-container>
                 </collapsible-body>
             </collapsible-list-item>
             
@@ -100,7 +125,27 @@
                     <h4 class="white-text">Torneos </h4>
                 </collapsible-header>
                 <collapsible-body [expanded]="true">
-                <p>Lista de torneos</p>
+                    <ul *ngIf="tournaments.length != 0" class="collection">
+                        <li *ngFor="let t of tournaments" class="collection-item avatar">
+                            <a class="black-text" href="/tournament/{{t.id}}">
+                                <b><span class="title">{{t.title}}</span></b> - 
+                                <ng-container *ngIf="t.count == 4">
+                                    Torneo chico
+                                </ng-container>
+                                <ng-container *ngIf="t.count == 8">
+                                    Torneo mediano
+                                </ng-container>
+                                <ng-container *ngIf="t.count == 16">
+                                    Torneo grande
+                                </ng-container>
+                            </a>
+                            <br><br>
+                            <p>Creador: <a class="orange-text" href="/profile/{{t.creator_id}}">{{t.creator}}</a></p>
+                        </li>
+                    </ul>
+                    <ng-container *ngIf="tournaments.length == 0">
+                        <p>No se han jugado torneos aqui</p>
+                    </ng-container>
                 </collapsible-body>
             </collapsible-list-item>
         </collapsible-list>

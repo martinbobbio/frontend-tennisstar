@@ -35,6 +35,21 @@ export class TournamentService {
     )
   }
 
+  getTouranentsByUser(){
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('id_user', localStorage.getItem("id_user"));
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/tournament/get-tournament-by-user`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+  }
+
   uploadScore(formData){
     
     let headers = new Headers();
@@ -124,6 +139,24 @@ export class TournamentService {
     let body = urlSearchParams.toString();
 
     return this.http.post(`${this.backUrl}/api/tournament/inscription`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+  }
+
+  leave(id_tournament, count){
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+
+    urlSearchParams.append('id_user', localStorage.getItem("id_user"));
+    urlSearchParams.append('id_tournament', id_tournament);
+    urlSearchParams.append('count', count);
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/tournament/leave`,body, {headers: headers}).map(
       (response) => response.json()
     )
   }

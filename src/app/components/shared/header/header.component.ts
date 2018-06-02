@@ -56,6 +56,8 @@ export class HeaderComponent implements OnInit {
 
   matchs:any[];
   matchHtml:string = "";
+  tournaments:any[];
+  tournamentHtml:string = "";
 
   myTournaments:any[];
 
@@ -194,14 +196,14 @@ export class HeaderComponent implements OnInit {
 
   viewEvents(){
 
-      if(this.matchHtml == ""){
+      if(this.matchHtml == "" && this.tournamentHtml == ""){
         this.matchHtml = "Aún no tienes eventos, inscribete en algún partido o torneo"
       }
 
       $("#btn-event").removeClass("red-text");
 
       swal({
-        html: this.matchHtml,  
+        html: this.matchHtml+this.tournamentHtml,  
         confirmButtonText: "Volver", 
         confirmButtonColor: "#ff9800",
         showCloseButton: true,
@@ -221,6 +223,13 @@ export class HeaderComponent implements OnInit {
     if (isMobile.matches) {
         this.mobile = true;
     }
+
+    setTimeout(() => {
+      if($("nav").width() < 975){
+        $("#label-username").fadeOut();
+      }
+    }, 1);
+    
 
     this.username = localStorage.getItem("username");
     
@@ -690,12 +699,41 @@ export class HeaderComponent implements OnInit {
   
       });
 
-      $("#btn-event").fadeIn();
-      $("#load-events").fadeOut();
+      this.tournamentService.getTouranentsByUser().subscribe(
+        (response)=>{
+          this.tournaments = response.data[0];
+          this.tournamentHtml = `
+          <p class="bold left-align">Torneos</p>
+          <div class="row">
+          `
+          for (let t of this.tournaments) {
+            this.tournamentHtml += `
+            <div class="card green">
+              <div class="card-content left-align white-text">
+                <div class="col s8">
+                </div>
+                <div class="col s4">
+                  <a href="/club/${t["googlePlaceId"]}" class="waves-effect waves-light btn black">Club</a>
+                </div>
+                <span class="card-x fs-19">${t["title"]}</span>
+                <br> <span class="bold fs-14">${t["date"]}</span>
+                <br><br>
+                <span class="bold fs-14">${t["countStatus"]}/${t["countTotal"]} Jugadores</span>
+              </div>
+              <div class="card-action white">
+                <a style="margin-right:0px;" href="/tournament/${t["id"]}" class="green-text pointer">Ver</a>
+              </div>
+            </div>
+              `
+            }
+            this.tournamentHtml += `
+          </div>
+          `
+          $("#btn-event").fadeIn();
+          $("#load-events").fadeOut();
+        });
 
-      });
-
-      
+      });      
 
   }
 

@@ -39,6 +39,28 @@ export class TournamentComponent implements OnInit {
 
   }
 
+  leave(){
+    $("#leave-button").fadeOut(0);
+    $("#leave-loader").fadeIn();
+
+    this.tournamentService.leave(this.tournament["id"],this.tournament["countTotal"]).subscribe(
+      (response)=>{
+        $("#leave-loader").fadeOut();
+        let status = response.data[0];
+        if(status == "ok"){
+          swal({
+            title: 'Torneo',
+            text: 'Has abandonado el torneo.',
+            type: 'info',
+            showCloseButton: true,
+            showConfirmButton: false
+          });
+          this.getTournament();
+        }
+      });
+
+  }
+
   inscription(){
 
     $("#inscription-button").fadeOut(0);
@@ -75,8 +97,14 @@ export class TournamentComponent implements OnInit {
     this.tournamentService.getTournament(this.tournament_id).subscribe(
       (response)=>{
         this.tournament = response.data[0];
+        if(this.tournament.inscriptionFull){
+          this.statusText = "Torneo lleno";
+        }
+        if(this.tournament.tournamentStart == 1){
+          this.statusText = "Torneo en proceso";
+        }
         if(this.tournament.status == 1){
-          this.statusText = "Torneo comenzado";
+          this.statusText = "Torneo finalizado";
         }
         if(this.tournament["id_creator"] == localStorage.getItem("id_user")){
           this.isCreator = true;

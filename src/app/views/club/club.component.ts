@@ -12,6 +12,8 @@ export class ClubComponent implements OnInit {
 
   googlePlaceId:string;
   entity;
+  matchs;
+  tournaments;
   entityStars:string = "";
   entityPhoto:string = "";
   entityOpening:string = "";
@@ -34,6 +36,8 @@ export class ClubComponent implements OnInit {
     this.mapService.getClub(this.googlePlaceId).subscribe(
       (response)=>{
         this.entity = response.data[0].result;
+        this.matchs = response.data[0].matchs;
+        this.tournaments = response.data[0].tournaments;
 
         if(this.entity.photos){
           this.entityPhoto = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${this.entity.photos[0].photo_reference}&key=${environment.googleApiKey}`;
