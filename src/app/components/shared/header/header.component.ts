@@ -9,6 +9,8 @@ import { environment } from '../../../../environments/environment';
 import { RequestFriendService } from '../../../services/request-friend.service';
 import { RequestMatchService } from '../../../services/request-match.service';
 
+import { LoadingBarService } from '@ngx-loading-bar/core';
+
 import * as swal from 'sweetalert2';
 declare let $: any;
 
@@ -211,12 +213,13 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  constructor(public auth:AuthService,public tournamentService:TournamentService, public matchService:MatchService,public userService:UserService,public requestMatchService:RequestMatchService, public requestFriendService:RequestFriendService, public router:Router) {
+  constructor(public auth:AuthService, private loadingBar: LoadingBarService,public tournamentService:TournamentService, public matchService:MatchService,public userService:UserService,public requestMatchService:RequestMatchService, public requestFriendService:RequestFriendService, public router:Router) {
     auth.handleAuthentication();
   }
 
   ngOnInit() {
 
+    this.loadingBar.start();
     this.isAdmin = localStorage.getItem("isAdmin");
     this.isNewUser = localStorage.getItem("new_user");
     var isMobile = window.matchMedia("only screen and (max-width: 576px)");
@@ -702,6 +705,9 @@ export class HeaderComponent implements OnInit {
       this.tournamentService.getTouranentsByUser().subscribe(
         (response)=>{
           this.tournaments = response.data[0];
+
+          if(this.tournaments.length != 0){
+
           this.tournamentHtml = `
           <p class="bold left-align">Torneos</p>
           <div class="row">
@@ -729,9 +735,13 @@ export class HeaderComponent implements OnInit {
             this.tournamentHtml += `
           </div>
           `
+          }
           $("#btn-event").fadeIn();
           $("#load-events").fadeOut();
+          this.loadingBar.complete();
         });
+
+        
 
       });      
 

@@ -23,7 +23,8 @@ export class CompletePerfilComponent implements OnInit {
 
   public uploader:FileUploader = new FileUploader({
     url: environment.uploaderUrl,
-    autoUpload: true
+    autoUpload: true,
+    
   });
   public uploadResult:boolean = false;
   public uploadPath:any;
@@ -50,7 +51,6 @@ export class CompletePerfilComponent implements OnInit {
             $("#age").focus();
             $("#lastname").focus();
             $("#firstname").focus();
-            $("#btn_submit").removeClass("disabled");
           }, 1000);
           
           
@@ -70,9 +70,17 @@ export class CompletePerfilComponent implements OnInit {
 
     this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
     this.uploader.onSuccessItem = (item, response, status, headers) => {
+      if(item.file.type == "image/png" || item.file.type == "image/jpeg"){
       this.uploadResult = true;
       this.uploadPath = JSON.parse(response);
       $("#btn_submit").removeClass("disabled");
+      }else{
+        swal({
+          title: 'Imagen',
+          text: 'La imagen debe ser png o jpg',
+          type: 'error',
+        })
+      }
     };
     this.uploader.onErrorItem = (item, response, status, headers) => {
       this.uploadResult = false;
@@ -83,7 +91,15 @@ export class CompletePerfilComponent implements OnInit {
 
     if(this.form.get("firstname").value != "" && this.form.get("lastname").value != "" && this.form.get("age").value != ""){
       
-      
+      if(this.form.get("age").value < 0 || this.form.get("age").value > 100){
+        swal({
+          title: 'Error',
+          text: 'Introduce una edad válida',
+          type: 'error',
+          showCloseButton: true,
+        })
+        return;
+      }
       if(this.uploadResult == true || this.user["status"]){
         let pathImg;
         let pathStatus;
@@ -121,6 +137,7 @@ export class CompletePerfilComponent implements OnInit {
         title: 'Error',
         text: 'Todos los campos deben estar completos',
         type: 'error',
+        showCloseButton: true,
       })
     }
 
@@ -129,6 +146,7 @@ export class CompletePerfilComponent implements OnInit {
         title: 'Error',
         text: 'Por favor, revise que exista la imagen y no tenga un tamaño grande',
         type: 'error',
+        showCloseButton: true,
       })
     }
 
