@@ -9,7 +9,8 @@
               <h1 *ngIf="!mobile" class="bold white-text">{{tournament.title}}</h1>
               <h3 *ngIf="mobile" class="bold white-text">{{tournament.title}}</h3>
 
-              <a *ngIf="!tournament.inscription" (click)="inscription()" id="inscription-button" class="waves-effect waves-light green btn">Inscribirse</a>
+              <a *ngIf="!tournament.inscription && !tournament.inscriptionOld" (click)="inscription()" id="inscription-button" class="waves-effect waves-light green btn">Inscribirse</a>
+              <a *ngIf="!tournament.inscription && tournament.inscriptionOld" class="waves-effect waves-light green btn disabled">Ya paso la fecha de inscripción</a>
               <a *ngIf="tournament.inscription && tournament.status == 0" class="waves-effect waves-light green btn disabled">Estás participando..</a>
               <a *ngIf="tournament.inscription && !tournament.tournamentStart" (click)="leave()" id="leave-button" class="waves-effect waves-light red btn">Abandonar torneo</a>
               <a *ngIf="tournament.inscription && tournament.status == 1" class="waves-effect waves-light green btn disabled">

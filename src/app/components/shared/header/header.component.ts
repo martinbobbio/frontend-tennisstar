@@ -362,13 +362,21 @@ export class HeaderComponent implements OnInit {
 
     $("#changePassword").on('click', () => {
 
-      $("#changePassword").fadeOut();
-      $("#loader").fadeIn();
-
       let newPass = $("#new-pass")[0].value;
       let newPass2 = $("#new-pass2")[0].value;
       let pass1 = $("#pass1")[0].value;
       let pass2 = $("#pass2")[0].value;
+
+      if(newPass.length < 8 || newPass2.length < 8){
+        swal({
+          title: "Cambio de contraseña", 
+          text: "La contraseña nueva debe tener minimo 8 digitos",
+          type: "info",  
+          showConfirmButton: false,
+          showCloseButton: true
+        });
+        return;
+      }
 
       if(newPass == "" && newPass2 == "" && pass1 == "" && pass2 == ""){
         swal({
@@ -382,6 +390,9 @@ export class HeaderComponent implements OnInit {
       }
       
       if(newPass == newPass2){
+
+      $("#changePassword").fadeOut();
+      $("#loader").fadeIn();
 
       let data = {
         newPass: newPass,
@@ -707,6 +718,8 @@ export class HeaderComponent implements OnInit {
           this.tournaments = response.data[0];
 
           if(this.tournaments.length != 0){
+
+          $("#btn-event").addClass("red-text");
 
           this.tournamentHtml = `
           <p class="bold left-align">Torneos</p>

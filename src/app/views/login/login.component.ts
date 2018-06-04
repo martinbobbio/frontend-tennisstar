@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
             swal.close();
             swal({
               title: "Olvido su contraseña", 
-              text: "Se la contraseña a tu email",
+              text: "Se envio la contraseña a tu email",
               type: "success",
               showConfirmButton: false,
               showCloseButton: true
