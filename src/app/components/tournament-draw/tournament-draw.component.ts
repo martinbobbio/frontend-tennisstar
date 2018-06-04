@@ -14,6 +14,7 @@ export class TournamentDrawComponent implements OnInit {
   @Input() count:number;
   @Input() matchs;
   @Input() idTournament;
+  @Input() status;
 
   constructor(public tournamentService:TournamentService,public router:Router) { }
 

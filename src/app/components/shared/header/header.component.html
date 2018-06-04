@@ -1,9 +1,10 @@
+<ngx-loading-bar color="#ff9800" [includeSpinner]="false" height="4px"></ngx-loading-bar>
 <nav class="green">
   <div class="nav-wrapper container">
     <a href="" class="brand-logo">Tennis-Star</a>
     <ul class="right">
       <li *ngIf="!mobile" class="pointer">
-        <a href="/profile" class="tooltipped" data-position="bottom" data-tooltip="Ver perfil">
+        <a href="/profile" id="label-username" class="tooltipped" data-position="bottom" data-tooltip="Ver perfil">
           {{username}}
         </a>
       </li>

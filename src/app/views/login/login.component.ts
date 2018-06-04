@@ -108,8 +108,7 @@ export class LoginComponent implements OnInit {
           if(response.error != null){
             return;
           }
-          
-          if(response.data[0] == "false"){
+          if(response.data[0].status == false){
             swal({
               title: 'Error',
               text: 'La contraseña es invalida',

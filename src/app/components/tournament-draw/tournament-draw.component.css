@@ -1,8 +1,9 @@
 .round {
     float: left;
   }
-  .round.r-of-4 {
-    
+  .icon-add{
+    font-size:29px;
+    background: #EEE
   }
   .round.r-of-2 {
     margin-top: 25px;

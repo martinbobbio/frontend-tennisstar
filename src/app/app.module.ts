@@ -31,6 +31,8 @@ import { FileDropDirective, FileSelectDirective } from 'ng2-file-upload';
 import "materialize-css";
 //Dependencia (Menu collapse)
 import { CollapsibleModule } from 'angular2-collapsible';
+//Loader Bar
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 //Pipes
 import { SafePipe } from './pipes/safe.pipe';
@@ -98,6 +100,7 @@ import { SearchUsersComponent } from './views/search-users/search-users.componen
     FileUploadModule,
     BrowserAnimationsModule,
     CollapsibleModule,
+    LoadingBarModule.forRoot(),
   ],
   providers: [
     MapService,
