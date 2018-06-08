@@ -151,19 +151,30 @@ export class MapComponent implements OnInit {
         $('.datepicker').pickadate({
           selectMonths: true, // Creates a dropdown to control month
           selectYears: 15, // Creates a dropdown of 15 years to control year,
-          today: 'Today',
-          clear: 'Clear',
-          close: 'Ok',
+          today: 'HOY',
+          clear: 'BORRAR',
+          close: 'LISTO',
           format: 'yyyy-mm-dd',
+          labelMonthNext: 'Mes siguiente',
+          labelMonthPrev: 'Mes anterior',
+          labelMonthSelect: 'Selecciona un mes',
+          labelYearSelect: 'Selecciona un año',
+          monthsFull: [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ],
+          monthsShort: [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ],
+          weekdaysFull: [ 'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado' ],
+          weekdaysShort: [ 'Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab' ],
+  
+  // Materialize modified
+          weekdaysLetter: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
           closeOnSelect: false // Close upon selecting a date,
         });
         $('.timepicker').pickatime({
           default: 'now', // Set default time: 'now', '1:30AM', '16:30'
           fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
           twelvehour: false, // Use AM/PM or 24-hour format
-          donetext: 'OK', // text for done-button
-          cleartext: 'Clear', // text for clear-button
-          canceltext: 'Cancel', // Text for cancel-button
+          donetext: 'LISTO', // text for done-button
+          cleartext: 'BORRAR', // text for clear-button
+          canceltext: 'CANCELAR', // Text for cancel-button
           autoclose: false, // automatic close timepicker
           ampmclickable: true, // make AM PM clickable
           aftershow: function(){} //Function for after opening timepicker
@@ -171,19 +182,27 @@ export class MapComponent implements OnInit {
         $('.datepicker2').pickadate({
           selectMonths: true, // Creates a dropdown to control month
           selectYears: 15, // Creates a dropdown of 15 years to control year,
-          today: 'Today',
-          clear: 'Clear',
-          close: 'Ok',
+          today: 'HOY',
+          clear: 'BORRAR',
+          close: 'LISTO',
           format: 'yyyy-mm-dd',
+          labelMonthNext: 'Mes siguiente',
+          labelMonthPrev: 'Mes anterior',
+          labelMonthSelect: 'Selecciona un mes',
+          labelYearSelect: 'Selecciona un año',
+          monthsFull: [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ],
+          monthsShort: [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ],
+          weekdaysFull: [ 'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado' ],
+          weekdaysShort: [ 'Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab' ],
           closeOnSelect: false // Close upon selecting a date,
         });
         $('.timepicker2').pickatime({
           default: 'now', // Set default time: 'now', '1:30AM', '16:30'
           fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
           twelvehour: false, // Use AM/PM or 24-hour format
-          donetext: 'OK', // text for done-button
-          cleartext: 'Clear', // text for clear-button
-          canceltext: 'Cancel', // Text for cancel-button
+          donetext: 'LISTO', // text for done-button
+          cleartext: 'BORRAR', // text for clear-button
+          canceltext: 'CANCELAR', // Text for cancel-button
           autoclose: false, // automatic close timepicker
           ampmclickable: true, // make AM PM clickable
           aftershow: function(){} //Function for after opening timepicker

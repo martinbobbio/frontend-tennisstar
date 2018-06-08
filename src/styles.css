@@ -61,6 +61,21 @@ body::-webkit-scrollbar-thumb
 	background-color: #4caf50;
 }
 
+/*Datepickers*/
+.picker__date-display {
+    background-color: #4caf50 !important;
+}
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+    background-color: #ff9800 !important;
+}
+.picker__today, .picker__close, {
+    color: #ff9800 !important;
+}
+.ui-datepicker {
+    background: #4caf50 !important;
+    color: #ff9800 !important;
+  }
+
 
 /*Mediaqueries*/
 

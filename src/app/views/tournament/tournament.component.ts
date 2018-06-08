@@ -24,6 +24,18 @@ export class TournamentComponent implements OnInit {
 
   ngOnInit() {
 
+    if(localStorage.getItem("id_user") == null){
+      swal({
+        title: "Acceso",
+        text: "Debes iniciar sesión para acceder aquí",
+        type: "info",
+        showConfirmButton: false
+     })
+     setTimeout(function() {
+      location.href = "/login";
+     }, 2000);
+  }
+
     var isMobile = window.matchMedia("only screen and (max-width: 576px)");
     if (isMobile.matches) {
         this.mobile = true;

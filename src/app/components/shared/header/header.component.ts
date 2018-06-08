@@ -24,12 +24,12 @@ export class HeaderComponent implements OnInit {
   @HostListener("window:scroll", []) onWindowScroll() {
     const scrollVertical = window.pageYOffset ||document.documentElement.scrollTop || document.body.scrollTop || 0;
 
-    if(!this.mobile && scrollVertical > 600 && !this.openMenuScroll && $("nav").width() > 1350){
+    if(!this.mobile && scrollVertical > 600 && !this.openMenuScroll && $("nav").width() > 1350 && localStorage.getItem("id_user") != null){
       $(".sidebar-left-collapse").fadeIn();
       this.openMenuScroll = true;
       this.openMenu = true;
     }
-    if(!this.mobile && scrollVertical < 600 && this.openMenuScroll && $("nav").width() > 1350){
+    if(!this.mobile && scrollVertical < 600 && this.openMenuScroll && $("nav").width() > 1350  && localStorage.getItem("id_user") != null){
       $(".sidebar-left-collapse").fadeOut();
       this.openMenuScroll = false;
       this.openMenu = false;

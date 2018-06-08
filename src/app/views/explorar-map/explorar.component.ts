@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
+import * as swal from 'sweetalert2';
+
 @Component({
   selector: 'explorar',
   templateUrl: './explorar.component.html',
@@ -39,6 +41,19 @@ export class ExplorarComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if(localStorage.getItem("id_user") == null){
+      swal({
+        title: "Acceso",
+        text: "Debes iniciar sesión para acceder aquí",
+        type: "info",
+        showConfirmButton: false
+     })
+     setTimeout(function() {
+      location.href = "/login";
+     }, 2000);
+  }
+
   }
 
 }
