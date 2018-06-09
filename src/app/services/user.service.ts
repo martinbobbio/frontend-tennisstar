@@ -119,6 +119,21 @@ export class UserService {
     )
   }
 
+  newPassword(email){
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('email', email);
+
+    let body = urlSearchParams.toString();
+
+    return this.http.post(`${this.backUrl}/api/auth/new-password`,body, {headers: headers}).map(
+      (response) => response.json()
+    )
+  }
+
   getAllUsers(){
     
     let headers = new Headers();

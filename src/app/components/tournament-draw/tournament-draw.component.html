@@ -824,7 +824,7 @@
       <div class="bracket-game">
         <div class="player top" [ngClass]="{'win': matchs.octavos[10].win, 'loss': !matchs.octavos[10].win, 'default': matchs.octavos[10].win == null}">
           <ng-container *ngIf="matchs.octavos[10]">
-            {{matchs.octavos[2].username}}
+            {{matchs.octavos[10].username}}
             <span (click)="uploadScore(matchs.octavos[10],matchs.octavos[11],6,'Octavos de final')"
             *ngIf="matchs.octavos[10].id_user && matchs.octavos[11].id_user && isAdmin && matchs.octavos[10].win == null" class="pointer" style="right:25%;top:25%;position:absolute;z-index:999">
               <i class="large material-icons icon-add">add_circle_outline</i>
@@ -834,7 +834,7 @@
             -
           </ng-container>
           <div class="score">
-            <ng-container *ngIf="matchs.octavos[2].win != null">
+            <ng-container *ngIf="matchs.octavos[10].win != null">
               <ng-container *ngIf="matchs.octavos[10].win">
                   {{matchs.octavos[10].set1a}} {{matchs.octavos[10].set2a}} {{matchs.octavos[10].set3a}}
               </ng-container>
@@ -872,7 +872,7 @@
       <div class="bracket-game">
         <div class="player top" [ngClass]="{'win': matchs.octavos[12].win, 'loss': !matchs.octavos[12].win, 'default': matchs.octavos[12].win == null}">
           <ng-container *ngIf="matchs.octavos[12]">
-            {{matchs.octavos[4].username}}
+            {{matchs.octavos[12].username}}
             <span (click)="uploadScore(matchs.octavos[12],matchs.octavos[13],7,'Octavos de final')"
             *ngIf="matchs.octavos[12].id_user && matchs.octavos[12].id_user && isAdmin && matchs.octavos[12].win == null" class="pointer" style="right:25%;top:25%;position:absolute;z-index:999">
               <i class="large material-icons icon-add">add_circle_outline</i>
@@ -886,7 +886,7 @@
               <ng-container *ngIf="matchs.octavos[12].win">
                   {{matchs.octavos[12].set1a}} {{matchs.octavos[12].set2a}} {{matchs.octavos[12].set3a}}
               </ng-container>
-              <ng-container *ngIf="matchs.octavos[5].win">
+              <ng-container *ngIf="matchs.octavos[13].win">
                   {{matchs.octavos[13].set1a}} {{matchs.octavos[13].set2a}} {{matchs.octavos[13].set3a}}
               </ng-container>
             </ng-container>
@@ -907,7 +907,7 @@
             <ng-container *ngIf="matchs.octavos[12].win">
                 {{matchs.octavos[12].set1b}} {{matchs.octavos[12].set2b}} {{matchs.octavos[12].set3b}}
             </ng-container>
-            <ng-container *ngIf="matchs.octavos[5].win">
+            <ng-container *ngIf="matchs.octavos[13].win">
                 {{matchs.octavos[13].set1b}} {{matchs.octavos[13].set2b}} {{matchs.octavos[13].set3b}}
             </ng-container>
           </ng-container>
@@ -920,7 +920,7 @@
       <div class="bracket-game">
         <div class="player top" [ngClass]="{'win': matchs.octavos[14].win, 'loss': !matchs.octavos[14].win, 'default': matchs.octavos[14].win == null}">
           <ng-container *ngIf="matchs.octavos[14]">
-            {{matchs.octavos[6].username}}
+            {{matchs.octavos[14].username}}
             <span (click)="uploadScore(matchs.octavos[14],matchs.octavos[15],8,'Octavos de final')"
             *ngIf="matchs.octavos[14].id_user && matchs.octavos[14].id_user && isAdmin && matchs.octavos[14].win == null" class="pointer" style="right:25%;top:25%;position:absolute;z-index:999">
               <i class="large material-icons icon-add">add_circle_outline</i>
@@ -934,7 +934,7 @@
               <ng-container *ngIf="matchs.octavos[14].win">
                   {{matchs.octavos[14].set1a}} {{matchs.octavos[14].set2a}} {{matchs.octavos[14].set3a}}
               </ng-container>
-              <ng-container *ngIf="matchs.octavos[7].win">
+              <ng-container *ngIf="matchs.octavos[14].win">
                   {{matchs.octavos[15].set1a}} {{matchs.octavos[15].set2a}} {{matchs.octavos[15].set3a}}
               </ng-container>
             </ng-container>
@@ -945,7 +945,7 @@
         </div>
         <div class="player bot" [ngClass]="{'win': matchs.octavos[15].win, 'loss': !matchs.octavos[15].win, 'default': matchs.octavos[15].win == null}">
         <ng-container *ngIf="matchs.octavos[15]">
-          {{matchs.octavos[7].username}}
+          {{matchs.octavos[15].username}}
         </ng-container>
         <ng-container *ngIf="!matchs.octavos[15].id_user">
           -

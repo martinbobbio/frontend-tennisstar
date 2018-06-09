@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 
 import * as $ from 'jquery';
 import * as swal from 'sweetalert2';
@@ -14,7 +15,7 @@ import * as swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public loginService:LoginService, public authService:AuthService, public router:Router) {
+  constructor(public loginService:LoginService, public authService:AuthService,public userService:UserService, public router:Router) {
 
     this.authService.handleAuthentication();
 
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit {
         <label>Email</label>
       </div>
       <div class="col s12">
-        <a id="changePassword" class="waves-effect waves-light btn green">Enviar mail</a>
+        <a id="changePassword" class="waves-effect waves-light btn green">Solicitar nueva contraseña</a>
         <div id="loader" class="row" style="display:none;">
           <div class="progress">
             <div class="col s12">
@@ -60,7 +61,32 @@ export class LoginComponent implements OnInit {
     });
 
     $("#changePassword").on('click', () => {
-      
+
+      let email = $("#email")[0]["value"];
+
+      this.userService.newPassword(email).subscribe(
+        (response)=>{
+          if(response.error){
+            swal.close();
+            swal({
+              title: "Olvido su contraseña", 
+              text: response.error[0],
+              type: "error",
+              showConfirmButton: false,
+              showCloseButton: true
+            });
+          }console.log(response);
+          if(response.data){
+            swal.close();
+            swal({
+              title: "Olvido su contraseña", 
+              text: "Se envio la contraseña a tu email",
+              type: "success",
+              showConfirmButton: false,
+              showCloseButton: true
+            });
+          }
+        });
     });
 
   }
