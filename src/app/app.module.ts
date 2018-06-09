@@ -34,6 +34,7 @@ import { CollapsibleModule } from 'angular2-collapsible';
 //Loader Bar
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 
+
 //Pipes
 import { SafePipe } from './pipes/safe.pipe';
 
@@ -100,7 +101,7 @@ import { SearchUsersComponent } from './views/search-users/search-users.componen
     FileUploadModule,
     BrowserAnimationsModule,
     CollapsibleModule,
-    LoadingBarModule.forRoot(),
+    LoadingBarModule.forRoot()
   ],
   providers: [
     MapService,
