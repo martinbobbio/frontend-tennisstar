@@ -322,7 +322,7 @@ export class MapComponent implements OnInit {
             <p class="fs-14">${tournament_aux.date}</p>
             <p class="orange-text">${tournament.countStatus}/${tournament.countTotal} Jugadores</p>
             <div class="center-align">
-            <a class="waves-effect waves-light btn white-text green ">Inscribirse</a>
+            <a href="/tournament/${tournament.id}" class="waves-effect waves-light btn white-text green ">Ver Torneo</a>
             </div>
           </div>
         </div>

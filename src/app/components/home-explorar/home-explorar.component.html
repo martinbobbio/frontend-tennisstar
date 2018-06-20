@@ -5,6 +5,7 @@
     </div>
     <div class="col m6 s12">
         <p class="orange-text bold">Usuarios</p>
+        <ng-container *ngIf="users.length != 0">
         <ul *ngFor="let user of users" id="explore-user-{{user.id}}" class="collection">
             <li class="collection-item avatar">
                 <img [routerLink]="['profile/'+user.id]" src="{{path}}{{user.path}}" alt="" class="circle pointer">
@@ -15,6 +16,11 @@
                 <a (click)="sendRequest(user.id)" class="secondary-content pointer"><i class="material-icons orange-text">person_add</i></a>
             </li>
         </ul>
+        </ng-container>
+        <ng-container *ngIf="users.length == 0">
+            <p class="bold">Por el momento no hay mas usuarios que puedas agregar.</p>
+            <br><br><br>
+        </ng-container>
         <div class="center-align">
             <a href="buscarUsuarios" class="waves-effect waves-light  btn gradient-45deg-amber-amber box-shadow-none border-round mr-1">Buscar usuarios</a>
         </div>
