@@ -31,13 +31,16 @@ Las herramientas y lenguajes utilizados para el desarrollo del sitio WEB fronten
 ## Capturas
 
 HomePage:
+
 ![Image of inicio](src/assets/images/screen-home.png)<br/>
 
 Login:
+
 ![Image of login](src/assets/images/screen-login.png)
 <br/>
 
 Pagina Principal:
+
 ![Image of main](src/assets/images/screen-main.png)
 <br/>
 
@@ -46,15 +49,18 @@ Partido:
 <br/>
 
 Club:
+
 ![Image of club](src/assets/images/screen-club.png)
 <br/>
 
 Vista de Partidos:
+
 ![Image of verPartidos](src/assets/images/screen-verPartidos.png)
 ![Image of match](src/assets/images/screen-explorar-match.png)
 <br/>
 
 Notificaciones:
+
 ![Image of friend](src/assets/images/screen-notification-friend.png)
 ![Image of notification-match](src/assets/images/screen-notification-match.png)
 <br/>
