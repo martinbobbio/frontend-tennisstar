@@ -310,7 +310,7 @@ export class ProfileComponent implements OnInit {
     }
 
 
-    sendRequestMatch(id){
+    sendRequestMatch(){
 
       let this_aux = this;
 

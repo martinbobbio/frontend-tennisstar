@@ -27,7 +27,6 @@ import { AgmCoreModule } from '@agm/core';
 import { ChartsModule } from 'ng2-charts';
 //Dependencia (File upload)
 import { FileUploadModule } from 'ng2-file-upload';
-import { FileDropDirective, FileSelectDirective } from 'ng2-file-upload';
 import "materialize-css";
 //Dependencia (Menu collapse)
 import { CollapsibleModule } from 'angular2-collapsible';
@@ -116,8 +115,5 @@ import { SearchUsersComponent } from './views/search-users/search-users.componen
     MatchService
   ],
   bootstrap: [AppComponent]
-})
-@NgModule({
-  declarations: [FileDropDirective, FileSelectDirective]
 })
 export class AppModule { }

@@ -16,15 +16,15 @@
     "@angular/animations": "^4.4.7",
     "@angular/cdk": "^6.2.0",
     "@angular/cli": "^1.7.3",
-    "@angular/common": "^4.2.4",
-    "@angular/compiler": "^4.2.4",
-    "@angular/core": "^4.2.4",
-    "@angular/forms": "^4.2.4",
-    "@angular/http": "^4.2.4",
+    "@angular/common": "^5.2.11",
+    "@angular/compiler": "^5.2.11",
+    "@angular/core": "^5.2.11",
+    "@angular/forms": "^5.2.11",
+    "@angular/http": "^5.2.11",
     "@angular/material": "^6.2.0",
-    "@angular/platform-browser": "^4.2.4",
-    "@angular/platform-browser-dynamic": "^4.2.4",
-    "@angular/router": "^4.2.4",
+    "@angular/platform-browser": "^5.2.11",
+    "@angular/platform-browser-dynamic": "^5.2.11",
+    "@angular/router": "^5.2.11",
     "@ngx-loading-bar/core": "^1.0.0",
     "@ngx-loading-bar/http": "^1.0.0",
     "@ngx-loading-bar/http-client": "^1.0.0",
@@ -44,8 +44,8 @@
   },
   "devDependencies": {
     "@angular/cli": "1.4.3",
-    "@angular/compiler-cli": "^4.2.4",
-    "@angular/language-service": "^4.2.4",
+    "@angular/compiler-cli": "^5.2.11",
+    "@angular/language-service": "^5.2.11",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
     "@types/jquery": "^3.3.0",
@@ -62,6 +62,6 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.3.2",
-    "typescript": "~2.3.3"
+    "typescript": "~2.8.4"
   }
 }
