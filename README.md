@@ -2,7 +2,7 @@
   <br>
   <a href="https://www.tennis-star.com"><img src="https://raw.githubusercontent.com/martinbobbio/davinci-tennisstar-frontend/master/src/assets/images/logo.png" alt="Tenisstar" width="200"></a>
   <br>
-  Tennis-Star - Frontend
+  Tennis-Star - Frontend 
   <br>
 </h1>
 <h4 align="center">
