@@ -83,7 +83,7 @@ export class HeaderComponent implements OnInit {
         confirmButtonText: "Volver", 
         confirmButtonColor: "#ff9800",
         showCloseButton: true,
-      });
+      }).catch(swal.noop);
 
       let this_aux = this;
 
@@ -138,7 +138,7 @@ export class HeaderComponent implements OnInit {
         text: "No tienes solicitudes", 
         confirmButtonText: "Volver", 
         confirmButtonColor: "#ff9800"
-      });
+      }).catch(swal.noop);
     }
   }
 
@@ -175,7 +175,7 @@ export class HeaderComponent implements OnInit {
           confirmButtonText: "Volver", 
           confirmButtonColor: "#ff9800",
           showCloseButton: true
-        });
+        }).catch(swal.noop);
       });
 
       $(document).on('click', ".removeFriend", function() {
@@ -187,7 +187,7 @@ export class HeaderComponent implements OnInit {
               confirmButtonText: "Volver",
               confirmButtonColor: "#ff9800",
               type: "success"
-            });
+            }).catch(swal.noop);
           });
       });
 
@@ -209,7 +209,7 @@ export class HeaderComponent implements OnInit {
         confirmButtonText: "Volver", 
         confirmButtonColor: "#ff9800",
         showCloseButton: true,
-      });
+      }).catch(swal.noop);
 
   }
 
@@ -314,7 +314,7 @@ export class HeaderComponent implements OnInit {
       html: textHtml,  
       showConfirmButton: false,
       showCloseButton: true
-    });
+    }).catch(swal.noop);
 
 
   }
@@ -358,7 +358,7 @@ export class HeaderComponent implements OnInit {
       html: textHtml,  
       showConfirmButton: false,
       showCloseButton: true
-    });
+    }).catch(swal.noop);
 
     $("#changePassword").on('click', () => {
 
@@ -374,7 +374,7 @@ export class HeaderComponent implements OnInit {
           type: "info",  
           showConfirmButton: false,
           showCloseButton: true
-        });
+        }).catch(swal.noop);
         return;
       }
 
@@ -385,7 +385,7 @@ export class HeaderComponent implements OnInit {
           type: "info",  
           showConfirmButton: false,
           showCloseButton: true
-        });
+        }).catch(swal.noop);
         return;
       }
       
@@ -411,7 +411,7 @@ export class HeaderComponent implements OnInit {
               type: "success",  
               showConfirmButton: false,
               showCloseButton: true
-            });
+            }).catch(swal.noop);
           }else if(status == 0){
             swal({
               title: "Error", 
@@ -419,7 +419,7 @@ export class HeaderComponent implements OnInit {
               type: "error",  
               showConfirmButton: false,
               showCloseButton: true
-            });
+            }).catch(swal.noop);
           }
           
         }
@@ -636,7 +636,7 @@ export class HeaderComponent implements OnInit {
           html: textHtml,  
           showConfirmButton: false,
           showCloseButton: true
-        });
+        }).catch(swal.noop);
 
         $(document).on('click', ".uploadScore", function() {
           let set1a = "";
@@ -705,7 +705,7 @@ export class HeaderComponent implements OnInit {
                 text: "Partido subido con exito!",
                 confirmButtonText: "Volver", 
                 confirmButtonColor: "#ff9800"
-              });
+              }).catch(swal.noop);
             });
 
         });

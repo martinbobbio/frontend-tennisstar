@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
       html: textHtml,
       showConfirmButton: false,
       showCloseButton: true
-    });
+    }).catch(swal.noop);
 
     $("#changePassword").on('click', () => {
 
@@ -74,8 +74,8 @@ export class LoginComponent implements OnInit {
               type: "error",
               showConfirmButton: false,
               showCloseButton: true
-            });
-          }console.log(response);
+            }).catch(swal.noop);
+          }
           if(response.data){
             swal.close();
             swal({
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
               type: "success",
               showConfirmButton: false,
               showCloseButton: true
-            });
+            }).catch(swal.noop);
           }
         });
     });
@@ -113,7 +113,7 @@ export class LoginComponent implements OnInit {
               title: 'Error',
               text: 'La contraseña es invalida',
               type: 'error',
-            })
+            }).catch(swal.noop);
             this.form.reset({
               password:"",
             });
@@ -129,7 +129,7 @@ export class LoginComponent implements OnInit {
             title: 'Error',
             text: 'El nombre de usuario no existe',
             type: 'error',
-          })
+          }).catch(swal.noop);
           this.form.reset({
             password:"",
           });
@@ -140,7 +140,7 @@ export class LoginComponent implements OnInit {
         title: 'Error',
         text: 'Debes completar el nombre de usuario y contraseña',
         type: 'error',
-      })
+      }).catch(swal.noop);
     }
   }
 

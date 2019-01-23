@@ -3,7 +3,7 @@
     <div class="col m12">
       <h3 class="green-text">Explorar</h3>
     </div>
-    <div class="col m6 s12">
+    <div *ngIf="users" class="col m6 s12">
         <p class="orange-text bold">Usuarios</p>
         <ng-container *ngIf="users.length != 0">
         <ul *ngFor="let user of users" id="explore-user-{{user.id}}" class="collection">

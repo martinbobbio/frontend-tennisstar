@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
           text: "Debes iniciar sesión para acceder aquí",
           type: "info",
           showConfirmButton: false
-       })
+       }).catch(swal.noop);
        setTimeout(function() {
         location.href = "/login";
        }, 2000);
@@ -170,7 +170,6 @@ export class ProfileComponent implements OnInit {
             (response_aux)=>{
               this.user_aux = response_aux.data[0];
               let percentSingles = 0;
-              console.log(this.user_aux);
               if(this.user_aux["countSinglesLoss"]){
                 if(this.user_aux["countSinglesLoss"] != 0){
                   percentSingles = Math.trunc((this.user_aux["countSinglesWin"] / (this.user_aux["countSinglesWin"] + this.user_aux["countSinglesLoss"])) * 100);
@@ -273,7 +272,7 @@ export class ProfileComponent implements OnInit {
       html: textHtml,  
       showConfirmButton: false, 
       showCloseButton: true,
-    });
+    }).catch(swal.noop);
 
   }
 
@@ -289,7 +288,7 @@ export class ProfileComponent implements OnInit {
             title: 'Solicitud de amistad enviada!',
             text: "Espera a que el usuario te acepte",
             type: 'info',
-          })
+          }).catch(swal.noop);
           return;
       })
     
@@ -304,7 +303,7 @@ export class ProfileComponent implements OnInit {
           text: "Para invitar a un jugador debes tener club favorito",
           type: 'info',
           confirmButtonColor: "#ff9800",
-        })
+        }).catch(swal.noop);
       }
       
     }
@@ -320,7 +319,7 @@ export class ProfileComponent implements OnInit {
           text: 'Debes ingresar el título para el partido',
           type: 'error',
           confirmButtonColor: "#ff9800",
-        });
+        }).catch(swal.noop);
         return;
       }
       if($('.datepicker')[0].value == ""){
@@ -329,7 +328,7 @@ export class ProfileComponent implements OnInit {
           text: 'Debes ingresar la fecha para el partido',
           type: 'error',
           confirmButtonColor: "#ff9800",
-        });
+        }).catch(swal.noop);
         return;
       }
       if($('.timepicker')[0].value == ""){
@@ -338,7 +337,7 @@ export class ProfileComponent implements OnInit {
           text: 'Debes ingresar la hora para el partido',
           type: 'error',
           confirmButtonColor: "#ff9800",
-        });
+        }).catch(swal.noop);
         return;
       }
       let date = $('.datepicker')[0].value;
@@ -358,7 +357,7 @@ export class ProfileComponent implements OnInit {
               title: 'Solicitud de partido enviada!',
               text: "Espera a que el usuario te acepte",
               type: 'info',
-            })
+            }).catch(swal.noop);
             setTimeout(function(){ this_aux.route.navigate(['/profile/'+this.user.id]); }, 2000);
         })
       

@@ -30,7 +30,7 @@ export class TournamentComponent implements OnInit {
         text: "Debes iniciar sesión para acceder aquí",
         type: "info",
         showConfirmButton: false
-     })
+     }).catch(swal.noop);
      setTimeout(function() {
       location.href = "/login";
      }, 2000);
@@ -66,7 +66,7 @@ export class TournamentComponent implements OnInit {
             type: 'info',
             showCloseButton: true,
             showConfirmButton: false
-          });
+          }).catch(swal.noop);
           this.getTournament();
         }
       });
@@ -90,7 +90,7 @@ export class TournamentComponent implements OnInit {
             type: 'success',
             showCloseButton: true,
             showConfirmButton: false
-          });
+          }).catch(swal.noop);
           this.getTournament();
         }else if(status == "error"){
           swal({
@@ -99,7 +99,7 @@ export class TournamentComponent implements OnInit {
             type: 'error',
             showCloseButton: true,
             showConfirmButton: false
-          });
+          }).catch(swal.noop);
         }
       });
   }

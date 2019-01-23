@@ -26,7 +26,7 @@ export class SearchUsersComponent implements OnInit {
         text: "Debes iniciar sesión para acceder aquí",
         type: "info",
         showConfirmButton: false
-     })
+     }).catch(swal.noop);
      setTimeout(function() {
       location.href = "/login";
      }, 2000);
@@ -49,7 +49,7 @@ export class SearchUsersComponent implements OnInit {
         text: 'El campo de busqueda esta vacio',
         type: 'info',
         showCloseButton: true
-      })
+      }).catch(swal.noop);
       return;
     }
 
@@ -77,7 +77,7 @@ export class SearchUsersComponent implements OnInit {
             title: 'Solicitud enviada!',
             text: "Espera a que el usuario te acepte",
             type: 'info',
-          })
+          }).catch(swal.noop);
           
           return;
       })

@@ -79,7 +79,7 @@ export class CompletePerfilComponent implements OnInit {
           title: 'Imagen',
           text: 'La imagen debe ser png o jpg',
           type: 'error',
-        })
+        }).catch(swal.noop);
       }
     };
     this.uploader.onErrorItem = (item, response, status, headers) => {
@@ -97,7 +97,7 @@ export class CompletePerfilComponent implements OnInit {
           text: 'Introduce una edad válida',
           type: 'error',
           showCloseButton: true,
-        })
+        }).catch(swal.noop);
         return;
       }
       if(this.uploadResult == true || this.user["status"]){
@@ -138,7 +138,7 @@ export class CompletePerfilComponent implements OnInit {
         text: 'Todos los campos deben estar completos',
         type: 'error',
         showCloseButton: true,
-      })
+      }).catch(swal.noop);
     }
 
     if(this.uploadResult == false && !this.user["status"]){
@@ -147,7 +147,7 @@ export class CompletePerfilComponent implements OnInit {
         text: 'Por favor, revise que exista la imagen y no tenga un tamaño grande',
         type: 'error',
         showCloseButton: true,
-      })
+      }).catch(swal.noop);
     }
 
   }

@@ -48,7 +48,7 @@ export class ExplorarComponent implements OnInit {
         text: "Debes iniciar sesión para acceder aquí",
         type: "info",
         showConfirmButton: false
-     })
+     }).done()
      setTimeout(function() {
       location.href = "/login";
      }, 2000);

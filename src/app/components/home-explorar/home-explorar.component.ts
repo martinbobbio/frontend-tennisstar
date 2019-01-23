@@ -136,7 +136,7 @@ export class HomeExplorarComponent implements OnInit {
             title: 'Solicitud enviada!',
             text: "Espera a que el usuario te acepte",
             type: 'info',
-          })
+          }).catch(swal.noop);
           
           return;
       })
@@ -168,10 +168,10 @@ export class HomeExplorarComponent implements OnInit {
                 type: "success",
                 confirmButtonText: "Volver", 
                 confirmButtonColor: "#ff9800"
-             })
+             }).catch(swal.noop);
             } ,
           )
-         });
+         }).catch(swal.noop);
   }
 
 }

@@ -290,7 +290,7 @@ export class MapComponent implements OnInit {
             type: "success",
             confirmButtonText: "Volver", 
             confirmButtonColor: "#ff9800"
-         })
+         }).catch(swal.noop);
          setTimeout(function() {
           location.href = "/explorar/verPartidos";
          }, 2500);
@@ -306,7 +306,7 @@ export class MapComponent implements OnInit {
       html: textHtml,  
       showConfirmButton: false,
       showCloseButton: true
-    });
+    }).catch(swal.noop);;
 
   }
 
@@ -336,7 +336,7 @@ export class MapComponent implements OnInit {
       html: textHtml,  
       showConfirmButton: false,
       showCloseButton: true
-    });
+    }).catch(swal.noop);
 
   }
 
@@ -432,7 +432,7 @@ export class MapComponent implements OnInit {
         html: textHtml,  
         showConfirmButton: false,
         showCloseButton: true
-      });
+      }).catch(swal.noop);
   
       $("#newMatch").on('click', () => {
         this.latMatch = marker.geometry.location.lat;
@@ -482,7 +482,7 @@ export class MapComponent implements OnInit {
         title: "Asignar como favorito", 
         html: textHtml,  
         showConfirmButton: false 
-      });
+      }).catch(swal.noop);
   
       let this_aux = this;
       $("#favoriteclub").on('click', () => {
@@ -494,7 +494,7 @@ export class MapComponent implements OnInit {
               type: 'success',
               showCloseButton: true,
               showConfirmButton: false
-            });
+            }).catch(swal.noop);
             setTimeout(function(){ this_aux.router.navigate(['/']); }, 3000);
           } ,
         )
@@ -516,7 +516,7 @@ export class MapComponent implements OnInit {
         text: 'Debes ingresar el título para el partido',
         type: 'error',
         confirmButtonColor: "#ff9800",
-      });
+      }).catch(swal.noop);
       return;
     }
     if($(".type .active").text() == ""){
@@ -525,7 +525,7 @@ export class MapComponent implements OnInit {
         text: 'Debes ingresar el tipo del partido',
         type: 'error',
         confirmButtonColor: "#ff9800",
-      });
+      }).catch(swal.noop);
       return;
     }
     if($('.datepicker')[0].value == ""){
@@ -534,7 +534,7 @@ export class MapComponent implements OnInit {
         text: 'Debes ingresar la fecha para el partido',
         type: 'error',
         confirmButtonColor: "#ff9800",
-      });
+      }).catch(swal.noop);
       return;
     }
     if($('.timepicker')[0].value == ""){
@@ -543,7 +543,7 @@ export class MapComponent implements OnInit {
         text: 'Debes ingresar la hora para el partido',
         type: 'error',
         confirmButtonColor: "#ff9800",
-      });
+      }).catch(swal.noop);
       return;
     }
     let date = $('.datepicker')[0].value;
@@ -569,7 +569,7 @@ export class MapComponent implements OnInit {
           type: 'success',
           showConfirmButton: false,
           showCloseButton: true
-        });
+        }).catch(swal.noop);
         setTimeout(function(){ this_aux.router.navigate(['/']); }, 3000);
       } ,
       (error) =>{
@@ -588,7 +588,7 @@ export class MapComponent implements OnInit {
           text: 'Debes ingresar el título para el torneo',
           type: 'error',
           confirmButtonColor: "#ff9800",
-        });
+        }).catch(swal.noop);
         return;
       }
       if($(".count .active").text() == ""){
@@ -597,7 +597,7 @@ export class MapComponent implements OnInit {
           text: 'Debes indicar de cuantos jugadores es el torneo',
           type: 'error',
           confirmButtonColor: "#ff9800",
-        });
+        }).catch(swal.noop);
         return;
       }
       if($('.datepicker2')[0].value == ""){
@@ -606,7 +606,7 @@ export class MapComponent implements OnInit {
           text: 'Debes ingresar la fecha para el torneo',
           type: 'error',
           confirmButtonColor: "#ff9800",
-        });
+        }).catch(swal.noop);
         return;
       }
       if($('.timepicker2')[0].value == ""){
@@ -615,7 +615,7 @@ export class MapComponent implements OnInit {
           text: 'Debes ingresar la hora para el torneo',
           type: 'error',
           confirmButtonColor: "#ff9800",
-        });
+        }).catch(swal.noop);
         return;
       }
       let date = $('.datepicker2')[0].value;
@@ -650,7 +650,7 @@ export class MapComponent implements OnInit {
             type: 'success',
             showConfirmButton: false,
             showCloseButton: true
-          });
+          }).catch(swal.noop);
           setTimeout(function(){ this_aux.router.navigate(['/']); }, 3000);
         } ,
         (error) =>{

@@ -27,7 +27,7 @@ export class NotificationsComponent implements OnInit {
         text: "Debes iniciar sesión para acceder aquí",
         type: "info",
         showConfirmButton: false
-     })
+     }).catch(swal.noop);
      setTimeout(function() {
       location.href = "/login";
      }, 2000);
@@ -126,7 +126,7 @@ export class NotificationsComponent implements OnInit {
       html: textHtml,  
       showConfirmButton: false,
       showCloseButton: true
-    });
+    }).catch(swal.noop);
 
   }
 

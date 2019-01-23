@@ -64,7 +64,7 @@ export class CompleteGameStatsComponent implements OnInit {
         title: 'Error',
         text: 'Todos los campos deben estar completos',
         type: 'error',
-      })
+      }).catch(swal.noop);
     }
 
   }

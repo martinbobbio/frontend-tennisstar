@@ -21,7 +21,7 @@ export class FooterComponent implements OnInit {
       confirmButtonText: "Volver", 
       confirmButtonColor: "#ff9800",
       showCloseButton: true,
-    });
+    }).catch(swal.noop);
 
   }
 

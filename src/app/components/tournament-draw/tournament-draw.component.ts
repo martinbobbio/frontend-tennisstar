@@ -78,7 +78,7 @@ export class TournamentDrawComponent implements OnInit {
       html: textHtml,  
       showConfirmButton: false,
       showCloseButton: true
-    });
+    }).catch(swal.noop);
 
     $(document).on('click', ".uploadScore",()=> {
       let set1a = "";
@@ -151,7 +151,7 @@ export class TournamentDrawComponent implements OnInit {
             text: "Partido subido con exito!",
             confirmButtonText: "Volver", 
             confirmButtonColor: "#ff9800"
-          });
+          }).catch(swal.noop);
           setTimeout(()=>{ location.href = "/tournament/"+this.idTournament }, 1500);
         });
 

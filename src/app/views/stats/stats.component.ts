@@ -24,7 +24,7 @@ export class StatsComponent implements OnInit {
         text: "Debes iniciar sesión para acceder aquí",
         type: "info",
         showConfirmButton: false
-     })
+     }).catch(swal.noop);
      setTimeout(function() {
       location.href = "/login";
      }, 2000);

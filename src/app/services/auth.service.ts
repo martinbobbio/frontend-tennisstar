@@ -18,8 +18,6 @@ export class AuthService {
     scope: 'openid profile'
   });
 
-  
-
   public userProfile:any;
 
   constructor(public router: Router) {}
