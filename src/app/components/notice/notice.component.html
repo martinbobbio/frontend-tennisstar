@@ -4,8 +4,8 @@
     <br>
     <div class="row">
       <div class="col m5">
-        <img *ngIf="videoLink" style="display:none" id="image-{{id}}" src="https://admin-tenis.tennis-star.com/web/{{imgsrc}}" class="responsive-img">
-        <img *ngIf="!videoLink"  id="image-{{id}}" src="https://admin-tenis.tennis-star.com/web/{{imgsrc}}" class="responsive-img">
+        <img *ngIf="videoLink" style="display:none" id="image-{{id}}" src="{{urlback}}/{{imgsrc}}" class="responsive-img">
+        <img *ngIf="!videoLink"  id="image-{{id}}" src="{{urlback}}/{{imgsrc}}" class="responsive-img">
         <div *ngIf="videoLink" id="video-{{id}}" style="height: 200px;">
           <iframe  width="100%" height="100%" [src]="linkVideoYT | safe" allowfullscreen></iframe>
         </div>
@@ -29,7 +29,7 @@
             <div class="card-content white-text">
               <span class="card-title">{{title}}</span>
               <br>
-              <img style="border:6px solid rgb(218, 103, 8) " src="https://admin-tenis.tennis-star.com/web/{{imgsrc}}" class="responsive-img">
+              <img style="border:6px solid rgb(218, 103, 8) " src="{{urlback}}/{{imgsrc}}" class="responsive-img">
               <br><br>
               <p [innerHTML]="description"></p>
             </div>
